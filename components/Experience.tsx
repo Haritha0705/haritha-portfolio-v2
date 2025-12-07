@@ -1,277 +1,220 @@
+'use client';
+
 import { motion } from 'motion/react';
-import { Briefcase, GraduationCap, Award } from 'lucide-react';
+import { Briefcase, GraduationCap, Trophy, School } from 'lucide-react';
 
 interface ExperienceProps {
-  theme: 'dark' | 'light';
+    theme: 'dark' | 'light';
 }
+
+const timeline = [
+    {
+        type: 'experience',
+        icon: Briefcase,
+        title: 'Frontend Developer Intern',
+        company: 'StartupXYZ',
+        period: 'Jan 2024 - May 2024',
+        current: false,
+        description:
+            'Built responsive web interfaces and improved user experience for the main product. Worked closely with designers to implement pixel-perfect designs.',
+        achievements: [
+            'Redesigned landing page, increasing conversion by 25%',
+            'Implemented component library used across 5+ projects',
+            'Mentored 2 junior developers',
+        ],
+    },
+    {
+        type: 'education',
+        icon: GraduationCap,
+        title: 'BSc Software Engineering',
+        company: 'University of Technology',
+        period: '2023 - 2027 (Expected)',
+        current: true,
+        description:
+            '2nd Year student specializing in software development and computer science. Maintaining strong academic performance while actively participating in tech clubs.',
+        achievements: [
+            'GPA: 3.8/4.0',
+            "Dean's List: 2023, 2024",
+            'President of Computer Science Society',
+        ],
+    },
+    {
+        type: 'achievement',
+        icon: Trophy,
+        title: 'Hackathon Winner',
+        company: 'National Tech Hackathon 2024',
+        period: 'Mar 2024',
+        current: false,
+        description:
+            'Led a team of 4 to win 1st place by developing an AI-powered student learning platform in 48 hours.',
+        achievements: [
+            'Competed against 50+ teams',
+            'Implemented ML model with 85% accuracy',
+            'Featured in local tech news',
+        ],
+    },
+    {
+        type: 'education',
+        icon: School,
+        title: 'High School Diploma',
+        company: 'Royal College',
+        period: '2019 - 2022',
+        current: false,
+        description:
+            'Completed Advanced Level examinations with distinction in Mathematics and Computer Science.',
+        achievements: [
+            'Top performer in district',
+            'Led school robotics club',
+            'Won inter-school coding competition',
+        ],
+    },
+];
 
 export function Experience({ theme }: ExperienceProps) {
-  const timeline = [
-    {
-      type: 'experience',
-      icon: Briefcase,
-      title: 'Full Stack Developer Intern',
-      company: 'Tech Solutions Inc.',
-      period: 'Jun 2024 - Present',
-      current: true,
-      description:
-        'Developing and maintaining web applications using React and Node.js. Collaborated with cross-functional teams to deliver high-quality products.',
-      achievements: [
-        'Reduced API response time by 40% through optimization',
-        'Implemented CI/CD pipeline reducing deployment time by 60%',
-        'Led development of customer dashboard serving 10K+ users',
-      ],
-      color: 'from-primary to-tertiary',
-    },
-    {
-      type: 'experience',
-      icon: Briefcase,
-      title: 'Frontend Developer',
-      company: 'StartupXYZ',
-      period: 'Jan 2024 - May 2024',
-      current: false,
-      description:
-        'Built responsive web interfaces and improved user experience for the main product. Worked closely with designers to implement pixel-perfect designs.',
-      achievements: [
-        'Redesigned landing page, increasing conversion by 25%',
-        'Implemented component library used across 5+ projects',
-        'Mentored 2 junior developers',
-      ],
-      color: 'from-secondary to-primary',
-    },
-    {
-      type: 'education',
-      icon: GraduationCap,
-      title: 'BSc Software Engineering',
-      company: 'University of Technology',
-      period: '2023 - 2027 (Expected)',
-      current: true,
-      description:
-        '2nd Year student specializing in software development and computer science. Maintaining strong academic performance while actively participating in tech clubs.',
-      achievements: [
-        'GPA: 3.8/4.0',
-        'Dean\'s List: 2023, 2024',
-        'President of Computer Science Society',
-      ],
-      color: 'from-tertiary to-secondary',
-    },
-    {
-      type: 'achievement',
-      icon: Award,
-      title: 'Hackathon Winner',
-      company: 'National Tech Hackathon 2024',
-      period: 'Mar 2024',
-      current: false,
-      description:
-        'Led a team of 4 to win 1st place by developing an AI-powered student learning platform in 48 hours.',
-      achievements: [
-        'Competed against 50+ teams',
-        'Implemented ML model with 85% accuracy',
-        'Featured in local tech news',
-      ],
-      color: 'from-success to-secondary',
-    },
-  ];
+    const isDark = theme === 'dark';
 
-  const certifications = [
-    {
-      name: 'AWS Certified Cloud Practitioner',
-      issuer: 'Amazon Web Services',
-      date: '2024',
-      link: '#',
-    },
-    {
-      name: 'Full Stack Web Development',
-      issuer: 'freeCodeCamp',
-      date: '2023',
-      link: '#',
-    },
-    {
-      name: 'JavaScript Algorithms and Data Structures',
-      issuer: 'freeCodeCamp',
-      date: '2023',
-      link: '#',
-    },
-  ];
-
-  return (
-    <section
-      id="experience"
-      className={`section-padding ${
-        theme === 'dark' ? 'bg-surface/30' : 'bg-surface-light/30'
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+    return (
+        <section
+            id="experience"
+            className={`section-padding ${isDark ? 'bg-surface/30' : 'bg-surface-light/30'}`}
         >
-          <h2 className="gradient-text mb-4">Experience & Education</h2>
-          <p
-            className={`text-lg ${
-              theme === 'dark' ? 'text-text-secondary' : 'text-text-secondary-light'
-            }`}
-          >
-            My journey and milestones
-          </p>
-        </motion.div>
-
-        {/* Timeline */}
-        <div className="relative">
-          {/* Center Line */}
-          <div
-            className={`absolute left-1/2 transform -translate-x-1/2 h-full w-0.5 ${
-              theme === 'dark' ? 'bg-border' : 'bg-border-light'
-            } hidden lg:block`}
-          />
-
-          {/* Timeline Items */}
-          <div className="space-y-12">
-            {timeline.map((item, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className={`flex items-center ${
-                  index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'
-                } flex-col lg:gap-8`}
-              >
-                {/* Content */}
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                {/* Section Header */}
                 <motion.div
-                  whileHover={{ scale: 1.02 }}
-                  className={`flex-1 ${
-                    index % 2 === 0 ? 'lg:text-right' : 'lg:text-left'
-                  } text-left`}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6 }}
+                    className="text-center mb-10 sm:mb-12 lg:mb-16"
                 >
-                  <div
-                    className={`p-6 rounded-2xl ${
-                      theme === 'dark' ? 'bg-surface' : 'bg-surface-light'
-                    } border ${
-                      theme === 'dark' ? 'border-border' : 'border-border-light'
-                    } card-hover-effect`}
-                  >
-                    {/* Header */}
-                    <div className="flex items-start justify-between mb-4">
-                      <div className="flex-1">
-                        <div className="flex items-center gap-2 mb-2">
-                          <h3 className="mb-0">{item.title}</h3>
-                          {item.current && (
-                            <span className="px-3 py-1 rounded-full bg-success/10 text-success text-xs border border-success/20">
-                              Current
-                            </span>
-                          )}
-                        </div>
-                        <h4 className="text-primary mb-1">{item.company}</h4>
-                        <p
-                          className={`text-sm ${
-                            theme === 'dark'
-                              ? 'text-text-secondary'
-                              : 'text-text-secondary-light'
-                          }`}
-                        >
-                          {item.period}
-                        </p>
-                      </div>
-                    </div>
-
-                    {/* Description */}
-                    <p
-                      className={`mb-4 ${
-                        theme === 'dark'
-                          ? 'text-text-secondary'
-                          : 'text-text-secondary-light'
-                      }`}
-                    >
-                      {item.description}
+                    <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-3 sm:mb-4">
+                        <span className="font-mono text-primary">{'<'}</span>
+                        <span className="text-primary">Experience & Education</span>
+                        <span className="font-mono text-primary">{' />'}</span>
+                    </h2>
+                    <p className={`text-sm sm:text-base lg:text-lg ${
+                        isDark ? 'text-text-secondary' : 'text-text-secondary-light'
+                    }`}>
+                        My journey and milestones
                     </p>
-
-                    {/* Achievements */}
-                    <ul className="space-y-2">
-                      {item.achievements.map((achievement, i) => (
-                        <li
-                          key={i}
-                          className={`flex items-start space-x-2 text-sm ${
-                            theme === 'dark'
-                              ? 'text-text-secondary'
-                              : 'text-text-secondary-light'
-                          }`}
-                        >
-                          <span className="text-primary mt-1">▸</span>
-                          <span>{achievement}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
                 </motion.div>
 
-                {/* Icon */}
-                <div className="relative flex items-center justify-center my-4 lg:my-0">
-                  <motion.div
-                    whileHover={{ scale: 1.1, rotate: 5 }}
-                    className={`w-16 h-16 rounded-full bg-gradient-to-br ${item.color} flex items-center justify-center z-10 border-4 ${
-                      theme === 'dark' ? 'border-background' : 'border-background-light'
-                    }`}
-                  >
-                    <item.icon className="w-8 h-8 text-white" />
-                  </motion.div>
-                </div>
+                {/* Timeline */}
+                <div className="relative">
+                    {/* Center Line - Desktop Only */}
+                    <div className={`absolute left-1/2 transform -translate-x-1/2 h-full w-0.5 hidden lg:block ${
+                        isDark ? 'bg-border' : 'bg-border-light'
+                    }`} />
 
-                {/* Spacer */}
-                <div className="flex-1 hidden lg:block" />
-              </motion.div>
-            ))}
-          </div>
-        </div>
+                    {/* Left Line - Mobile/Tablet */}
+                    <div className={`absolute left-4 sm:left-6 top-0 bottom-0 w-0.5 lg:hidden ${
+                        isDark ? 'bg-border' : 'bg-border-light'
+                    }`} />
 
-        {/* Certifications Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="mt-20"
-        >
-          <h3 className="text-center mb-8">Certifications</h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {certifications.map((cert, index) => (
-              <motion.a
-                key={index}
-                href={cert.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                whileHover={{ y: -5 }}
-                className={`p-6 rounded-2xl ${
-                  theme === 'dark' ? 'bg-surface' : 'bg-surface-light'
-                } border ${
-                  theme === 'dark' ? 'border-border' : 'border-border-light'
-                } card-hover-effect cursor-pointer`}
-              >
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center mb-4">
-                  <Award className="w-6 h-6 text-white" />
+                    {/* Timeline Items */}
+                    <div className="space-y-8 sm:space-y-10 lg:space-y-12">
+                        {timeline.map((item, index) => (
+                            <motion.div
+                                key={index}
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: index * 0.1 }}
+                                className={`flex items-start gap-4 sm:gap-6 lg:gap-8 ${
+                                    index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'
+                                }`}
+                            >
+                                {/* Icon - Mobile/Tablet */}
+                                <div className="relative flex-shrink-0 lg:hidden z-10">
+                                    <motion.div
+                                        whileHover={{ scale: 1.1, rotate: 5 }}
+                                        className={`w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-secondary to-primary flex items-center justify-center border-4 ${
+                                            isDark ? 'border-background' : 'border-background-light'
+                                        }`}
+                                    >
+                                        <item.icon className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
+                                    </motion.div>
+                                </div>
+
+                                {/* Content */}
+                                <motion.div
+                                    whileHover={{ scale: 1.02 }}
+                                    className={`flex-1 ${
+                                        index % 2 === 0 ? 'lg:text-right lg:pr-8' : 'lg:text-left lg:pl-8'
+                                    }`}
+                                >
+                                    <div className={`p-4 sm:p-5 lg:p-6 rounded-xl sm:rounded-2xl card-hover-effect border ${
+                                        isDark ? 'bg-surface border-border' : 'bg-surface-light border-border-light'
+                                    }`}>
+                                        {/* Header */}
+                                        <div className="mb-3 sm:mb-4">
+                                            <div className="flex flex-wrap items-center gap-2 mb-2">
+                                                <h3 className="text-base sm:text-lg lg:text-xl font-semibold">
+                                                    {item.title}
+                                                </h3>
+                                                {item.current && (
+                                                    <span className="px-2 sm:px-3 py-0.5 sm:py-1 rounded-full bg-success/10 text-success text-[10px] sm:text-xs border border-success/20">
+                            Current
+                          </span>
+                                                )}
+                                            </div>
+                                            <p className="text-primary text-sm sm:text-base font-medium mb-1">
+                                                {item.company}
+                                            </p>
+                                            <p className={`text-xs sm:text-sm ${
+                                                isDark ? 'text-text-secondary' : 'text-text-secondary-light'
+                                            }`}>
+                                                {item.period}
+                                            </p>
+                                        </div>
+
+                                        {/* Description */}
+                                        <p className={`text-sm sm:text-base mb-3 sm:mb-4 leading-relaxed ${
+                                            isDark ? 'text-text-secondary' : 'text-text-secondary-light'
+                                        }`}>
+                                            {item.description}
+                                        </p>
+
+                                        {/* Achievements */}
+                                        <ul className={`space-y-1.5 sm:space-y-2 ${
+                                            index % 2 === 0 ? 'lg:text-left' : ''
+                                        }`}>
+                                            {item.achievements.map((achievement, i) => (
+                                                <li
+                                                    key={i}
+                                                    className={`flex items-start gap-2 text-xs sm:text-sm ${
+                                                        isDark ? 'text-text-secondary' : 'text-text-secondary-light'
+                                                    }`}
+                                                >
+                                                    <span className="text-primary mt-0.5 flex-shrink-0">▸</span>
+                                                    <span>{achievement}</span>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                </motion.div>
+
+                                {/* Icon - Desktop Center */}
+                                <div className="relative hidden lg:flex items-center justify-center">
+                                    <motion.div
+                                        whileHover={{ scale: 1.1, rotate: 5 }}
+                                        className={`w-14 h-14 lg:w-16 lg:h-16 rounded-full bg-gradient-to-br from-secondary to-primary flex items-center justify-center z-10 border-4 ${
+                                            isDark ? 'border-background' : 'border-background-light'
+                                        }`}
+                                    >
+                                        <item.icon className="w-6 h-6 lg:w-8 lg:h-8 text-white" />
+                                    </motion.div>
+                                </div>
+
+                                {/* Spacer - Desktop */}
+                                <div className="flex-1 hidden lg:block" />
+                            </motion.div>
+                        ))}
+                    </div>
                 </div>
-                <h4 className="mb-2">{cert.name}</h4>
-                <p
-                  className={`text-sm mb-1 ${
-                    theme === 'dark' ? 'text-text-secondary' : 'text-text-secondary-light'
-                  }`}
-                >
-                  {cert.issuer}
-                </p>
-                <p className="text-xs text-primary">{cert.date}</p>
-              </motion.a>
-            ))}
-          </div>
-        </motion.div>
-      </div>
-    </section>
-  );
+            </div>
+        </section>
+    );
 }
+
+export default Experience;

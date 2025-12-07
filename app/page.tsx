@@ -3,13 +3,12 @@
 import { useState, useEffect } from "react";
 import { Toaster } from 'sonner';
 import { Navigation } from '@/components/Navigation';
-import { TerminalHero } from '@/components/TerminalHero';
+import { Hero } from '@/components/Hero';
 import { About } from '@/components/About';
 import { CodeSkills } from '@/components/CodeSkills';
 import { DevProjects } from '@/components/DevProjects';
 import { Experience } from '@/components/Experience';
 import { GitHubActivity } from '@/components/GitHubActivity';
-import { Achievements } from '@/components/Achievements';
 import { Contact } from '@/components/Contact';
 import { Footer } from '@/components/Footer';
 import { CommandPalette } from '@/components/CommandPalette';
@@ -34,7 +33,7 @@ export default function App() {
     };
 
     return (
-        <div className="relative min-h-screen">
+        <div className="relative min-h-screen bg-[var(--bg-void)] text-[var(--text-primary)]">
             {/* Toast Notifications */}
             <Toaster
                 position="top-right"
@@ -51,13 +50,12 @@ export default function App() {
 
             {/* Main Content */}
             <main>
-                <TerminalHero theme={theme} />
+                <Hero theme={theme} />
                 <About theme={theme} />
                 <CodeSkills theme={theme} />
                 <DevProjects theme={theme} />
                 <GitHubActivity theme={theme} />
                 <Experience theme={theme} />
-                <Achievements theme={theme} />
                 <Contact theme={theme} />
             </main>
 
