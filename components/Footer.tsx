@@ -64,8 +64,8 @@ export function Footer({ theme }: FooterProps) {
                         transition={{ duration: 0.6 }}
                         className="sm:col-span-2 lg:col-span-1"
                     >
-                        <h3 className="gradient-text text-lg sm:text-xl lg:text-2xl font-bold mb-3 sm:mb-4">
-                            Haritha Wickramasinga
+                        <h3 className={`${isDark ? 'gradient-text' : 'gradient-textLight'} text-lg sm:text-xl lg:text-2xl font-bold mb-3 sm:mb-4`}>
+                            Haritha Wickremesinghe
                         </h3>
                         <p className={`text-sm sm:text-base mb-4 leading-relaxed ${
                             isDark ? 'text-text-secondary' : 'text-text-secondary-light'
@@ -199,11 +199,11 @@ export function Footer({ theme }: FooterProps) {
             <span className={isDark ? 'text-text-secondary' : 'text-text-secondary-light'}>
               Built with
             </span>
-                        <Heart className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-primary animate-pulse" />
+                        <Heart className={`w-3.5 h-3.5 sm:w-4 sm:h-4 animate-pulse ${isDark ? 'text-primary' : 'text-primary-light'}`} />
                         <span className={isDark ? 'text-text-secondary' : 'text-text-secondary-light'}>
               and
             </span>
-                        <span className="gradient-text font-medium">React + Tailwind CSS</span>
+                        <span className={`${isDark ? 'text-primary' : 'text-primary-light'} font-medium`}>Next JS</span>
                     </motion.div>
                 </div>
             </div>

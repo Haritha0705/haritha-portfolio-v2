@@ -106,13 +106,6 @@ const tabs = [
     { id: 'tools', label: 'Tools', icon: Wrench },
 ];
 
-const quickStats = [
-    { label: 'Languages', value: '8+', icon: '📝' },
-    { label: 'Frameworks', value: '12+', icon: '⚡' },
-    { label: 'Databases', value: '5+', icon: '💾' },
-    { label: 'Tools', value: '20+', icon: '🛠️' },
-];
-
 export function CodeSkills({ theme }: CodeSkillsProps) {
     const [activeTab, setActiveTab] = useState('frontend');
     const isDark = theme === 'dark';
@@ -133,10 +126,10 @@ export function CodeSkills({ theme }: CodeSkillsProps) {
                     transition={{ duration: 0.6 }}
                     className="text-center mb-8 sm:mb-10 lg:mb-12"
                 >
-                    <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-3 sm:mb-4">
-                        <span className="font-mono text-primary">{'<'}</span>
-                        <span className="text-primary">Tech Stack</span>
-                        <span className="font-mono text-primary">{' />'}</span>
+                    <h2 className={`text-2xl sm:text-3xl lg:text-4xl font-bold mb-3 sm:mb-4 ${isDark ? 'gradient-text' : 'gradient-textLight'}`}>
+                        <span className="font-mono">{'<'}</span>
+                        <span>Tech Stack</span>
+                        <span className="font-mono">{' />'}</span>
                     </h2>
                     <p className={`text-sm sm:text-base lg:text-lg font-mono ${
                         isDark ? 'text-text-secondary' : 'text-text-secondary-light'
@@ -188,12 +181,18 @@ export function CodeSkills({ theme }: CodeSkillsProps) {
                                         ? isDark
                                             ? 'bg-[#1E1E1E] text-text-primary'
                                             : 'bg-white text-text-primary-light'
-                                        : `${isDark ? 'text-text-secondary' : 'text-text-secondary-light'} hover:text-primary`
+                                        : `${isDark ? 'text-text-secondary' : 'text-text-secondary-light'}`
                                 }`}
                             >
-                                <tab.icon className={`w-3 h-3 sm:w-4 sm:h-4 ${
-                                    activeTab === tab.id ? 'text-primary' : ''
-                                }`} />
+                                <tab.icon
+                                    className={`w-3 h-3 sm:w-4 sm:h-4 ${
+                                        activeTab === tab.id
+                                            ? isDark
+                                                ? 'text-primary'        
+                                                : 'text-primary-light'  
+                                            : ''                        
+                                    }`}
+                                />
                                 <span className="hidden xs:inline sm:inline">{tab.label}</span>
                             </button>
                         ))}
@@ -247,41 +246,6 @@ export function CodeSkills({ theme }: CodeSkillsProps) {
                             <span>Spaces: 2</span>
                         </div>
                     </div>
-                </motion.div>
-
-                {/* Quick Stats */}
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6, delay: 0.3 }}
-                    className="mt-8 sm:mt-10 lg:mt-12 grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4"
-                >
-                    {quickStats.map((stat, index) => (
-                        <motion.div
-                            key={stat.label}
-                            initial={{ opacity: 0, scale: 0.9 }}
-                            whileInView={{ opacity: 1, scale: 1 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: index * 0.1 }}
-                            whileHover={{ scale: 1.05, y: -5 }}
-                            className={`p-4 sm:p-5 lg:p-6 rounded-lg sm:rounded-xl text-center border ${
-                                isDark
-                                    ? 'bg-surface border-border'
-                                    : 'bg-surface-light border-border-light'
-                            }`}
-                        >
-                            <div className="text-2xl sm:text-3xl mb-2">{stat.icon}</div>
-                            <div className="text-primary font-mono font-bold text-xl sm:text-2xl mb-1">
-                                {stat.value}
-                            </div>
-                            <div className={`text-xs sm:text-sm ${
-                                isDark ? 'text-text-secondary' : 'text-text-secondary-light'
-                            }`}>
-                                {stat.label}
-                            </div>
-                        </motion.div>
-                    ))}
                 </motion.div>
             </div>
         </section>

@@ -1,30 +1,42 @@
 @import "tailwindcss";
 
 @theme {
-    /* Color Palette - Dark Mode (Default) */
-    --color-background: #0A0A0F;
-    --color-surface: #12121A;
-    --color-primary: #00FF41;
-    --color-secondary: #22D3EE;
-    --color-tertiary: #A855F7;
-    --color-success: #10B981;
-    --color-text-primary: #F8FAFC;
-    --color-text-secondary: #94A3B8;
-    --color-border: #1E293B;
+      /*DARK MODE*/
 
-    /* Light Mode Colors */
-    --color-background-light: #FAFBFC;
+    --color-background: #0B0B11;
+    --color-surface: #14141F;
+
+    --color-primary: #00FF41;
+
+    --color-secondary: #00C8FF;
+
+    --color-tertiary: #9B5CFF;
+
+    --color-success: #0ED88A;
+
+    --color-text-primary: #F1F5F9;
+    --color-text-secondary: #8D99AE;
+
+    --color-border: #1F2937;
+
+     /*LIGHT MODE*/
+
+    --color-background-light: #F5F5F5;
     --color-surface-light: #FFFFFF;
     --color-primary-light: #4F46E5;
+    --color-secondary-light: #0284C7;
+    --color-tertiary-light: #8B5CF6;
+
     --color-text-primary-light: #0F172A;
     --color-text-secondary-light: #64748B;
+
     --color-border-light: #E2E8F0;
 
-    /* Spacing */
     --spacing-section: 6rem;
 
     --font-mono: 'JetBrains Mono', 'Fira Code', 'Consolas', 'Monaco', monospace;
 }
+
 
 @layer base {
     * {
@@ -35,6 +47,7 @@
         @apply bg-background text-text-primary antialiased;
         font-family: var(--font-mono);
         transition: background-color 0.3s ease, color 0.3s ease;
+        scroll-behavior: smooth;
     }
 
     body.light {
@@ -86,7 +99,14 @@
     }
 
     .gradient-text {
-        background: linear-gradient(90deg, #6366F1, #22D3EE);
+        background: linear-gradient(90deg, #00FF41, #22D3EE);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .gradient-textLight {
+        background: linear-gradient(90deg, #6366F1, #A855F7);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
@@ -160,33 +180,14 @@
         }
     }
 
-    /* Custom scrollbar */
-    ::-webkit-scrollbar {
-        width: 12px;
-        height: 12px;
+    /* Hide scrollbar for Chrome, Safari */
+    body::-webkit-scrollbar {
+        display: none;
     }
 
-    ::-webkit-scrollbar-track {
-        background: var(--color-background);
-    }
-
-    ::-webkit-scrollbar-thumb {
-        background: var(--color-primary);
-        border-radius: 6px;
-        border: 3px solid var(--color-background);
-    }
-
-    ::-webkit-scrollbar-thumb:hover {
-        background: var(--color-secondary);
-    }
-
-    body.light ::-webkit-scrollbar-track {
-        background: var(--color-background-light);
-    }
-
-    body.light ::-webkit-scrollbar-thumb {
-        background: var(--color-primary-light);
-        border-color: var(--color-background-light);
+    /* Hide scrollbar for Firefox */
+    body {
+        scrollbar-width: none;
     }
 
     /* Selection */

@@ -6,9 +6,9 @@ import { Navigation } from '@/components/Navigation';
 import { Hero } from '@/components/Hero';
 import { About } from '@/components/About';
 import { CodeSkills } from '@/components/CodeSkills';
-import { DevProjects } from '@/components/DevProjects';
+import DevProjects from '@/components/DevProjects';
 import { Experience } from '@/components/Experience';
-import { GitHubActivity } from '@/components/GitHubActivity';
+import GitHubActivity from '@/components/GitHubActivity';
 import { Contact } from '@/components/Contact';
 import { Footer } from '@/components/Footer';
 import { CommandPalette } from '@/components/CommandPalette';
@@ -17,7 +17,6 @@ export default function App() {
     const [theme, setTheme] = useState<'dark' | 'light'>('dark');
 
     useEffect(() => {
-        // Check for saved theme preference or default to 'dark'
         const savedTheme = localStorage.getItem('theme') as 'dark' | 'light' | null;
         if (savedTheme) {
             setTheme(savedTheme);

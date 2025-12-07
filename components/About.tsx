@@ -8,9 +8,9 @@ interface AboutProps {
 }
 
 const stats = [
-    { label: 'Projects', value: '25+' },
+    { label: 'Projects', value: '5+' },
     { label: 'Technologies', value: '15+' },
-    { label: 'Experience', value: '2+ Yrs' },
+    { label: 'Experience', value: '3+ Yrs' },
 ];
 
 const competencies = [
@@ -38,10 +38,10 @@ export function About({ theme }: AboutProps) {
                     transition={{ duration: 0.6 }}
                     className="text-center mb-10 sm:mb-12 lg:mb-16"
                 >
-                    <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-3 sm:mb-4">
-                        <span className="font-mono text-primary">{'<'}</span>
-                        <span className="gradient-text">About Me</span>
-                        <span className="font-mono text-primary">{' />'}</span>
+                    <h2 className={`text-2xl sm:text-3xl lg:text-4xl font-bold mb-3 sm:mb-4 ${isDark ? 'gradient-text' : 'gradient-textLight'}`}>
+                        <span className="font-mono">{'<'}</span>
+                        <span>About Me</span>
+                        <span className="font-mono">{' />'}</span>
                     </h2>
                     <p className={`text-sm sm:text-base lg:text-lg ${
                         isDark ? 'text-text-secondary' : 'text-text-secondary-light'
@@ -64,7 +64,7 @@ export function About({ theme }: AboutProps) {
                             isDark ? 'bg-surface' : 'bg-surface-light'
                         }`}>
                             <Image
-                                src="/haritha.jpg"
+                                src="/Gemini_Generated_Image_5ck7vd5ck7vd5ck7.png"
                                 alt="Haritha Profile"
                                 width={400}
                                 height={400}
@@ -86,7 +86,7 @@ export function About({ theme }: AboutProps) {
                                         isDark ? 'bg-surface' : 'bg-surface-light'
                                     }`}
                                 >
-                                    <div className="text-primary font-bold text-lg sm:text-xl lg:text-2xl mb-1">
+                                    <div className={` ${isDark ? 'text-primary' : 'text-primary-light'} font-bold text-lg sm:text-xl lg:text-2xl mb-1`}>
                                         {stat.value}
                                     </div>
                                     <div className={`text-xs sm:text-sm ${

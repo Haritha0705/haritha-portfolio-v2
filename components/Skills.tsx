@@ -110,7 +110,7 @@ export function Skills({ theme }: SkillsProps) {
                     className="text-center mb-10 sm:mb-12 lg:mb-16"
                 >
                     <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-3 sm:mb-4">
-                        <span className="gradient-text">Tech Stack</span>
+                        <span>Tech Stack</span>
                     </h2>
                     <p className={`text-sm sm:text-base lg:text-lg ${
                         isDark ? 'text-text-secondary' : 'text-text-secondary-light'

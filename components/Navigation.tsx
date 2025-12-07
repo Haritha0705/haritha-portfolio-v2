@@ -105,7 +105,7 @@ export function Navigation({ theme, toggleTheme }: NavigationProps) {
                         <motion.button
                             whileHover={{ scale: 1.05 }}
                             onClick={() => scrollToSection('home')}
-                            className="text-primary font-bold text-base sm:text-lg lg:text-xl cursor-pointer"
+                            className={`${ isDark ? 'text-primary' : 'text-primary-light'} font-bold text-base sm:text-lg lg:text-xl cursor-pointer`}
                         >
                             @Haritha0705
                         </motion.button>
@@ -121,7 +121,9 @@ export function Navigation({ theme, toggleTheme }: NavigationProps) {
                   <span
                       className={`text-sm lg:text-base transition-colors ${
                           activeSection === item.id
-                              ? 'text-primary'
+                              ? isDark 
+                                  ? 'text-primary' 
+                                  : 'text-primary-light'
                               : isDark
                                   ? 'text-text-secondary hover:text-text-primary'
                                   : 'text-text-secondary-light hover:text-text-primary-light'
@@ -130,7 +132,7 @@ export function Navigation({ theme, toggleTheme }: NavigationProps) {
                     {item.label}
                   </span>
                                     <motion.div
-                                        className="absolute -bottom-0.5 left-0 right-0 h-0.5 bg-primary"
+                                        className={`absolute -bottom-0.5 left-0 right-0 h-0.5 ${ isDark ? 'bg-primary' : 'bg-primary-light'}`}
                                         initial={{ scaleX: 0 }}
                                         animate={{ scaleX: activeSection === item.id ? 1 : 0 }}
                                         transition={{ duration: 0.3 }}

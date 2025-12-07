@@ -105,9 +105,9 @@ export function Contact({ theme }: ContactProps) {
                     transition={{ duration: 0.6 }}
                     className="text-center mb-10 sm:mb-12 lg:mb-16"
                 >
-                    <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-3 sm:mb-4">
+                    <h2 className={`text-2xl sm:text-3xl lg:text-4xl font-bold mb-3 sm:mb-4 ${isDark ? 'gradient-text' : 'gradient-textLight'}`}>
                         <span className="font-mono text-primary">{'<'}</span>
-                        <span className="text-primary">Get In Touch</span>
+                        <span>Get In Touch</span>
                         <span className="font-mono text-primary">{' />'}</span>
                     </h2>
                     <p className={`text-sm sm:text-base lg:text-lg ${
@@ -141,7 +141,9 @@ export function Contact({ theme }: ContactProps) {
                                     whileHover={{ x: 5 }}
                                     className="flex items-center gap-3 sm:gap-4"
                                 >
-                                    <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-gradient-to-br from-secondary to-primary flex items-center justify-center flex-shrink-0">
+                                    <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl ${
+                                            isDark ? 'bg-gradient-to-br from-secondary to-primary' : 'bg-gradient-to-br from-secondary-light to-primary-light'
+                                        } flex items-center justify-center flex-shrink-0`}>
                                         <info.icon className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                                     </div>
                                     <div>

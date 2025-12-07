@@ -97,11 +97,11 @@ export function Hero({ theme }: HeroProps) {
         >
             {/* Matrix Background */}
             {mounted && (
-                <div className="absolute inset-0 opacity-5 pointer-events-none overflow-hidden">
+                <div className={`absolute inset-0 pointer-events-none overflow-hidden ${isDark ? 'opacity-5' : 'opacity-20'}`}>
                     {BINARY_STRINGS.map((binaryString, i) => (
                         <motion.div
                             key={i}
-                            className="absolute font-mono text-xs sm:text-sm select-none text-primary"
+                            className={`absolute font-mono text-xs sm:text-sm select-none ${isDark ? 'text-primary' : 'text-primary-light'}`}
                             initial={{ y: -100, x: i * 80 }}
                             animate={{ y: '100vh' }}
                             transition={{
@@ -124,7 +124,7 @@ export function Hero({ theme }: HeroProps) {
                     backgroundImage: `radial-gradient(circle, ${
                         isDark ? 'var(--color-primary)' : 'var(--color-primary-light)'
                     } 1px, transparent 1px)`,
-                    backgroundSize: '40px 40px',
+                    backgroundSize: '20px 20px',
                 }}
             />
 
@@ -142,8 +142,8 @@ export function Hero({ theme }: HeroProps) {
                             <div className="space-y-4">
                                 <StatusBadge status="available" theme={theme} />
 
-                                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold gradient-text leading-tight">
-                                    Haritha Wickramasinga
+                                <h1 className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold ${isDark ? 'gradient-text' : 'gradient-textLight'} leading-tight`}>
+                                    Haritha Wickremesinghe
                                 </h1>
 
                                 {/* Typing Animation */}
@@ -269,7 +269,7 @@ export function Hero({ theme }: HeroProps) {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 1.2 }}
-                    className="hidden sm:flex absolute bottom-4 sm:bottom-8 left-1/2 transform -translate-x-1/2 flex-col items-center"
+                    className="hidden sm:flex absolute bottom-4 sm:bottom-[-60px] left-1/2 transform -translate-x-1/2 flex-col items-center"
                 >
           <span className={`text-xs mb-2 tracking-wider font-mono ${
               isDark ? 'text-text-secondary' : 'text-text-secondary-light'

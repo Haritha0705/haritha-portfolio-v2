@@ -120,7 +120,9 @@ export function CommandPalette({ theme }: CommandPaletteProps) {
                                 <div className={`flex items-center px-3 sm:px-4 py-2.5 sm:py-3 border-b ${
                                     isDark ? 'border-border' : 'border-border-light'
                                 }`}>
-                                    <Search className="w-4 h-4 sm:w-5 sm:h-5 text-primary mr-2 sm:mr-3 flex-shrink-0" />
+                                    <Search className={`w-4 h-4 sm:w-5 sm:h-5 ${
+                                                    isDark ? 'text-primary' : 'text-primary-light'
+                                                } mr-2 sm:mr-3 flex-shrink-0`} />
                                     <input
                                         type="text"
                                         value={search}
@@ -158,7 +160,9 @@ export function CommandPalette({ theme }: CommandPaletteProps) {
                                                         : 'hover:bg-primary/10 border-l-2 border-transparent'
                                                 }`}
                                             >
-                                                <cmd.icon className="w-4 h-4 sm:w-5 sm:h-5 text-primary mr-2 sm:mr-3 flex-shrink-0" />
+                                                <cmd.icon className={`w-4 h-4 sm:w-5 sm:h-5 ${
+                                                    isDark ? 'text-primary' : 'text-primary-light'
+                                                } mr-2 sm:mr-3 flex-shrink-0`} />
                                                 <span className="text-sm sm:text-base">{cmd.label}</span>
                                             </button>
                                         ))
@@ -194,7 +198,9 @@ export function CommandPalette({ theme }: CommandPaletteProps) {
                         : 'bg-surface-light border-primary-light/30'
                 }`}
             >
-                <Terminal className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-primary" />
+                <Terminal className={`w-3.5 h-3.5 sm:w-4 sm:h-4 ${
+                                                    isDark ? 'text-primary' : 'text-primary-light'
+                                                }`} />
                 <span className={isDark ? 'text-text-secondary' : 'text-text-secondary-light'}>
           Press
         </span>

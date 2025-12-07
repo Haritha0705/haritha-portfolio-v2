@@ -87,10 +87,10 @@ export function Experience({ theme }: ExperienceProps) {
                     transition={{ duration: 0.6 }}
                     className="text-center mb-10 sm:mb-12 lg:mb-16"
                 >
-                    <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-3 sm:mb-4">
-                        <span className="font-mono text-primary">{'<'}</span>
-                        <span className="text-primary">Experience & Education</span>
-                        <span className="font-mono text-primary">{' />'}</span>
+                    <h2 className={`text-2xl sm:text-3xl lg:text-4xl font-bold mb-3 sm:mb-4 ${isDark ? 'gradient-text' : 'gradient-textLight'}`}>
+                        <span className="font-mono">{'<'}</span>
+                        <span>Experience & Education</span>
+                        <span className="font-mono">{' />'}</span>
                     </h2>
                     <p className={`text-sm sm:text-base lg:text-lg ${
                         isDark ? 'text-text-secondary' : 'text-text-secondary-light'
@@ -158,7 +158,7 @@ export function Experience({ theme }: ExperienceProps) {
                           </span>
                                                 )}
                                             </div>
-                                            <p className="text-primary text-sm sm:text-base font-medium mb-1">
+                                            <p className={`${isDark ? 'text-primary' : 'text-primary-light'} text-sm sm:text-base font-medium mb-1`}>
                                                 {item.company}
                                             </p>
                                             <p className={`text-xs sm:text-sm ${
@@ -198,8 +198,8 @@ export function Experience({ theme }: ExperienceProps) {
                                 <div className="relative hidden lg:flex items-center justify-center">
                                     <motion.div
                                         whileHover={{ scale: 1.1, rotate: 5 }}
-                                        className={`w-14 h-14 lg:w-16 lg:h-16 rounded-full bg-gradient-to-br from-secondary to-primary flex items-center justify-center z-10 border-4 ${
-                                            isDark ? 'border-background' : 'border-background-light'
+                                        className={`w-14 h-14 lg:w-16 lg:h-16 rounded-full flex items-center justify-center z-10 border-4 ${
+                                            isDark ? 'border-background bg-gradient-to-br from-secondary to-primary' : 'border-background-light bg-gradient-to-br from-secondary-light to-primary-light'
                                         }`}
                                     >
                                         <item.icon className="w-6 h-6 lg:w-8 lg:h-8 text-white" />
