@@ -1,20 +1,260 @@
-import {Box, Typography} from "@mui/material";
+'use client';
 
-export default function Footer (){
+import { motion } from 'framer-motion';
+import {
+    Box,
+    Container,
+    Typography,
+    Stack,
+    IconButton,
+    Divider,
+    Button, useTheme,
+} from '@mui/material';
+
+import EmailIcon from '@mui/icons-material/Email';
+import GitHubIcon from '@mui/icons-material/GitHub';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import TwitterIcon from '@mui/icons-material/Twitter';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
+
+const footerLinks = [
+    { label: 'Home', href: '#home' },
+    { label: 'About', href: '#about' },
+    { label: 'Skills', href: '#skills' },
+    { label: 'Projects', href: '#projects' },
+    { label: 'Experience', href: '#experience' },
+    { label: 'Contact', href: '#contact' },
+];
+
+const socialLinks = [
+    { icon: GitHubIcon, href: 'https://github.com', label: 'GitHub' },
+    { icon: LinkedInIcon, href: 'https://linkedin.com', label: 'LinkedIn' },
+    { icon: TwitterIcon, href: 'https://twitter.com', label: 'Twitter' },
+    { icon: EmailIcon, href: 'mailto:haritha@example.com', label: 'Email' },
+];
+
+export default function Footer() {
+    const theme = useTheme();
+    const isDark = theme.palette.mode === 'dark';
+
+    const currentYear = new Date().getFullYear();
+
+    const scrollToTop = () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
+    const scrollToSection = (href: string) => {
+        const sectionId = href.replace('#', '');
+        const element = document.getElementById(sectionId);
+        if (element) {
+            const offset = 80;
+            const elementPosition = element.offsetTop - offset;
+            window.scrollTo({ top: elementPosition, behavior: 'smooth' });
+        }
+    };
+
     return (
         <Box
-            component="section"
-            sx={{
-                minHeight: '100vh',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                bgcolor: 'primary.main',
-                color: 'primary.contrastText',
-                p: 4,
-            }}
+            component="footer"
+            bgcolor={isDark ? 'rgba(255,255,255,0.02)' : 'rgba(0,0,0,0.02)'}
+            borderTop={1}
+            borderColor={isDark ? 'divider' : 'grey.300'}
+            position="relative"
+            pt={8}
+            pb={6}
         >
-            <Typography>Footer Section</Typography>
+            <Container maxWidth="lg">
+                {/* Main Content */}
+                <Box
+                    display="grid"
+                    gridTemplateColumns={{ xs: '1fr', sm: '1fr 1fr', lg: 'repeat(3, 1fr)' }}
+                    gap={6}
+                    mb={6}
+                >
+                    {/* Brand & Social */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                    >
+                        <Typography
+                            variant="h6"
+                            fontWeight="bold"
+                            mb={2}
+                            sx={{
+                                background: isDark
+                                    ? 'linear-gradient(90deg,#8b5cf6,#22d3ee)'
+                                    : 'linear-gradient(90deg,#6366f1,#0ea5e9)',
+                                WebkitBackgroundClip: 'text',
+                                WebkitTextFillColor: 'transparent',
+                            }}
+                        >
+                            Haritha Wickremesinghe
+                        </Typography>
+                        <Typography fontSize={14} mb={2} color="text.secondary">
+                            Full Stack Developer passionate about creating elegant solutions to complex problems.
+                        </Typography>
+                        <Stack direction="row" spacing={1.5}>
+                            {socialLinks.map((s, i) => {
+                                const Icon = s.icon;
+                                return (
+                                    <motion.div
+                                        key={s.label}
+                                        initial={{ opacity: 0, scale: 0.8 }}
+                                        whileInView={{ opacity: 1, scale: 1 }}
+                                        viewport={{ once: true }}
+                                        transition={{ delay: i * 0.1 }}
+                                    >
+                                        <IconButton
+                                            component="a"
+                                            href={s.href}
+                                            target="_blank"
+                                            sx={{
+                                                border: '1px solid',
+                                                borderColor: 'divider',
+                                                bgcolor: isDark ? 'background.paper' : 'grey.100',
+                                                '&:hover': { bgcolor: 'primary.main', color: '#fff' },
+                                            }}
+                                        >
+                                            <Icon fontSize="small" />
+                                        </IconButton>
+                                    </motion.div>
+                                );
+                            })}
+                        </Stack>
+                    </motion.div>
+
+                    {/* Quick Links */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.1 }}
+                    >
+                        <Typography fontWeight="bold" mb={1.5}>
+                            Quick Links
+                        </Typography>
+                        <Stack spacing={1}>
+                            {footerLinks.map((link, i) => (
+                                <motion.div
+                                    key={link.label}
+                                    initial={{ opacity: 0, x: -20 }}
+                                    whileInView={{ opacity: 1, x: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ delay: i * 0.05 }}
+                                >
+                                    <Button
+                                        onClick={() => scrollToSection(link.href)}
+                                        sx={{
+                                            textTransform: 'none',
+                                            color: isDark ? 'text.secondary' : 'text.secondary',
+                                            '&:hover': {
+                                                color: 'primary.main',
+                                                bgcolor: 'transparent',
+                                            },
+                                            p: 0,
+                                            minWidth: 0,
+                                        }}
+                                    >
+                                        {link.label}
+                                    </Button>
+                                </motion.div>
+                            ))}
+                        </Stack>
+                    </motion.div>
+
+                    {/* Contact Info */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.2 }}
+                    >
+                        <Typography fontWeight="bold" mb={1.5}>
+                            Get in Touch
+                        </Typography>
+                        <Stack spacing={0.5}>
+                            <Button
+                                component="a"
+                                href="mailto:haritha@example.com"
+                                sx={{ textTransform: 'none', p: 0, minWidth: 0 }}
+                            >
+                                haritha@example.com
+                            </Button>
+                            <Button
+                                component="a"
+                                href="tel:+94771234567"
+                                sx={{ textTransform: 'none', p: 0, minWidth: 0 }}
+                            >
+                                +94 77 123 4567
+                            </Button>
+                            <Typography fontSize={14}>Colombo, Sri Lanka</Typography>
+                        </Stack>
+                    </motion.div>
+                </Box>
+
+                <Divider sx={{ my: 3 }} />
+
+                {/* Bottom */}
+                <Stack
+                    direction={{ xs: 'column', sm: 'row' }}
+                    justifyContent="space-between"
+                    alignItems="center"
+                    spacing={1}
+                >
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        viewport={{ once: true }}
+                    >
+                        <Typography fontSize={12}>
+                            © {currentYear} Haritha Wickremesinghe. All rights reserved.
+                        </Typography>
+                    </motion.div>
+
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        viewport={{ once: true }}
+                        style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '0.5em',
+                        }}
+                    >
+                        <Typography fontSize={12}>Built with</Typography>
+                        <FavoriteIcon fontSize="small" color="primary" sx={{ animation: 'pulse 1.5s infinite' }} />
+                        <Typography fontSize={12}>and</Typography>
+                        <Typography fontSize={12} fontWeight="medium" color="primary">
+                            Next JS
+                        </Typography>
+                    </motion.div>
+                </Stack>
+            </Container>
+
+            {/* Back to Top */}
+            <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                whileHover={{ scale: 1.1, y: -2 }}
+                whileTap={{ scale: 0.9 }}
+            >
+                <IconButton
+                    onClick={scrollToTop}
+                    sx={{
+                        position: 'fixed',
+                        bottom: 16,
+                        right: 16,
+                        bgcolor: 'primary.main',
+                        color: '#fff',
+                        '&:hover': { bgcolor: 'primary.dark' },
+                    }}
+                >
+                    <ArrowUpwardIcon />
+                </IconButton>
+            </motion.div>
         </Box>
-    )
+    );
 }

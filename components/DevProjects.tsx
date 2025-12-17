@@ -229,7 +229,7 @@ export default function DevProjects() {
                     >
                         <Grid container spacing={3}>
                             {filtered.map((p, i) => (
-                                <Grid item xs={12} sm={6} lg={4} key={p.id}>
+                                <Grid size={{xs: 12 ,sm: 6 ,lg: 4}} key={p.id}>
                                     <motion.div
                                         initial={{ opacity: 0, y: 20 }}
                                         animate={{ opacity: 1, y: 0 }}
@@ -412,17 +412,22 @@ export default function DevProjects() {
                                     variant="contained"
                                     href={project.demo}
                                     target="_blank"
+                                    rel="noopener noreferrer"
                                 >
                                     Demo
                                 </Button>
                             )}
-                            <Button
-                                variant="outlined"
-                                href={project?.github}
-                                target="_blank"
-                            >
-                                GitHub
-                            </Button>
+
+                            {project?.github && (
+                                <Button
+                                    variant="outlined"
+                                    href={project.github}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    GitHub
+                                </Button>
+                            )}
                         </Stack>
                     </Box>
                 </Modal>
