@@ -134,6 +134,8 @@ const projects = [
 
 /* -------------------------------------------------- */
 
+const MotionBox = motion.create(Box);
+
 export default function DevProjects() {
     const [activeFilter, setActiveFilter] = useState('all');
     const [hovered, setHovered] = useState<number | null>(null);
@@ -149,10 +151,10 @@ export default function DevProjects() {
     const project = projects.find((p) => p.id === selected);
 
     return (
-        <Box component="section" py={{ xs: 6, md: 8 }}>
+        <Box component="section" id="projects" py={{ xs: 6, md: 8 }}>
             <Container maxWidth="lg">
                 {/* Header */}
-                <motion.div
+                <MotionBox
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
@@ -163,11 +165,10 @@ export default function DevProjects() {
                         fontWeight="bold"
                         mb={1}
                         sx={{
-                            background: isDark
-                                ? 'linear-gradient(90deg,#8b5cf6,#22d3ee)'
-                                : 'linear-gradient(90deg,#6366f1,#0ea5e9)',
+                            background: theme.custom.gradients.text,
                             WebkitBackgroundClip: 'text',
                             WebkitTextFillColor: 'transparent',
+                            backgroundClip: 'text',
                         }}
                     >
                         {'<'}Featured Projects{' />'}
@@ -179,9 +180,9 @@ export default function DevProjects() {
                         color="text.secondary"
                         mb={4}
                     >
-                        // Building cool stuff, one commit at a time
+                        {"// Building cool stuff, one commit at a time"}
                     </Typography>
-                </motion.div>
+                </MotionBox>
 
                 {/* Filters */}
                 <Stack
@@ -192,7 +193,7 @@ export default function DevProjects() {
                     mb={5}
                 >
                     {filters.map((f) => (
-                        <motion.div key={f.id} whileHover={{ scale: 1.05 }}>
+                        <MotionBox key={f.id} whileHover={{ scale: 1.05 }}>
                             <Button
                                 onClick={() => setActiveFilter(f.id)}
                                 sx={{
@@ -215,13 +216,13 @@ export default function DevProjects() {
                             >
                                 {f.label}
                             </Button>
-                        </motion.div>
+                        </MotionBox>
                     ))}
                 </Stack>
 
                 {/* Grid */}
                 <AnimatePresence mode="wait">
-                    <motion.div
+                    <MotionBox
                         key={activeFilter}
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -230,7 +231,7 @@ export default function DevProjects() {
                         <Grid container spacing={3}>
                             {filtered.map((p, i) => (
                                 <Grid size={{xs: 12 ,sm: 6 ,lg: 4}} key={p.id}>
-                                    <motion.div
+                                    <MotionBox
                                         initial={{ opacity: 0, y: 20 }}
                                         animate={{ opacity: 1, y: 0 }}
                                         transition={{ delay: i * 0.08 }}
@@ -324,16 +325,16 @@ export default function DevProjects() {
                                                     spacing={2}
                                                     mt={2}
                                                     fontFamily="monospace"
-                                                    fontSize={12}
+                                                    fontSize={18}
                                                     color="text.secondary"
                                                 >
                                                     <Stack direction="row" spacing={0.5}>
                                                         <StarIcon fontSize="inherit" />
-                                                        <span>{p.stars}</span>
+                                                        <Typography component={"span"} fontSize={12}>{p.stars}</Typography>
                                                     </Stack>
                                                     <Stack direction="row" spacing={0.5}>
                                                         <CallSplitIcon fontSize="inherit" />
-                                                        <span>{p.forks}</span>
+                                                        <Typography component={"span"} fontSize={12}>{p.forks}</Typography>
                                                     </Stack>
                                                 </Stack>
                                             </Box>
@@ -355,11 +356,11 @@ export default function DevProjects() {
                                                 <TerminalIcon fontSize="inherit" />
                                             </Stack>
                                         </Box>
-                                    </motion.div>
+                                    </MotionBox>
                                 </Grid>
                             ))}
                         </Grid>
-                    </motion.div>
+                    </MotionBox>
                 </AnimatePresence>
 
                 {/* Modal */}
@@ -399,11 +400,11 @@ export default function DevProjects() {
                             ))}
                         </Stack>
 
-                        <Stack spacing={1} fontSize={13}>
-                            <span>Repo: {project?.githubRepo}</span>
-                            <span>⭐ {project?.stars}</span>
-                            <span>🍴 {project?.forks}</span>
-                            <span>📦 Lines: {project?.lines}</span>
+                        <Stack spacing={1}>
+                            <Typography component={"span"} fontSize={12}>Repo: {project?.githubRepo}</Typography>
+                            <Typography component={"span"} fontSize={12}>⭐ {project?.stars}</Typography>
+                            <Typography component={"span"} fontSize={12}>🍴 {project?.forks}</Typography>
+                            <Typography component={"span"} fontSize={12}>📦 Lines: {project?.lines}</Typography>
                         </Stack>
 
                         <Stack direction="row" spacing={2} mt={3}>

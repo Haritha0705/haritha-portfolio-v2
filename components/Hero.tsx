@@ -10,7 +10,7 @@ import DownloadIcon from '@mui/icons-material/Download';
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
 
 import StatusBadge from '@/components/ui/BadgeN';
-import Terminal from '@/components/Terminal';
+import Terminal from '@/components/ui/Terminal';
 
 const TITLES = ['Full Stack Developer', 'Student', 'Tech Enthusiast'];
 
@@ -28,6 +28,7 @@ const ANIMATION_CONFIG = Array.from({ length: 15 }, (_, i) => ({
     duration: 5 + (i % 5),
     delay: (i * 0.5) % 5,
 }));
+const MotionBox = motion(Box);
 
 export function Hero() {
     const theme = useTheme();
@@ -125,7 +126,7 @@ export function Hero() {
                     }}
                 >
                     {BINARY_STRINGS.map((binaryString, i) => (
-                        <motion.div
+                        <MotionBox
                             key={i}
                             style={{
                                 position: 'absolute',
@@ -142,7 +143,7 @@ export function Hero() {
                             }}
                         >
                             {binaryString}
-                        </motion.div>
+                        </MotionBox>
                     ))}
                 </Box>
             )}
@@ -186,7 +187,7 @@ export function Hero() {
                     }}
                 >
                     {/* Left Content */}
-                    <motion.div
+                    <MotionBox
                         initial={{ opacity: 0, x: -50 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.8 }}
@@ -197,9 +198,7 @@ export function Hero() {
                             sx={{
                                 fontWeight: 'bold',
                                 fontSize: { xs: '3rem', sm: '5rem' },
-                                background: isDark
-                                    ? 'linear-gradient(90deg,#00FF41,#00C8FF)'
-                                    : 'linear-gradient(90deg,#00C8FF,#9B5CFF)',
+                                background: theme.custom.gradients.text,
                                 WebkitBackgroundClip: 'text',
                                 WebkitTextFillColor: 'transparent',
                                 mt: 2,
@@ -214,20 +213,21 @@ export function Hero() {
                                 <Typography
                                     sx={{
                                         fontFamily: 'Monospace',
-                                        fontSize: 18,
-                                        color: isDark ? 'text.secondary' : 'text.primary',
+                                        fontSize: { xs: '1.25rem', sm: '1.5rem', lg: '1.75rem' },
+                                        color: 'secondary.main',
                                     }}
                                 >
                                     {'>'} {displayedText}
                                 </Typography>
-                                <motion.span
+                                <Box
+                                    component={motion.span}
                                     animate={{ opacity: [1, 0] }}
                                     transition={{ duration: 0.5, repeat: Infinity }}
-                                    style={{
+                                    sx={{
                                         width: 2,
                                         height: 28,
-                                        backgroundColor: isDark ? theme.palette.primary.main : theme.palette.primary.light,
                                         display: 'inline-block',
+                                        backgroundColor: isDark ? theme.palette.primary.main : theme.palette.primary.light,
                                     }}
                                 />
                             </Box>
@@ -250,7 +250,7 @@ export function Hero() {
 
                         {/* CTA Buttons */}
                         <Box sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, gap: 2, mt: 4 }}>
-                            <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                            <MotionBox whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
                                 <Button
                                     variant="contained"
                                     endIcon={<ArrowRightAltIcon />}
@@ -264,9 +264,9 @@ export function Hero() {
                                 >
                                     View Projects
                                 </Button>
-                            </motion.div>
+                            </MotionBox>
 
-                            <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                            <MotionBox whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
                                 <Button
                                     variant="outlined"
                                     startIcon={<DownloadIcon />}
@@ -280,13 +280,14 @@ export function Hero() {
                                 >
                                     Download CV
                                 </Button>
-                            </motion.div>
+                            </MotionBox>
                         </Box>
 
                         {/* Social Links */}
                         <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 2, mt: 3 }}>
                             {socialLinks.map((link) => (
-                                <motion.a
+                                <Box
+                                    component={motion.a}
                                     key={link.label}
                                     href={link.href}
                                     target={link.href.startsWith('http') ? '_blank' : undefined}
@@ -308,19 +309,19 @@ export function Hero() {
                                     <Typography sx={{ fontSize: 14, color: isDark ? 'text.primary' : 'text.primary' }}>
                                         {link.label}
                                     </Typography>
-                                </motion.a>
+                                </Box>
                             ))}
                         </Box>
-                    </motion.div>
+                    </MotionBox>
 
                     {/* Right - Terminal */}
-                    <motion.div
+                    <MotionBox
                         initial={{ opacity: 0, x: 50 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.8, delay: 0.2 }}
                     >
                         <Terminal lines={terminalLines} />
-                    </motion.div>
+                    </MotionBox>
                 </Box>
             </Box>
         </Box>

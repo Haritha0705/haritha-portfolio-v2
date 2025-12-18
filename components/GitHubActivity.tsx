@@ -24,6 +24,8 @@ interface ContributionDay {
     count: number;
 }
 
+const MotionBox = motion.create(Box);
+
 export default function GitHubActivity() {
     const [contributions, setContributions] = useState<ContributionDay[]>([]);
     const theme = useTheme();
@@ -140,7 +142,7 @@ export default function GitHubActivity() {
         >
             <Container maxWidth="xl">
                 {/* Title */}
-                <motion.div
+                <MotionBox
                     initial={{ opacity: 0, y: 15 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
@@ -151,11 +153,10 @@ export default function GitHubActivity() {
                         fontWeight="bold"
                         mb={1}
                         sx={{
-                            background: isDark
-                                ? "linear-gradient(90deg,#8b5cf6,#22d3ee)"
-                                : "linear-gradient(90deg,#6366f1,#0ea5e9)",
-                            WebkitBackgroundClip: "text",
-                            WebkitTextFillColor: "transparent",
+                            background: theme.custom.gradients.text,
+                            WebkitBackgroundClip: 'text',
+                            WebkitTextFillColor: 'transparent',
+                            backgroundClip: 'text',
                         }}
                     >
                         GitHub Activity
@@ -170,7 +171,7 @@ export default function GitHubActivity() {
                     >
                         Updated automatically from your GitHub profile
                     </Typography>
-                </motion.div>
+                </MotionBox>
 
                 {/* Stats */}
                 <Grid container spacing={2} mb={6}>
@@ -178,7 +179,7 @@ export default function GitHubActivity() {
                         const Icon = s.icon;
                         return (
                             <Grid size={{xs: 6,md: 4,lg: 2}} key={s.label}>
-                                <motion.div
+                                <MotionBox
                                     initial={{ opacity: 0, scale: 0.9 }}
                                     whileInView={{ opacity: 1, scale: 1 }}
                                     viewport={{ once: true }}
@@ -211,7 +212,7 @@ export default function GitHubActivity() {
                                             {s.label}
                                         </Typography>
                                     </Paper>
-                                </motion.div>
+                                </MotionBox>
                             </Grid>
                         );
                     })}
@@ -230,7 +231,7 @@ export default function GitHubActivity() {
                             {weeks.map((week, wi) => (
                                 <Stack key={wi} spacing="3px">
                                     {week.map((day, di) => (
-                                        <motion.div
+                                        <MotionBox
                                             key={di}
                                             initial={{ opacity: 0, scale: 0 }}
                                             whileInView={{ opacity: 1, scale: 1 }}
@@ -255,7 +256,7 @@ export default function GitHubActivity() {
 
                     {/* Legend */}
                     <Stack direction="row" spacing={1} mt={3} fontSize={10}>
-                        <span>Less</span>
+                        <Typography component="span" sx={{ fontSize:10}}>Less</Typography>
                         {[0, 2, 4, 8, 12].map((v, i) => (
                             <Box
                                 key={i}
@@ -265,7 +266,7 @@ export default function GitHubActivity() {
                                 bgcolor={getColor(v)}
                             />
                         ))}
-                        <span>More</span>
+                        <Typography component="span" sx={{ fontSize:10}}>More</Typography>
                     </Stack>
                 </Box>
             </Container>

@@ -30,7 +30,6 @@ const competencies = [
     'Problem Solving',
 ];
 
-// ✅ Correct Framer Motion API
 const MotionBox = motion.create(Box);
 const MotionPaper = motion.create(Paper);
 
@@ -55,11 +54,10 @@ export default function About() {
                         fontWeight="bold"
                         mb={1}
                         sx={{
-                            background: isDark
-                                ? 'linear-gradient(90deg,#8b5cf6,#22d3ee)'
-                                : 'linear-gradient(90deg,#6366f1,#0ea5e9)',
+                            background: theme.custom.gradients.text,
                             WebkitBackgroundClip: 'text',
                             WebkitTextFillColor: 'transparent',
+                            backgroundClip: 'text',
                         }}
                     >
                         {'<'}About Me{' />'}
@@ -92,7 +90,7 @@ export default function About() {
                                 }}
                             >
                                 <Image
-                                    src="/Gemini_Generated_Image_5ck7vd5ck7vd5ck7.png"
+                                    src="/about_Img.png"
                                     alt="Profile"
                                     width={400}
                                     height={400}
@@ -164,7 +162,7 @@ export default function About() {
 
                             <Box display="flex" flexWrap="wrap" gap={1}>
                                 {competencies.map((skill, index) => (
-                                    <motion.div
+                                    <MotionBox
                                         key={skill}
                                         initial={{ opacity: 0, scale: 0.8 }}
                                         whileInView={{ opacity: 1, scale: 1 }}
@@ -179,7 +177,7 @@ export default function About() {
                                                 borderColor: 'primary.main',
                                             }}
                                         />
-                                    </motion.div>
+                                    </MotionBox>
                                 ))}
                             </Box>
                         </MotionBox>

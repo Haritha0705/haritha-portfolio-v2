@@ -6,10 +6,11 @@ import WorkIcon from '@mui/icons-material/Work';
 import SchoolIcon from '@mui/icons-material/School';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
+import {ElementType} from "react";
 
 interface TimelineItem {
     type: 'experience' | 'education' | 'achievement';
-    icon: any;
+    icon: ElementType;
     title: string;
     company: string;
     period: string;
@@ -81,6 +82,8 @@ const timeline: TimelineItem[] = [
     },
 ];
 
+const MotionBox = motion.create(Box);
+
 export default function Experience() {
     const theme = useTheme();
     const isDark = theme.palette.mode === 'dark';
@@ -88,6 +91,7 @@ export default function Experience() {
     return (
         <Box
             component="section"
+            id="experience"
             sx={{
                 py: { xs: 6, md: 12 },
                 backgroundColor: isDark ? 'rgba(255,255,255,0.03)' : 'rgba(0,0,0,0.03)',
@@ -95,7 +99,7 @@ export default function Experience() {
         >
             <Container maxWidth="lg">
                 {/* Section Header */}
-                <motion.div
+                <MotionBox
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
@@ -105,13 +109,12 @@ export default function Experience() {
                     <Typography
                         variant="h4"
                         fontWeight="bold"
+                        mb={1}
                         sx={{
-                            background: isDark
-                                ? 'linear-gradient(90deg,#8b5cf6,#22d3ee)'
-                                : 'linear-gradient(90deg,#6366f1,#0ea5e9)',
+                            background: theme.custom.gradients.text,
                             WebkitBackgroundClip: 'text',
                             WebkitTextFillColor: 'transparent',
-                            mb: 1,
+                            backgroundClip: 'text',
                         }}
                     >
                         {'<'}Experience & Education{' />'}
@@ -119,7 +122,7 @@ export default function Experience() {
                     <Typography fontSize={14} color="text.secondary">
                         My journey and milestones
                     </Typography>
-                </motion.div>
+                </MotionBox>
 
                 {/* Timeline */}
                 <Box sx={{ position: 'relative' }}>
@@ -155,7 +158,7 @@ export default function Experience() {
                             const isLeft = index % 2 === 0;
 
                             return (
-                                <motion.div
+                                <MotionBox
                                     key={index}
                                     initial={{ opacity: 0, y: 20 }}
                                     whileInView={{ opacity: 1, y: 0 }}
@@ -184,7 +187,7 @@ export default function Experience() {
 
                                     {/* Content */}
                                     <Box flex={1} sx={{ textAlign: { lg: isLeft ? 'right' : 'left' } }}>
-                                        <motion.div whileHover={{ scale: 1.02 }}>
+                                        <MotionBox whileHover={{ scale: 1.02 }}>
                                             <Paper
                                                 elevation={3}
                                                 sx={{
@@ -227,7 +230,7 @@ export default function Experience() {
                                                     ))}
                                                 </Box>
                                             </Paper>
-                                        </motion.div>
+                                        </MotionBox>
                                     </Box>
 
                                     {/* Desktop Icon */}
@@ -241,7 +244,7 @@ export default function Experience() {
                                             justifyContent: 'center',
                                             zIndex: 10,
                                             border: `4px solid ${isDark ? '#0f172a' : '#fff'}`,
-                                            background: 'linear-gradient(135deg,#6366f1,#22d3ee)',
+                                            background: theme.custom.gradients.text,
                                         }}
                                     >
                                         <Icon sx={{ color: '#fff', fontSize: 28 }} />
@@ -249,7 +252,7 @@ export default function Experience() {
 
                                     {/* Spacer for Desktop */}
                                     <Box flex={1} sx={{ display: { xs: 'none', lg: 'block' } }} />
-                                </motion.div>
+                                </MotionBox>
                             );
                         })}
                     </Box>

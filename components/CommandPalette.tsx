@@ -29,6 +29,8 @@ const commands = [
     { icon: Mail, label: 'Contact Me', action: 'contact', keywords: 'contact email message' },
 ];
 
+const MotionBox = motion.create(Box);
+
 export default function CommandPalette() {
     const theme = useTheme();
 
@@ -95,8 +97,7 @@ export default function CommandPalette() {
                 {open && (
                     <>
                         {/* Backdrop */}
-                        <Box
-                            component={motion.div}
+                        <MotionBox
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
@@ -114,8 +115,7 @@ export default function CommandPalette() {
                         />
 
                         {/* Palette */}
-                        <Box
-                            component={motion.div}
+                        <MotionBox
                             initial={{ opacity: 0, scale: 0.95, y: -20 }}
                             animate={{ opacity: 1, scale: 1, y: 0 }}
                             exit={{ opacity: 0, scale: 0.95, y: -20 }}
@@ -208,12 +208,12 @@ export default function CommandPalette() {
                                         color: 'text.secondary',
                                     }}
                                 >
-                                    <span>↑↓ navigate</span>
-                                    <span>↵ select</span>
-                                    <span>ESC close</span>
+                                    <Typography fontSize={12}>↑↓ navigate</Typography>
+                                    <Typography fontSize={12}>↵ select</Typography>
+                                    <Typography fontSize={12}>ESC close</Typography>
                                 </Box>
                             </Paper>
-                        </Box>
+                        </MotionBox>
                     </>
                 )}
             </AnimatePresence>

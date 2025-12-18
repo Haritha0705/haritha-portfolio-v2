@@ -4,50 +4,6 @@ import React from 'react';
 import { Box, Typography } from '@mui/material';
 import { keyframes } from '@mui/system';
 
-interface BadgeProps {
-    children: React.ReactNode;
-    variant?: 'frontend' | 'backend' | 'tools' | 'default';
-    themeMode?: 'dark' | 'light';
-}
-
-export function Badge({ children, variant = 'default', themeMode = 'dark' }: BadgeProps) {
-    const isDark = themeMode === 'dark';
-
-    const variants = {
-        frontend: { bg: 'rgba(34,211,238,0.1)', color: 'secondary.main', border: 'rgba(34,211,238,0.2)' },
-        backend: { bg: 'rgba(168,85,247,0.1)', color: 'tertiary.main', border: 'rgba(168,85,247,0.2)' },
-        tools: { bg: 'rgba(251,146,60,0.1)', color: '#FB923C', border: 'rgba(251,146,60,0.2)' },
-        default: {
-            bg: isDark ? 'background.paper' : 'grey.100',
-            color: isDark ? 'text.secondary' : 'text.secondary',
-            border: isDark ? 'divider' : 'grey.300',
-        },
-    };
-
-    const style = variants[variant];
-
-    return (
-        <Box
-            component="span"
-            sx={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                px: 1.5,
-                py: 0.5,
-                borderRadius: 999,
-                fontSize: '0.75rem',
-                fontWeight: 500,
-                border: `1px solid ${style.border}`,
-                bgcolor: style.bg,
-                color: style.color,
-                fontFamily: 'Monospace',
-            }}
-        >
-            {children}
-        </Box>
-    );
-}
-
 interface StatusBadgeProps {
     status: 'available' | 'busy' | 'unavailable';
     label?: string;
@@ -105,39 +61,6 @@ export default function StatusBadge({ status, label, themeMode = 'dark' }: Statu
                 }}
             >
                 {label || config.defaultLabel}
-            </Typography>
-        </Box>
-    );
-}
-
-interface TechBadgeProps {
-    name: string;
-    icon?: React.ReactNode;
-    themeMode?: 'dark' | 'light';
-}
-
-export function TechBadge({ name, icon, themeMode = 'dark' }: TechBadgeProps) {
-    const isDark = themeMode === 'dark';
-
-    return (
-        <Box
-            sx={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: 1,
-                px: 1.5,
-                py: 1,
-                borderRadius: 2,
-                border: `1px solid ${isDark ? 'divider' : 'grey.300'}`,
-                bgcolor: isDark ? 'background.paper' : 'grey.100',
-                cursor: 'default',
-                transition: 'transform 0.2s',
-                '&:hover': { transform: 'scale(1.05)' },
-            }}
-        >
-            {icon && <Box sx={{ color: isDark ? 'primary.main' : 'primary.light', fontSize: 18 }}>{icon}</Box>}
-            <Typography sx={{ fontSize: '0.75rem', fontFamily: 'Monospace', color: isDark ? 'text.primary' : 'text.primary' }}>
-                {name}
             </Typography>
         </Box>
     );

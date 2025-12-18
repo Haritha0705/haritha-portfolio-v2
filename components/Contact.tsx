@@ -10,7 +10,8 @@ import {
     Button,
     Paper,
     Stack,
-    IconButton, useTheme,
+    IconButton,
+    useTheme,
 } from "@mui/material";
 import { toast } from "sonner";
 
@@ -57,6 +58,8 @@ const socialLinks = [
     { icon: TwitterIcon, label: "Twitter", href: "https://twitter.com" },
 ];
 
+const MotionBox = motion.create(Box);
+
 export default function Contact() {
     const theme = useTheme();
     const isDark = theme.palette.mode === 'dark';
@@ -96,12 +99,13 @@ export default function Contact() {
     return (
         <Box
             component="section"
+            id="contact"
             py={{ xs: 6, md: 10 }}
             bgcolor={isDark ? "rgba(255,255,255,0.02)" : "rgba(0,0,0,0.02)"}
         >
             <Container maxWidth="lg">
                 {/* Header */}
-                <motion.div
+                <MotionBox
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
@@ -112,11 +116,10 @@ export default function Contact() {
                         fontWeight="bold"
                         mb={1}
                         sx={{
-                            background: isDark
-                                ? "linear-gradient(90deg,#8b5cf6,#22d3ee)"
-                                : "linear-gradient(90deg,#6366f1,#0ea5e9)",
-                            WebkitBackgroundClip: "text",
-                            WebkitTextFillColor: "transparent",
+                            background: theme.custom.gradients.text,
+                            WebkitBackgroundClip: 'text',
+                            WebkitTextFillColor: 'transparent',
+                            backgroundClip: 'text',
                         }}
                     >
                         {"<"}Get In Touch{" />"}
@@ -130,11 +133,11 @@ export default function Contact() {
                     >
                         Have a project in mind? Let&#39;s work together!
                     </Typography>
-                </motion.div>
+                </MotionBox>
 
                 <Box display="grid" gridTemplateColumns={{ xs: "1fr", md: "1fr 1fr" }} gap={6}>
                     {/* Left */}
-                    <motion.div
+                    <MotionBox
                         initial={{ opacity: 0, x: -40 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
@@ -147,7 +150,7 @@ export default function Contact() {
                             {contactInfo.map((info, i) => {
                                 const Icon = info.icon;
                                 return (
-                                    <motion.div
+                                    <MotionBox
                                         key={info.label}
                                         initial={{ opacity: 0, y: 20 }}
                                         whileInView={{ opacity: 1, y: 0 }}
@@ -160,8 +163,7 @@ export default function Contact() {
                                                     width: 48,
                                                     height: 48,
                                                     borderRadius: 2,
-                                                    background:
-                                                        "linear-gradient(135deg,#6366f1,#22d3ee)",
+                                                    background: theme.custom.gradients.text,
                                                     display: "flex",
                                                     alignItems: "center",
                                                     justifyContent: "center",
@@ -187,7 +189,7 @@ export default function Contact() {
                                                 )}
                                             </Box>
                                         </Stack>
-                                    </motion.div>
+                                    </MotionBox>
                                 );
                             })}
                         </Stack>
@@ -200,7 +202,7 @@ export default function Contact() {
                             {socialLinks.map((s, i) => {
                                 const Icon = s.icon;
                                 return (
-                                    <motion.div
+                                    <MotionBox
                                         key={s.label}
                                         initial={{ opacity: 0, scale: 0.8 }}
                                         whileInView={{ opacity: 1, scale: 1 }}
@@ -218,7 +220,7 @@ export default function Contact() {
                                         >
                                             <Icon />
                                         </IconButton>
-                                    </motion.div>
+                                    </MotionBox>
                                 );
                             })}
                         </Stack>
@@ -238,10 +240,10 @@ export default function Contact() {
                                 </Box>
                             </Stack>
                         </Paper>
-                    </motion.div>
+                    </MotionBox>
 
                     {/* Right - Form */}
-                    <motion.div
+                    <MotionBox
                         initial={{ opacity: 0, x: 40 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
@@ -296,7 +298,7 @@ export default function Contact() {
                                 </Button>
                             </Stack>
                         </Box>
-                    </motion.div>
+                    </MotionBox>
                 </Box>
             </Container>
         </Box>

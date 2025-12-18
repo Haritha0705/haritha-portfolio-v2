@@ -2,7 +2,6 @@
 
 import { Box } from '@mui/material';
 import { Toaster } from 'sonner';
-
 import Navigation from '@/components/Navigation';
 import Hero  from '@/components/Hero';
 import About from '@/components/About';
@@ -13,7 +12,7 @@ import GitHubActivity from '@/components/GitHubActivity';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 import CommandPalette from '@/components/CommandPalette';
-import { useThemeContext } from './ThemeProvider';
+import { useThemeContext } from '@/theme/ThemeProvider';
 
 export default function App() {
     const { toggleTheme } = useThemeContext();

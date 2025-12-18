@@ -27,6 +27,8 @@ const navItems = [
     { id: 'contact', label: 'Contact' },
 ];
 
+const MotionBox = motion.create(Box);
+
 export default function Navigation({ toggleTheme }: { toggleTheme: () => void }) {
     const theme = useTheme();
     const isDark = theme.palette.mode === 'dark';
@@ -82,6 +84,8 @@ export default function Navigation({ toggleTheme }: { toggleTheme: () => void })
                 sx={{
                     backdropFilter: scrolled ? 'blur(10px)' : 'none',
                     borderBottom: scrolled ? `1px solid ${theme.palette.divider}` : 'none',
+                    px: 32,
+                    py: 1
                 }}
             >
                 <Toolbar sx={{ justifyContent: 'space-between' }}>
@@ -129,23 +133,23 @@ export default function Navigation({ toggleTheme }: { toggleTheme: () => void })
                         <IconButton onClick={toggleTheme}>
                             <AnimatePresence mode="wait">
                                 {isDark ? (
-                                    <motion.div
+                                    <MotionBox
                                         key="light"
                                         initial={{ rotate: -90, opacity: 0 }}
                                         animate={{ rotate: 0, opacity: 1 }}
                                         exit={{ rotate: 90, opacity: 0 }}
                                     >
                                         <LightModeIcon />
-                                    </motion.div>
+                                    </MotionBox>
                                 ) : (
-                                    <motion.div
+                                    <MotionBox
                                         key="dark"
                                         initial={{ rotate: 90, opacity: 0 }}
                                         animate={{ rotate: 0, opacity: 1 }}
                                         exit={{ rotate: -90, opacity: 0 }}
                                     >
                                         <DarkModeIcon />
-                                    </motion.div>
+                                    </MotionBox>
                                 )}
                             </AnimatePresence>
                         </IconButton>

@@ -8,7 +8,8 @@ import {
     Typography,
     Button,
     Stack,
-    Divider, useTheme,
+    Divider,
+    useTheme,
 } from '@mui/material';
 import CodeIcon from '@mui/icons-material/Code';
 import TerminalIcon from '@mui/icons-material/Terminal';
@@ -89,6 +90,8 @@ const tabs = [
     { id: 'tools', label: 'Tools', icon: <BuildIcon /> },
 ];
 
+const MotionBox = motion.create(Box);
+
 export default function CodeSkills() {
     const theme = useTheme();
     const isDark = theme.palette.mode === 'dark';
@@ -98,12 +101,13 @@ export default function CodeSkills() {
     return (
         <Box
             component="section"
+            id="skills"
             py={{ xs: 6, md: 8 }}
             bgcolor={isDark ? 'rgba(30,30,30,0.4)' : 'rgba(245,245,245,0.6)'}
         >
             <Container maxWidth="lg">
                 {/* Header */}
-                <motion.div
+                <MotionBox
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
@@ -114,25 +118,23 @@ export default function CodeSkills() {
                         fontWeight="bold"
                         mb={1}
                         sx={{
-                            background: isDark
-                                ? 'linear-gradient(90deg,#8b5cf6,#22d3ee)'
-                                : 'linear-gradient(90deg,#6366f1,#0ea5e9)',
+                            background: theme.custom.gradients.text,
                             WebkitBackgroundClip: 'text',
                             WebkitTextFillColor: 'transparent',
+                            backgroundClip: 'text',
                         }}
                     >
                         {'<'}Tech Stack{' />'}
                     </Typography>
-
                     <Typography
                         align="center"
                         fontFamily="monospace"
                         color={isDark ? 'grey.400' : 'grey.600'}
                         mb={4}
                     >
-                        // My developer toolbox
+                        {"// My developer toolbox"}
                     </Typography>
-                </motion.div>
+                </MotionBox>
 
                 {/* Editor */}
                 <Box
@@ -217,28 +219,31 @@ export default function CodeSkills() {
                             textAlign="right"
                         >
                             {codeLines.map((_, i) => (
-                                <div key={i}>{i + 1}</div>
+                                <Box key={i}>{i + 1}</Box>
                             ))}
                         </Box>
 
                         <AnimatePresence mode="wait">
-                            <motion.pre
+                            <Box
                                 key={activeTab}
+                                component={motion.pre}
                                 initial={{ opacity: 0, x: 20 }}
                                 animate={{ opacity: 1, x: 0 }}
                                 exit={{ opacity: 0, x: -20 }}
                                 transition={{ duration: 0.25 }}
-                                style={{
-                                    margin: 0,
-                                    padding: '16px 16px 16px 64px',
+                                sx={{
+                                    m: 0,
+                                    p: '16px 16px 16px 64px',
                                     overflowX: 'auto',
                                     fontFamily: 'monospace',
                                     fontSize: 13,
-                                    color: isDark ? '#E5E7EB' : '#111827',
+                                    color: theme.palette.mode === 'dark'
+                                        ? theme.palette.grey[300]
+                                        : theme.palette.grey[900],
                                 }}
                             >
                                 {skillsCode[activeTab as keyof typeof skillsCode]}
-                            </motion.pre>
+                            </Box>
                         </AnimatePresence>
                     </Box>
 
@@ -249,12 +254,22 @@ export default function CodeSkills() {
                         px={2}
                         py={1}
                         bgcolor={isDark ? 'primary.main' : '#0066B8'}
-                        color="#fff"
+                        color={'background.default'}
                         fontFamily="monospace"
                         fontSize={12}
                     >
-                        <span>✓ Ready</span>
-                        <span>Spaces: 2</span>
+                        <Box
+                            sx={{
+                                display: 'flex',
+                                gap: 2,
+                                alignItems: 'center',
+                            }}
+                        >
+                            <Typography component="span" sx={{ fontSize:12}}>✓ Ready</Typography>
+                            <Typography component="span" sx={{ fontSize:12}}>UTF-8</Typography>
+                            <Typography component="span" sx={{ fontSize:12}}>JavaScript</Typography>
+                        </Box>
+                        <Typography component="span" sx={{ fontSize:12}}>Spaces: 2</Typography>
                     </Stack>
                 </Box>
             </Container>

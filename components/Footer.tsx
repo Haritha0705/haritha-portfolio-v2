@@ -34,6 +34,8 @@ const socialLinks = [
     { icon: EmailIcon, href: 'mailto:haritha@example.com', label: 'Email' },
 ];
 
+const MotionBox = motion.create(Box);
+
 export default function Footer() {
     const theme = useTheme();
     const isDark = theme.palette.mode === 'dark';
@@ -73,7 +75,7 @@ export default function Footer() {
                     mb={6}
                 >
                     {/* Brand & Social */}
-                    <motion.div
+                    <MotionBox
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
@@ -83,11 +85,10 @@ export default function Footer() {
                             fontWeight="bold"
                             mb={2}
                             sx={{
-                                background: isDark
-                                    ? 'linear-gradient(90deg,#8b5cf6,#22d3ee)'
-                                    : 'linear-gradient(90deg,#6366f1,#0ea5e9)',
+                                background: theme.custom.gradients.text,
                                 WebkitBackgroundClip: 'text',
                                 WebkitTextFillColor: 'transparent',
+                                backgroundClip: 'text',
                             }}
                         >
                             Haritha Wickremesinghe
@@ -99,7 +100,7 @@ export default function Footer() {
                             {socialLinks.map((s, i) => {
                                 const Icon = s.icon;
                                 return (
-                                    <motion.div
+                                    <MotionBox
                                         key={s.label}
                                         initial={{ opacity: 0, scale: 0.8 }}
                                         whileInView={{ opacity: 1, scale: 1 }}
@@ -119,14 +120,14 @@ export default function Footer() {
                                         >
                                             <Icon fontSize="small" />
                                         </IconButton>
-                                    </motion.div>
+                                    </MotionBox>
                                 );
                             })}
                         </Stack>
-                    </motion.div>
+                    </MotionBox>
 
                     {/* Quick Links */}
-                    <motion.div
+                    <MotionBox
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
@@ -137,7 +138,7 @@ export default function Footer() {
                         </Typography>
                         <Stack spacing={1}>
                             {footerLinks.map((link, i) => (
-                                <motion.div
+                                <MotionBox
                                     key={link.label}
                                     initial={{ opacity: 0, x: -20 }}
                                     whileInView={{ opacity: 1, x: 0 }}
@@ -159,13 +160,13 @@ export default function Footer() {
                                     >
                                         {link.label}
                                     </Button>
-                                </motion.div>
+                                </MotionBox>
                             ))}
                         </Stack>
-                    </motion.div>
+                    </MotionBox>
 
                     {/* Contact Info */}
-                    <motion.div
+                    <MotionBox
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
@@ -174,24 +175,46 @@ export default function Footer() {
                         <Typography fontWeight="bold" mb={1.5}>
                             Get in Touch
                         </Typography>
-                        <Stack spacing={0.5}>
+                        <Stack
+                            spacing={0.5}
+                            color="text.secondary"
+                            sx={{
+                                alignItems: 'flex-start',
+                            }}
+                        >
                             <Button
                                 component="a"
                                 href="mailto:haritha@example.com"
-                                sx={{ textTransform: 'none', p: 0, minWidth: 0 }}
+                                sx={{
+                                    textTransform: 'none',
+                                    p: 0,
+                                    minWidth: 0,
+                                    color: 'inherit',
+                                    justifyContent: 'flex-start',
+                                }}
                             >
                                 haritha@example.com
                             </Button>
+
                             <Button
                                 component="a"
                                 href="tel:+94771234567"
-                                sx={{ textTransform: 'none', p: 0, minWidth: 0 }}
+                                sx={{
+                                    textTransform: 'none',
+                                    p: 0,
+                                    minWidth: 0,
+                                    color: 'inherit',
+                                    justifyContent: 'flex-start',
+                                }}
                             >
                                 +94 77 123 4567
                             </Button>
-                            <Typography fontSize={14}>Colombo, Sri Lanka</Typography>
+
+                            <Typography fontSize={14}>
+                                Colombo, Sri Lanka
+                            </Typography>
                         </Stack>
-                    </motion.div>
+                    </MotionBox>
                 </Box>
 
                 <Divider sx={{ my: 3 }} />
@@ -203,7 +226,7 @@ export default function Footer() {
                     alignItems="center"
                     spacing={1}
                 >
-                    <motion.div
+                    <MotionBox
                         initial={{ opacity: 0 }}
                         whileInView={{ opacity: 1 }}
                         viewport={{ once: true }}
@@ -211,9 +234,9 @@ export default function Footer() {
                         <Typography fontSize={12}>
                             © {currentYear} Haritha Wickremesinghe. All rights reserved.
                         </Typography>
-                    </motion.div>
+                    </MotionBox>
 
-                    <motion.div
+                    <MotionBox
                         initial={{ opacity: 0 }}
                         whileInView={{ opacity: 1 }}
                         viewport={{ once: true }}
@@ -229,12 +252,12 @@ export default function Footer() {
                         <Typography fontSize={12} fontWeight="medium" color="primary">
                             Next JS
                         </Typography>
-                    </motion.div>
+                    </MotionBox>
                 </Stack>
             </Container>
 
             {/* Back to Top */}
-            <motion.div
+            <MotionBox
                 initial={{ opacity: 0, scale: 0.8 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
@@ -254,7 +277,7 @@ export default function Footer() {
                 >
                     <ArrowUpwardIcon />
                 </IconButton>
-            </motion.div>
+            </MotionBox>
         </Box>
     );
 }
