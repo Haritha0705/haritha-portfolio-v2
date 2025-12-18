@@ -1,86 +1,8 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { timeline } from '@/data/content';
 import {Box, Container, Typography, Paper, Chip, useTheme} from '@mui/material';
-import WorkIcon from '@mui/icons-material/Work';
-import SchoolIcon from '@mui/icons-material/School';
-import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
-import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
-import {ElementType} from "react";
-
-interface TimelineItem {
-    type: 'experience' | 'education' | 'achievement';
-    icon: ElementType;
-    title: string;
-    company: string;
-    period: string;
-    current: boolean;
-    description: string;
-    achievements: string[];
-}
-
-const timeline: TimelineItem[] = [
-    {
-        type: 'experience',
-        icon: WorkIcon,
-        title: 'Frontend Developer Intern',
-        company: 'StartupXYZ',
-        period: 'Jan 2024 - May 2024',
-        current: false,
-        description:
-            'Built responsive web interfaces and improved user experience for the main product. Worked closely with designers to implement pixel-perfect designs.',
-        achievements: [
-            'Redesigned landing page, increasing conversion by 25%',
-            'Implemented component library used across 5+ projects',
-            'Mentored 2 junior developers',
-        ],
-    },
-    {
-        type: 'education',
-        icon: SchoolIcon,
-        title: 'BSc Software Engineering',
-        company: 'University of Technology',
-        period: '2023 - 2027 (Expected)',
-        current: true,
-        description:
-            '2nd Year student specializing in software development and computer science. Maintaining strong academic performance while actively participating in tech clubs.',
-        achievements: [
-            'GPA: 3.8/4.0',
-            "Dean's List: 2023, 2024",
-            'President of Computer Science Society',
-        ],
-    },
-    {
-        type: 'achievement',
-        icon: EmojiEventsIcon,
-        title: 'Hackathon Winner',
-        company: 'National Tech Hackathon 2024',
-        period: 'Mar 2024',
-        current: false,
-        description:
-            'Led a team of 4 to win 1st place by developing an AI-powered student learning platform in 48 hours.',
-        achievements: [
-            'Competed against 50+ teams',
-            'Implemented ML model with 85% accuracy',
-            'Featured in local tech news',
-        ],
-    },
-    {
-        type: 'education',
-        icon: AccountBalanceIcon,
-        title: 'High School Diploma',
-        company: 'Royal College',
-        period: '2019 - 2022',
-        current: false,
-        description:
-            'Completed Advanced Level examinations with distinction in Mathematics and Computer Science.',
-        achievements: [
-            'Top performer in district',
-            'Led school robotics club',
-            'Won inter-school coding competition',
-        ],
-    },
-];
 
 const MotionBox = motion.create(Box);
 

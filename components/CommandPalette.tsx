@@ -14,20 +14,9 @@ import {
 import {
     Search,
     Terminal,
-    Code,
-    Person,
-    Work,
-    Mail,
     Close,
 } from '@mui/icons-material';
-
-const commands = [
-    { icon: Person, label: 'Go to About', action: 'about', keywords: 'about me profile' },
-    { icon: Terminal, label: 'View Skills', action: 'skills', keywords: 'skills tech stack' },
-    { icon: Code, label: 'Browse Projects', action: 'projects', keywords: 'projects portfolio' },
-    { icon: Work, label: 'View Experience', action: 'experience', keywords: 'experience timeline' },
-    { icon: Mail, label: 'Contact Me', action: 'contact', keywords: 'contact email message' },
-];
+import { commands } from '@/data/content';
 
 const MotionBox = motion.create(Box);
 
@@ -182,7 +171,7 @@ export default function CommandPalette() {
                                                     alignItems: 'center',
                                                     px: 2,
                                                     py: 1.5,
-                                                    bgcolor: i === selected ? 'primary.main' : 'transparent',
+                                                    backgroundColor: i === selected ? 'primary.main' : 'transparent',
                                                     color:
                                                         i === selected
                                                             ? theme.palette.primary.contrastText
@@ -229,7 +218,7 @@ export default function CommandPalette() {
                     py: 1,
                     borderRadius: 2,
                     border: `1px solid ${theme.palette.divider}`,
-                    bgcolor: 'background.paper',
+                    backgroundColor: 'background.paper',
                     display: { xs: 'none', md: 'flex' },
                     alignItems: 'center',
                     gap: 1,

@@ -10,29 +10,9 @@ import {
     Divider,
     Button, useTheme,
 } from '@mui/material';
-
-import EmailIcon from '@mui/icons-material/Email';
-import GitHubIcon from '@mui/icons-material/GitHub';
-import LinkedInIcon from '@mui/icons-material/LinkedIn';
-import TwitterIcon from '@mui/icons-material/Twitter';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
-
-const footerLinks = [
-    { label: 'Home', href: '#home' },
-    { label: 'About', href: '#about' },
-    { label: 'Skills', href: '#skills' },
-    { label: 'Projects', href: '#projects' },
-    { label: 'Experience', href: '#experience' },
-    { label: 'Contact', href: '#contact' },
-];
-
-const socialLinks = [
-    { icon: GitHubIcon, href: 'https://github.com', label: 'GitHub' },
-    { icon: LinkedInIcon, href: 'https://linkedin.com', label: 'LinkedIn' },
-    { icon: TwitterIcon, href: 'https://twitter.com', label: 'Twitter' },
-    { icon: EmailIcon, href: 'mailto:haritha@example.com', label: 'Email' },
-];
+import { footerLinks,socialLinksFooter } from '@/data/content';
 
 const MotionBox = motion.create(Box);
 
@@ -97,7 +77,7 @@ export default function Footer() {
                             Full Stack Developer passionate about creating elegant solutions to complex problems.
                         </Typography>
                         <Stack direction="row" spacing={1.5}>
-                            {socialLinks.map((s, i) => {
+                            {socialLinksFooter.map((s, i) => {
                                 const Icon = s.icon;
                                 return (
                                     <MotionBox
@@ -114,8 +94,8 @@ export default function Footer() {
                                             sx={{
                                                 border: '1px solid',
                                                 borderColor: 'divider',
-                                                bgcolor: isDark ? 'background.paper' : 'grey.100',
-                                                '&:hover': { bgcolor: 'primary.main', color: '#fff' },
+                                                backgroundColor: isDark ? 'background.paper' : 'grey.100',
+                                                '&:hover': { backgroundColor: 'primary.main', color: '#fff' },
                                             }}
                                         >
                                             <Icon fontSize="small" />
@@ -152,7 +132,7 @@ export default function Footer() {
                                             color: isDark ? 'text.secondary' : 'text.secondary',
                                             '&:hover': {
                                                 color: 'primary.main',
-                                                bgcolor: 'transparent',
+                                                backgroundColor: 'transparent',
                                             },
                                             p: 0,
                                             minWidth: 0,
@@ -270,9 +250,9 @@ export default function Footer() {
                         position: 'fixed',
                         bottom: 16,
                         right: 16,
-                        bgcolor: 'primary.main',
+                        backgroundColor: 'primary.main',
                         color: '#fff',
-                        '&:hover': { bgcolor: 'primary.dark' },
+                        '&:hover': { backgroundColor: 'primary.dark' },
                     }}
                 >
                     <ArrowUpwardIcon />

@@ -14,49 +14,9 @@ import {
     useTheme,
 } from "@mui/material";
 import { toast } from "sonner";
-
-import EmailIcon from "@mui/icons-material/Email";
-import PhoneIcon from "@mui/icons-material/Phone";
-import LocationOnIcon from "@mui/icons-material/LocationOn";
 import SendIcon from "@mui/icons-material/Send";
-import GitHubIcon from "@mui/icons-material/GitHub";
-import LinkedInIcon from "@mui/icons-material/LinkedIn";
-import TwitterIcon from "@mui/icons-material/Twitter";
+import { contactInfo,socialLinksContact,FormData } from '@/data/content';
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-
-interface FormData {
-    name: string;
-    email: string;
-    subject: string;
-    message: string;
-}
-
-const contactInfo = [
-    {
-        icon: EmailIcon,
-        label: "Email",
-        value: "haritha@example.com",
-        href: "mailto:haritha@example.com",
-    },
-    {
-        icon: PhoneIcon,
-        label: "Phone",
-        value: "+94 77 123 4567",
-        href: "tel:+94771234567",
-    },
-    {
-        icon: LocationOnIcon,
-        label: "Location",
-        value: "Colombo, Sri Lanka",
-        href: null,
-    },
-];
-
-const socialLinks = [
-    { icon: GitHubIcon, label: "GitHub", href: "https://github.com" },
-    { icon: LinkedInIcon, label: "LinkedIn", href: "https://linkedin.com" },
-    { icon: TwitterIcon, label: "Twitter", href: "https://twitter.com" },
-];
 
 const MotionBox = motion.create(Box);
 
@@ -199,7 +159,7 @@ export default function Contact() {
                             Follow Me
                         </Typography>
                         <Stack direction="row" spacing={2} mb={4}>
-                            {socialLinks.map((s, i) => {
+                            {socialLinksContact.map((s, i) => {
                                 const Icon = s.icon;
                                 return (
                                     <MotionBox

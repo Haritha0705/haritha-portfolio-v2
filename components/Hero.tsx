@@ -1,14 +1,11 @@
 'use client';
 
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Box, Typography, Button, useTheme } from '@mui/material';
 import { motion } from 'framer-motion';
-import GitHubIcon from '@mui/icons-material/GitHub';
-import LinkedInIcon from '@mui/icons-material/LinkedIn';
-import MailOutlineIcon from '@mui/icons-material/MailOutline';
+import {terminalLines, socialLinks, SocialLink} from '@/data/content';
 import DownloadIcon from '@mui/icons-material/Download';
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
-
 import StatusBadge from '@/components/ui/BadgeN';
 import Terminal from '@/components/ui/Terminal';
 
@@ -37,29 +34,6 @@ export function Hero() {
     const [titleIndex, setTitleIndex] = useState(0);
     const [isDeleting, setIsDeleting] = useState(false);
     const [mounted, setMounted] = useState(false);
-
-    const terminalLines = useMemo(
-        () => [
-            { type: 'command' as const, text: '$ whoami' },
-            { type: 'output' as const, text: 'Haritha Wickramasinga - Full Stack Developer' },
-            { type: 'command' as const, text: '$ cat skills.txt' },
-            { type: 'output' as const, text: 'React • Node.js • TypeScript • MongoDB • AWS' },
-            { type: 'command' as const, text: '$ echo $STATUS' },
-            { type: 'output' as const, text: '🟢 Available for opportunities' },
-            { type: 'command' as const, text: '$ ./start-project.sh' },
-        ],
-        []
-    );
-
-    const socialLinks = useMemo(
-        () => [
-            { icon: GitHubIcon, label: 'GitHub', href: 'https://github.com' },
-            { icon: LinkedInIcon, label: 'LinkedIn', href: 'https://linkedin.com' },
-            { icon: MailOutlineIcon, label: 'Email', href: 'mailto:haritha@example.com' },
-            { icon: DownloadIcon, label: 'Resume', href: '#' },
-        ],
-        []
-    );
 
     useEffect(() => {
         const mount = () => {
@@ -105,7 +79,7 @@ export function Hero() {
                 position: 'relative',
                 overflow: 'hidden',
                 pt: { xs: 16 * 0.25, sm: 20 * 0.25},
-                bgcolor: isDark ? 'background.default' : 'grey.100',
+                backgroundColor: isDark ? 'background.default' : 'grey.100',
             }}
         >
             {/* Matrix Background */}
@@ -255,7 +229,7 @@ export function Hero() {
                                     variant="contained"
                                     endIcon={<ArrowRightAltIcon />}
                                     sx={{
-                                        bgcolor: isDark ? 'primary.main' : 'primary.light',
+                                        backgroundColor: isDark ? 'primary.main' : 'primary.light',
                                         color: isDark ? 'background.default' : 'white',
                                         px: 4,
                                         py: 1.5,
@@ -285,7 +259,7 @@ export function Hero() {
 
                         {/* Social Links */}
                         <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 2, mt: 3 }}>
-                            {socialLinks.map((link) => (
+                            {socialLinks.map((link:SocialLink) => (
                                 <Box
                                     component={motion.a}
                                     key={link.label}

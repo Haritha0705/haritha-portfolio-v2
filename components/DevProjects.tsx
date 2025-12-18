@@ -23,116 +23,7 @@ import TerminalIcon from '@mui/icons-material/Terminal';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import CloseIcon from '@mui/icons-material/Close';
-
-/* ---------------- data (unchanged) ---------------- */
-
-const filters = [
-    { id: 'all', label: '// All Projects' },
-    { id: 'featured', label: '// Featured' },
-    { id: 'web', label: '// Web Apps' },
-    { id: 'api', label: '// APIs' },
-];
-
-const projects = [
-    {
-        id: 1,
-        title: 'DevConnect Platform',
-        description: 'Real-time collaboration platform for developers with code sharing, video calls, and project management.',
-        category: ['featured', 'web'],
-        tech: ['Next.js', 'Socket.io', 'PostgreSQL', 'Redis'],
-        stars: 234,
-        forks: 45,
-        language: 'TypeScript',
-        languageColor: '#3178C6',
-        github: 'https://github.com/devconnect/platform',
-        githubRepo: 'devconnect/platform',
-        demo: 'https://devconnect.demo.com',
-        lines: '15.2K',
-        commits: '234',
-    },
-    {
-        id: 2,
-        title: 'AI Code Reviewer',
-        description: 'ML-powered code review assistant that provides intelligent suggestions and detects potential bugs.',
-        category: ['featured', 'api'],
-        tech: ['Python', 'FastAPI', 'TensorFlow', 'Docker'],
-        stars: 567,
-        forks: 89,
-        language: 'Python',
-        languageColor: '#3776AB',
-        github: 'https://github.com/ai/reviewer',
-        githubRepo: 'ai/reviewer',
-        demo: null,
-        lines: '8.7K',
-        commits: '156',
-    },
-    {
-        id: 3,
-        title: 'TaskFlow API',
-        description: 'RESTful API for task management with advanced filtering, real-time updates, and team collaboration.',
-        category: ['api'],
-        tech: ['Node.js', 'Express', 'MongoDB', 'JWT'],
-        stars: 189,
-        forks: 34,
-        language: 'JavaScript',
-        languageColor: '#F7DF1E',
-        github: 'https://github.com/taskflow/api',
-        githubRepo: 'taskflow/api',
-        demo: 'https://taskflow.demo.com',
-        lines: '6.3K',
-        commits: '98',
-    },
-    {
-        id: 4,
-        title: 'Design System Kit',
-        description: 'Comprehensive React component library with 50+ customizable components and theming support.',
-        category: ['web'],
-        tech: ['React', 'TypeScript', 'Storybook', 'Tailwind'],
-        stars: 423,
-        forks: 67,
-        language: 'TypeScript',
-        languageColor: '#3178C6',
-        github: 'https://github.com/design/system-kit',
-        githubRepo: 'design/system-kit',
-        demo: 'https://designkit.demo.com',
-        lines: '12.1K',
-        commits: '189',
-    },
-    {
-        id: 5,
-        title: 'WeatherPulse',
-        description: 'Beautiful weather dashboard with interactive maps, forecasts, and location-based alerts.',
-        category: ['web'],
-        tech: ['React', 'Leaflet', 'OpenWeather API', 'Chart.js'],
-        stars: 145,
-        forks: 28,
-        language: 'JavaScript',
-        languageColor: '#F7DF1E',
-        github: 'https://github.com/weather/pulse',
-        githubRepo: 'weather/pulse',
-        demo: 'https://weatherpulse.demo.com',
-        lines: '4.5K',
-        commits: '67',
-    },
-    {
-        id: 6,
-        title: 'DevMetrics Analytics',
-        description: 'Developer productivity analytics platform with GitHub integration and insights dashboard.',
-        category: ['featured', 'web'],
-        tech: ['Next.js', 'D3.js', 'Supabase', 'GitHub API'],
-        stars: 312,
-        forks: 52,
-        language: 'TypeScript',
-        languageColor: '#3178C6',
-        github: 'https://github.com/devmetrics/analytics',
-        githubRepo: 'devmetrics/analytics',
-        demo: 'https://devmetrics.demo.com',
-        lines: '9.8K',
-        commits: '145',
-    },
-];
-
-/* -------------------------------------------------- */
+import { filters,projects } from '@/data/content';
 
 const MotionBox = motion.create(Box);
 
@@ -198,7 +89,7 @@ export default function DevProjects() {
                                 onClick={() => setActiveFilter(f.id)}
                                 sx={{
                                     fontFamily: 'monospace',
-                                    bgcolor:
+                                    backgroundColor:
                                         activeFilter === f.id
                                             ? isDark
                                                 ? 'primary.main'
@@ -374,7 +265,7 @@ export default function DevProjects() {
                             mx: 'auto',
                             mt: '10%',
                             p: 4,
-                            bgcolor: isDark ? 'grey.900' : '#fff',
+                            backgroundColor: isDark ? 'grey.900' : '#fff',
                             borderRadius: 3,
                             position: 'relative',
                         }}

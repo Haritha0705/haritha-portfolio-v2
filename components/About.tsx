@@ -12,23 +12,7 @@ import {
     Stack,
     useTheme,
 } from '@mui/material';
-
-const stats = [
-    { label: 'Projects', value: '5+' },
-    { label: 'Technologies', value: '15+' },
-    { label: 'Experience', value: '3+ Yrs' },
-];
-
-const competencies = [
-    'Full Stack Development',
-    'React & Next.js',
-    'Node.js & Express',
-    'Database Design',
-    'API Development',
-    'Cloud Deployment',
-    'Agile Methodology',
-    'Problem Solving',
-];
+import { stats, competencies } from '@/data/content';
 
 const MotionBox = motion.create(Box);
 const MotionPaper = motion.create(Paper);
@@ -86,7 +70,7 @@ export default function About() {
                                     p: { xs: 2, sm: 3 },
                                     mb: 3,
                                     borderRadius: 3,
-                                    bgcolor: isDark ? 'grey.900' : 'grey.100',
+                                    backgroundColor: isDark ? 'grey.900' : 'grey.100',
                                 }}
                             >
                                 <Image
@@ -112,7 +96,7 @@ export default function About() {
                                                 textAlign: 'center',
                                                 p: 2,
                                                 borderRadius: 2,
-                                                bgcolor: isDark ? 'grey.900' : 'grey.100',
+                                                backgroundColor: isDark ? 'grey.900' : 'grey.100',
                                             }}
                                         >
                                             <Typography
@@ -173,7 +157,7 @@ export default function About() {
                                             label={skill}
                                             variant="outlined"
                                             sx={{
-                                                bgcolor: isDark ? 'grey.900' : 'grey.100',
+                                                backgroundColor: isDark ? 'grey.900' : 'grey.100',
                                                 borderColor: 'primary.main',
                                             }}
                                         />

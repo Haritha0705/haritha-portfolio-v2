@@ -18,11 +18,7 @@ import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
 import FlashOnIcon from "@mui/icons-material/FlashOn";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
-
-interface ContributionDay {
-    date: string;
-    count: number;
-}
+import { ContributionDay } from '@/data/content';
 
 const MotionBox = motion.create(Box);
 
@@ -191,7 +187,7 @@ export default function GitHubActivity() {
                                             p: 2,
                                             textAlign: "center",
                                             borderRadius: 2,
-                                            bgcolor: isDark ? "grey.900" : "#fff",
+                                            backgroundColor: isDark ? "grey.900" : "#fff",
                                             transition: "0.3s",
                                             "&:hover": {
                                                 transform: "translateY(-2px)",

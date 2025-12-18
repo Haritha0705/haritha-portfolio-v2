@@ -11,84 +11,8 @@ import {
     Divider,
     useTheme,
 } from '@mui/material';
-import CodeIcon from '@mui/icons-material/Code';
-import TerminalIcon from '@mui/icons-material/Terminal';
-import StorageIcon from '@mui/icons-material/Storage';
-import CloudQueueIcon from '@mui/icons-material/CloudQueue';
-import BuildIcon from '@mui/icons-material/Build';
 import LayersIcon from '@mui/icons-material/Layers';
-
-const skillsCode = {
-    frontend: `// Frontend Technologies
-import React from 'react';
-import NextJS from 'next';
-import TypeScript from 'typescript';
-import TailwindCSS from 'tailwindcss';
-
-const skills = {
-  frameworks: ['React', 'Next.js', 'Vue.js'],
-  languages: ['TypeScript', 'JavaScript', 'HTML5', 'CSS3'],
-  styling: ['Tailwind CSS', 'Sass', 'Styled Components'],
-  tools: ['Vite', 'Webpack', 'Redux', 'React Query'],
-  proficiency: '90%'
-};
-
-export default skills;`,
-
-    backend: `// Backend & APIs
-const express = require('express');
-const mongoose = require('mongoose');
-
-class BackendDeveloper {
-  constructor() {
-    this.languages = ['Node.js', 'Python', 'Java'];
-    this.frameworks = ['Express', 'FastAPI', 'Spring Boot'];
-    this.apis = ['REST', 'GraphQL', 'WebSocket'];
-    this.auth = ['JWT', 'OAuth', 'Passport'];
-  }
-
-  buildAPI() {
-    return 'Scalable & Secure APIs';
-  }
-}
-
-module.exports = new BackendDeveloper();`,
-
-    database: `-- Database & Storage
-SELECT * FROM skills
-WHERE category = 'Database'
-ORDER BY proficiency DESC;
-
-/* MongoDB, PostgreSQL, MySQL, Redis */
-
-CREATE TABLE expertise (
-  id SERIAL PRIMARY KEY,
-  skill VARCHAR(50),
-  level INT CHECK (level >= 80)
-);`,
-
-    devops: `# DevOps & Cloud
-docker build -t app .
-docker-compose up -d
-
-AWS • Vercel • CI/CD
-GitHub Actions`,
-
-    tools: `{
-  "editor": "VS Code",
-  "design": ["Figma", "Adobe XD"],
-  "testing": ["Postman", "Insomnia"],
-  "versionControl": "Git & GitHub"
-}`,
-};
-
-const tabs = [
-    { id: 'frontend', label: 'Frontend', icon: <CodeIcon /> },
-    { id: 'backend', label: 'Backend', icon: <TerminalIcon /> },
-    { id: 'database', label: 'Database', icon: <StorageIcon /> },
-    { id: 'devops', label: 'DevOps', icon: <CloudQueueIcon /> },
-    { id: 'tools', label: 'Tools', icon: <BuildIcon /> },
-];
+import { skillsCode, tabs } from '@/data/content';
 
 const MotionBox = motion.create(Box);
 
@@ -186,7 +110,7 @@ export default function CodeSkills() {
                                                 ? 'primary.light'
                                                 : 'primary.main'
                                             : 'text.secondary',
-                                    bgcolor:
+                                    backgroundColor:
                                         activeTab === tab.id
                                             ? isDark
                                                 ? '#1E1E1E'
