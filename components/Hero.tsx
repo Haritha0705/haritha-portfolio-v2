@@ -257,6 +257,7 @@ export default function Hero() {
                         <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 2, mt: 4 }}>
                             {socialLinks.map((link: SocialLink) => (
                                 <MotionBox
+                                    component="a"
                                     key={link.label}
                                     href={link.href}
                                     target={link.href.startsWith('http') ? '_blank' : undefined}

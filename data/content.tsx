@@ -181,7 +181,6 @@ export const commands: Command[] = [
 export interface FormData {
     name: string;
     email: string;
-    subject: string;
     message: string;
 }
 
