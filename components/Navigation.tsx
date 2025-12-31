@@ -23,7 +23,6 @@ const MotionBox = motion.create(Box);
 
 export default function Navigation({ toggleTheme }: { toggleTheme: () => void }) {
     const theme = useTheme();
-    const isDark = theme.palette.mode === 'dark';
 
     const [scrolled, setScrolled] = useState(false);
     const [mobileOpen, setMobileOpen] = useState(false);
@@ -76,8 +75,9 @@ export default function Navigation({ toggleTheme }: { toggleTheme: () => void })
                 sx={{
                     backdropFilter: scrolled ? 'blur(10px)' : 'none',
                     borderBottom: scrolled ? `1px solid ${theme.palette.divider}` : 'none',
-                    px: 32,
-                    py: 1
+                    px: 4,
+                    py: 1,
+                    backgroundColor: theme.palette.background.default,
                 }}
             >
                 <Toolbar sx={{ justifyContent: 'space-between' }}>
@@ -92,7 +92,10 @@ export default function Navigation({ toggleTheme }: { toggleTheme: () => void })
                             cursor: 'pointer',
                             background: 'none',
                             border: 'none',
-                            color: 'primary.main',
+                            color: theme.custom.gradients.text,
+                            backgroundClip: 'text',
+                            WebkitBackgroundClip: 'text',
+                            WebkitTextFillColor: 'transparent',
                         }}
                     >
                         @Haritha0705
@@ -109,8 +112,8 @@ export default function Navigation({ toggleTheme }: { toggleTheme: () => void })
                                 sx={{
                                     color:
                                         active === item.id
-                                            ? 'primary.main'
-                                            : 'text.secondary',
+                                            ? theme.palette.primary.main
+                                            : theme.palette.text.secondary,
                                     fontWeight: active === item.id ? 600 : 400,
                                 }}
                             >
@@ -124,25 +127,14 @@ export default function Navigation({ toggleTheme }: { toggleTheme: () => void })
                         {/* Theme toggle */}
                         <IconButton onClick={toggleTheme}>
                             <AnimatePresence mode="wait">
-                                {isDark ? (
-                                    <MotionBox
-                                        key="light"
-                                        initial={{ rotate: -90, opacity: 0 }}
-                                        animate={{ rotate: 0, opacity: 1 }}
-                                        exit={{ rotate: 90, opacity: 0 }}
-                                    >
-                                        <LightModeIcon />
-                                    </MotionBox>
-                                ) : (
-                                    <MotionBox
-                                        key="dark"
-                                        initial={{ rotate: 90, opacity: 0 }}
-                                        animate={{ rotate: 0, opacity: 1 }}
-                                        exit={{ rotate: -90, opacity: 0 }}
-                                    >
-                                        <DarkModeIcon />
-                                    </MotionBox>
-                                )}
+                                <MotionBox
+                                    key={theme.palette.mode}
+                                    initial={{ rotate: theme.palette.mode === 'dark' ? 90 : -90, opacity: 0 }}
+                                    animate={{ rotate: 0, opacity: 1 }}
+                                    exit={{ rotate: theme.palette.mode === 'dark' ? -90 : 90, opacity: 0 }}
+                                >
+                                    {theme.palette.mode === 'dark' ? <LightModeIcon /> : <DarkModeIcon />}
+                                </MotionBox>
                             </AnimatePresence>
                         </IconButton>
 
@@ -162,6 +154,7 @@ export default function Navigation({ toggleTheme }: { toggleTheme: () => void })
                 anchor="right"
                 open={mobileOpen}
                 onClose={() => setMobileOpen(false)}
+                PaperProps={{ sx: { backgroundColor: theme.palette.background.paper } }}
             >
                 <Box sx={{ width: 280, p: 3 }}>
                     <IconButton onClick={() => setMobileOpen(false)}>
@@ -182,8 +175,8 @@ export default function Navigation({ toggleTheme }: { toggleTheme: () => void })
                                     fontSize: 18,
                                     color:
                                         active === item.id
-                                            ? 'primary.main'
-                                            : 'text.primary',
+                                            ? theme.palette.primary.main
+                                            : theme.palette.text.primary,
                                 }}
                             >
                                 {item.label}

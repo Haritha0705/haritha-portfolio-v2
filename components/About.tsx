@@ -14,49 +14,55 @@ import {
 } from '@mui/material';
 import { stats, competencies } from '@/data/content';
 
-const MotionBox = motion.create(Box);
-const MotionPaper = motion.create(Paper);
+const MotionBox = motion(Box);
+const MotionPaper = motion(Paper);
 
 export default function About() {
     const theme = useTheme();
-    const isDark = theme.palette.mode === 'dark';
 
     return (
-        <Box component="section" id="about" py={{ xs: 6, sm: 8, lg: 10 }}>
+        <Box
+            component="section"
+            id="about"
+            sx={{
+                py: { xs: 6, sm: 8, lg: 10 },
+                backgroundColor: theme.palette.background.default,
+            }}
+        >
             <Container maxWidth="lg">
-                {/* Header */}
+                {/* ---------------- Header ---------------- */}
                 <MotionBox
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6 }}
-                    textAlign="center"
-                    mb={{ xs: 5, sm: 6, lg: 8 }}
+                    sx={{ textAlign: 'center', mb: { xs: 5, sm: 6, lg: 8 } }}
                 >
                     <Typography
                         variant="h4"
-                        fontWeight="bold"
+                        fontWeight={800}
                         mb={1}
                         sx={{
                             background: theme.custom.gradients.text,
                             WebkitBackgroundClip: 'text',
                             WebkitTextFillColor: 'transparent',
-                            backgroundClip: 'text',
                         }}
                     >
                         {'<'}About Me{' />'}
                     </Typography>
 
                     <Typography
-                        color={isDark ? 'grey.400' : 'grey.600'}
-                        fontSize={{ xs: 14, sm: 16 }}
+                        sx={{
+                            fontSize: { xs: 14, sm: 16 },
+                            color: theme.custom.gradients.text,
+                        }}
                     >
                         Get to know more about who I am and what I do
                     </Typography>
                 </MotionBox>
 
                 <Grid container spacing={{ xs: 4, lg: 6 }} alignItems="center">
-                    {/* Left */}
+                    {/* ---------------- Left Side ---------------- */}
                     <Grid size={{ xs: 12, lg: 6 }}>
                         <MotionBox
                             initial={{ opacity: 0, x: -50 }}
@@ -64,13 +70,15 @@ export default function About() {
                             viewport={{ once: true }}
                             transition={{ duration: 0.6 }}
                         >
+                            {/* Profile Image */}
                             <Paper
                                 elevation={0}
                                 sx={{
                                     p: { xs: 2, sm: 3 },
                                     mb: 3,
                                     borderRadius: 3,
-                                    backgroundColor: isDark ? 'grey.900' : 'grey.100',
+                                    backgroundColor: theme.palette.background.paper,
+                                    border: `1px solid ${theme.palette.divider}`,
                                 }}
                             >
                                 <Image
@@ -78,11 +86,16 @@ export default function About() {
                                     alt="Profile"
                                     width={400}
                                     height={400}
-                                    style={{ width: '100%', height: 'auto', borderRadius: 16 }}
+                                    style={{
+                                        width: '100%',
+                                        height: 'auto',
+                                        borderRadius: 16,
+                                    }}
                                     priority
                                 />
                             </Paper>
 
+                            {/* Stats */}
                             <Grid container spacing={2}>
                                 {stats.map((stat, index) => (
                                     <Grid size={4} key={stat.label}>
@@ -96,17 +109,24 @@ export default function About() {
                                                 textAlign: 'center',
                                                 p: 2,
                                                 borderRadius: 2,
-                                                backgroundColor: isDark ? 'grey.900' : 'grey.100',
+                                                backgroundColor: theme.palette.background.paper,
+                                                border: `1px solid ${theme.palette.divider}`,
                                             }}
                                         >
                                             <Typography
-                                                fontWeight="bold"
+                                                fontWeight={700}
                                                 fontSize={{ xs: 18, sm: 22 }}
-                                                color={isDark ? 'primary.light' : 'primary.main'}
+                                                sx={{ background: theme.custom.gradients.text,
+                                                    WebkitBackgroundClip: 'text',
+                                                    WebkitTextFillColor: 'transparent',
+                                                }}
                                             >
                                                 {stat.value}
                                             </Typography>
-                                            <Typography fontSize={12} color="text.secondary">
+                                            <Typography
+                                                fontSize={12}
+                                                sx={{ color: theme.custom.gradients.text }}
+                                            >
                                                 {stat.label}
                                             </Typography>
                                         </MotionPaper>
@@ -116,7 +136,7 @@ export default function About() {
                         </MotionBox>
                     </Grid>
 
-                    {/* Right */}
+                    {/* ---------------- Right Side ---------------- */}
                     <Grid size={{ xs: 12, lg: 6 }}>
                         <MotionBox
                             initial={{ opacity: 0, x: 50 }}
@@ -124,7 +144,12 @@ export default function About() {
                             viewport={{ once: true }}
                             transition={{ duration: 0.6 }}
                         >
-                            <Typography variant="h5" fontWeight="600" mb={3}>
+                            <Typography
+                                variant="h5"
+                                fontWeight={700}
+                                mb={3}
+                                sx={{ color: theme.custom.gradients.text }}
+                            >
                                 Passionate Developer & Problem Solver
                             </Typography>
 
@@ -134,21 +159,26 @@ export default function About() {
                                     'I specialize in full-stack development with React, Node.js, and TypeScript.',
                                     'I believe in continuous learning and staying ahead of technology trends.',
                                 ].map((text, i) => (
-                                    <Typography key={i} color="text.secondary">
+                                    <Typography key={i} sx={{ color: theme.custom.gradients.text }}>
                                         {text}
                                     </Typography>
                                 ))}
                             </Stack>
 
-                            <Typography fontWeight="600" mb={2}>
+                            <Typography
+                                fontWeight={600}
+                                mb={2}
+                                sx={{ color: theme.custom.gradients.text }}
+                            >
                                 Core Competencies
                             </Typography>
 
-                            <Box display="flex" flexWrap="wrap" gap={1}>
+                            {/* Skills */}
+                            <Box display="flex" flexWrap="wrap" gap={1.2}>
                                 {competencies.map((skill, index) => (
                                     <MotionBox
                                         key={skill}
-                                        initial={{ opacity: 0, scale: 0.8 }}
+                                        initial={{ opacity: 0, scale: 0.85 }}
                                         whileInView={{ opacity: 1, scale: 1 }}
                                         viewport={{ once: true }}
                                         transition={{ delay: index * 0.05 }}
@@ -157,8 +187,12 @@ export default function About() {
                                             label={skill}
                                             variant="outlined"
                                             sx={{
-                                                backgroundColor: isDark ? 'grey.900' : 'grey.100',
-                                                borderColor: 'primary.main',
+                                                borderColor: theme.custom.gradients.text,
+                                                color: theme.custom.gradients.text,
+                                                backgroundColor: theme.palette.background.paper,
+                                                '&:hover': {
+                                                    backgroundColor: theme.palette.action.hover,
+                                                },
                                             }}
                                         />
                                     </MotionBox>

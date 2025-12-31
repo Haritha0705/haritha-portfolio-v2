@@ -14,11 +14,10 @@ import {
 import LayersIcon from '@mui/icons-material/Layers';
 import { skillsCode, tabs } from '@/data/content';
 
-const MotionBox = motion.create(Box);
+const MotionBox = motion(Box);
 
 export default function CodeSkills() {
     const theme = useTheme();
-    const isDark = theme.palette.mode === 'dark';
     const [activeTab, setActiveTab] = useState('frontend');
     const codeLines = skillsCode[activeTab as keyof typeof skillsCode].split('\n');
 
@@ -26,11 +25,13 @@ export default function CodeSkills() {
         <Box
             component="section"
             id="skills"
-            py={{ xs: 6, md: 8 }}
-            bgcolor={isDark ? 'rgba(30,30,30,0.4)' : 'rgba(245,245,245,0.6)'}
+            sx={{
+                py: { xs: 6, md: 8 },
+                backgroundColor: theme.palette.background.default,
+            }}
         >
             <Container maxWidth="lg">
-                {/* Header */}
+                {/* ---------------- Header ---------------- */}
                 <MotionBox
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -39,54 +40,67 @@ export default function CodeSkills() {
                     <Typography
                         variant="h4"
                         align="center"
-                        fontWeight="bold"
+                        fontWeight={800}
                         mb={1}
                         sx={{
                             background: theme.custom.gradients.text,
                             WebkitBackgroundClip: 'text',
                             WebkitTextFillColor: 'transparent',
-                            backgroundClip: 'text',
                         }}
                     >
                         {'<'}Tech Stack{' />'}
                     </Typography>
+
                     <Typography
                         align="center"
                         fontFamily="monospace"
-                        color={isDark ? 'grey.400' : 'grey.600'}
+                        color={theme.custom.gradients.text}
                         mb={4}
                     >
-                        {"// My developer toolbox"}
+                        {'// My developer toolbox'}
                     </Typography>
                 </MotionBox>
 
-                {/* Editor */}
+                {/* ---------------- Code Editor ---------------- */}
                 <Box
-                    borderRadius={2}
-                    overflow="hidden"
-                    border="2px solid"
-                    borderColor={isDark ? 'primary.dark' : 'primary.light'}
-                    bgcolor={isDark ? '#1E1E1E' : '#fff'}
-                    boxShadow={6}
+                    sx={{
+                        borderRadius: 2,
+                        overflow: 'hidden',
+                        border: `1px solid ${theme.palette.divider}`,
+                        backgroundColor: theme.palette.background.paper,
+                        boxShadow: theme.shadows[6],
+                    }}
                 >
-                    {/* Editor Header */}
+                    {/* -------- Editor Header -------- */}
                     <Stack
                         direction="row"
                         alignItems="center"
                         justifyContent="space-between"
                         px={2}
                         py={1}
-                        bgcolor={isDark ? '#2D2D30' : '#F3F3F3'}
+                        sx={{
+                            backgroundColor: theme.palette.background.paper,
+                            borderBottom: `1px solid ${theme.palette.divider}`,
+                        }}
                     >
+                        {/* Mac buttons */}
                         <Stack direction="row" spacing={1}>
                             {['#FF5F56', '#FFBD2E', '#27C93F'].map((c) => (
-                                <Box key={c} width={10} height={10} borderRadius="50%" bgcolor={c} />
+                                <Box
+                                    key={c}
+                                    sx={{
+                                        width: 10,
+                                        height: 10,
+                                        borderRadius: '50%',
+                                        backgroundColor: c,
+                                    }}
+                                />
                             ))}
                         </Stack>
 
                         <Stack direction="row" spacing={1} alignItems="center">
-                            <LayersIcon fontSize="small" />
-                            <Typography fontSize={12} fontFamily="monospace">
+                            <LayersIcon fontSize="small" sx={{ color: theme.custom.gradients.text }} />
+                            <Typography fontSize={12} fontFamily="monospace" sx={{ color: theme.custom.gradients.text }}>
                                 skills.{activeTab}
                             </Typography>
                         </Stack>
@@ -94,8 +108,14 @@ export default function CodeSkills() {
                         <Box width={40} />
                     </Stack>
 
-                    {/* Tabs */}
-                    <Stack direction="row" divider={<Divider orientation="vertical" flexItem />}>
+                    {/* -------- Tabs -------- */}
+                    <Stack
+                        direction="row"
+                        divider={<Divider orientation="vertical" flexItem />}
+                        sx={{
+                            borderBottom: `1px solid ${theme.palette.divider}`,
+                        }}
+                    >
                         {tabs.map((tab) => (
                             <Button
                                 key={tab.id}
@@ -104,18 +124,18 @@ export default function CodeSkills() {
                                 sx={{
                                     fontFamily: 'monospace',
                                     borderRadius: 0,
+                                    px: 2,
                                     color:
                                         activeTab === tab.id
-                                            ? isDark
-                                                ? 'primary.light'
-                                                : 'primary.main'
-                                            : 'text.secondary',
+                                            ? theme.custom.gradients.text
+                                            : theme.palette.text.primary,
                                     backgroundColor:
                                         activeTab === tab.id
-                                            ? isDark
-                                                ? '#1E1E1E'
-                                                : '#fff'
+                                            ? theme.palette.action.selected
                                             : 'transparent',
+                                    '&:hover': {
+                                        backgroundColor: theme.palette.action.hover,
+                                    },
                                 }}
                             >
                                 {tab.label}
@@ -123,24 +143,25 @@ export default function CodeSkills() {
                         ))}
                     </Stack>
 
-                    {/* Code */}
+                    {/* -------- Code Area -------- */}
                     <Box position="relative">
                         {/* Line Numbers */}
                         <Box
-                            position="absolute"
-                            left={0}
-                            top={0}
-                            bottom={0}
-                            width={48}
-                            bgcolor={isDark ? '#1E1E1E' : '#F8F8F8'}
-                            borderRight="1px solid"
-                            borderColor={isDark ? '#3E3E42' : '#E5E5E5'}
-                            px={1}
-                            py={2}
-                            fontFamily="monospace"
-                            fontSize={12}
-                            color="text.secondary"
-                            textAlign="right"
+                            sx={{
+                                position: 'absolute',
+                                left: 0,
+                                top: 0,
+                                bottom: 0,
+                                width: 48,
+                                px: 1,
+                                py: 2,
+                                textAlign: 'right',
+                                fontFamily: 'monospace',
+                                fontSize: 12,
+                                color: theme.custom.gradients.text,
+                                backgroundColor: theme.palette.background.paper,
+                                borderRight: `1px solid ${theme.palette.divider}`,
+                            }}
                         >
                             {codeLines.map((_, i) => (
                                 <Box key={i}>{i + 1}</Box>
@@ -161,9 +182,8 @@ export default function CodeSkills() {
                                     overflowX: 'auto',
                                     fontFamily: 'monospace',
                                     fontSize: 13,
-                                    color: theme.palette.mode === 'dark'
-                                        ? theme.palette.grey[300]
-                                        : theme.palette.grey[900],
+                                    lineHeight: 1.6,
+                                    color: theme.palette.text.primary,
                                 }}
                             >
                                 {skillsCode[activeTab as keyof typeof skillsCode]}
@@ -171,29 +191,25 @@ export default function CodeSkills() {
                         </AnimatePresence>
                     </Box>
 
-                    {/* Status Bar */}
+                    {/* -------- Status Bar -------- */}
                     <Stack
                         direction="row"
                         justifyContent="space-between"
                         px={2}
                         py={1}
-                        bgcolor={isDark ? 'primary.main' : '#0066B8'}
-                        color={'background.default'}
-                        fontFamily="monospace"
-                        fontSize={12}
+                        sx={{
+                            backgroundColor: theme.palette.primary.main,
+                            color: theme.palette.background.default,
+                            fontFamily: 'monospace',
+                            fontSize: 12,
+                        }}
                     >
-                        <Box
-                            sx={{
-                                display: 'flex',
-                                gap: 2,
-                                alignItems: 'center',
-                            }}
-                        >
-                            <Typography component="span" sx={{ fontSize:12}}>✓ Ready</Typography>
-                            <Typography component="span" sx={{ fontSize:12}}>UTF-8</Typography>
-                            <Typography component="span" sx={{ fontSize:12}}>JavaScript</Typography>
-                        </Box>
-                        <Typography component="span" sx={{ fontSize:12}}>Spaces: 2</Typography>
+                        <Stack direction="row" spacing={2}>
+                            <Typography component="span">✓ Ready</Typography>
+                            <Typography component="span">UTF-8</Typography>
+                            <Typography component="span">JavaScript</Typography>
+                        </Stack>
+                        <Typography component="span">Spaces: 2</Typography>
                     </Stack>
                 </Box>
             </Container>

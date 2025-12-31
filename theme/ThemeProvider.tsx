@@ -22,18 +22,15 @@ export function useThemeContext() {
 }
 
 export default function AppThemeProvider({children,}: { children: React.ReactNode; }) {
-    const [mode, setMode] = useState<ThemeMode>('dark');
-
-    // Load saved theme
-    useEffect(() => {
-        const loadSavedTheme = () => {
+    const [mode, setMode] = useState<ThemeMode>(() => {
+        try {
+            if (typeof window === 'undefined') return 'dark';
             const saved = localStorage.getItem('theme') as ThemeMode | null;
-            if (saved) {
-                setMode(saved);
-            }
-        };
-        loadSavedTheme();
-    }, []);
+            return (saved as ThemeMode) || 'dark';
+        } catch {
+            return 'dark';
+        }
+    });
 
     // Sync html class for Tailwind
     useEffect(() => {

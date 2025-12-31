@@ -163,7 +163,7 @@ export const tabs: Tab[] = [
 // Command Palette Data and interface
 
 export interface Command {
-    icon: any;
+    icon: ReactNode;
     label: string;
     action: string;
     keywords: string;

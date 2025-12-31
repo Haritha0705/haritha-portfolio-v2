@@ -9,7 +9,8 @@ import {
     Typography,
     Grid,
     Paper,
-    Stack, useTheme,
+    Stack,
+    useTheme,
 } from "@mui/material";
 
 import BarChartIcon from "@mui/icons-material/BarChart";
@@ -25,7 +26,6 @@ const MotionBox = motion.create(Box);
 export default function GitHubActivity() {
     const [contributions, setContributions] = useState<ContributionDay[]>([]);
     const theme = useTheme();
-    const isDark = theme.palette.mode === 'dark';
 
     useEffect(() => {
         async function fetchData() {
@@ -114,11 +114,12 @@ export default function GitHubActivity() {
     }, [contributions]);
 
     const getColor = (count: number) => {
-        if (count === 0) return isDark ? "#161B22" : "#EBEDF0";
-        if (count <= 3) return "#9BE9A8";
-        if (count <= 6) return "#40C463";
-        if (count <= 12) return "#30A14E";
-        return "#216E39";
+        // Use theme palette colors instead of hard-coded dark/light
+        if (count === 0) return theme.palette.grey[100];
+        if (count <= 3) return theme.palette.success.light;
+        if (count <= 6) return theme.palette.success.main;
+        if (count <= 12) return theme.palette.success.dark;
+        return theme.palette.success.dark;
     };
 
     const stats = [
@@ -134,7 +135,7 @@ export default function GitHubActivity() {
         <Box
             component="section"
             py={{ xs: 6, md: 8 }}
-            bgcolor={isDark ? "rgba(255,255,255,0.02)" : "rgba(0,0,0,0.02)"}
+            bgcolor={theme.palette.background.default}
         >
             <Container maxWidth="xl">
                 {/* Title */}
@@ -174,7 +175,7 @@ export default function GitHubActivity() {
                     {stats.map((s, i) => {
                         const Icon = s.icon;
                         return (
-                            <Grid size={{xs: 6,md: 4,lg: 2}} key={s.label}>
+                            <Grid size={{ xs: 6, md: 4, lg: 2 }} key={s.label}>
                                 <MotionBox
                                     initial={{ opacity: 0, scale: 0.9 }}
                                     whileInView={{ opacity: 1, scale: 1 }}
@@ -187,7 +188,7 @@ export default function GitHubActivity() {
                                             p: 2,
                                             textAlign: "center",
                                             borderRadius: 2,
-                                            backgroundColor: isDark ? "grey.900" : "#fff",
+                                            backgroundColor: theme.palette.background.paper,
                                             transition: "0.3s",
                                             "&:hover": {
                                                 transform: "translateY(-2px)",
@@ -252,7 +253,9 @@ export default function GitHubActivity() {
 
                     {/* Legend */}
                     <Stack direction="row" spacing={1} mt={3} fontSize={10}>
-                        <Typography component="span" sx={{ fontSize:10}}>Less</Typography>
+                        <Typography component="span" sx={{ fontSize: 10 }}>
+                            Less
+                        </Typography>
                         {[0, 2, 4, 8, 12].map((v, i) => (
                             <Box
                                 key={i}
@@ -262,7 +265,9 @@ export default function GitHubActivity() {
                                 bgcolor={getColor(v)}
                             />
                         ))}
-                        <Typography component="span" sx={{ fontSize:10}}>More</Typography>
+                        <Typography component="span" sx={{ fontSize: 10 }}>
+                            More
+                        </Typography>
                     </Stack>
                 </Box>
             </Container>

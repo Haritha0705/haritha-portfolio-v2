@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -12,7 +12,8 @@ import {
     Stack,
     Divider,
     Modal,
-    IconButton, useTheme,
+    IconButton,
+    useTheme,
 } from '@mui/material';
 
 import FolderIcon from '@mui/icons-material/Folder';
@@ -23,7 +24,7 @@ import TerminalIcon from '@mui/icons-material/Terminal';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import CloseIcon from '@mui/icons-material/Close';
-import { filters,projects } from '@/data/content';
+import { filters, projects } from '@/data/content';
 
 const MotionBox = motion.create(Box);
 
@@ -33,7 +34,7 @@ export default function DevProjects() {
     const [selected, setSelected] = useState<number | null>(null);
 
     const theme = useTheme();
-    const isDark = theme.palette.mode === 'dark';
+
     const filtered =
         activeFilter === 'all'
             ? projects
@@ -42,14 +43,10 @@ export default function DevProjects() {
     const project = projects.find((p) => p.id === selected);
 
     return (
-        <Box component="section" id="projects" py={{ xs: 6, md: 8 }}>
+        <Box component="section" id="projects" py={theme.custom.sectionPadding} bgcolor={theme.palette.background.default}>
             <Container maxWidth="lg">
                 {/* Header */}
-                <MotionBox
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                >
+                <MotionBox initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
                     <Typography
                         variant="h4"
                         align="center"
@@ -65,24 +62,13 @@ export default function DevProjects() {
                         {'<'}Featured Projects{' />'}
                     </Typography>
 
-                    <Typography
-                        align="center"
-                        fontFamily="monospace"
-                        color="text.secondary"
-                        mb={4}
-                    >
+                    <Typography align="center" fontFamily="monospace" color="text.secondary" mb={4}>
                         {"// Building cool stuff, one commit at a time"}
                     </Typography>
                 </MotionBox>
 
                 {/* Filters */}
-                <Stack
-                    direction="row"
-                    flexWrap="wrap"
-                    justifyContent="center"
-                    gap={1.5}
-                    mb={5}
-                >
+                <Stack direction="row" flexWrap="wrap" justifyContent="center" gap={1.5} mb={5}>
                     {filters.map((f) => (
                         <MotionBox key={f.id} whileHover={{ scale: 1.05 }}>
                             <Button
@@ -91,18 +77,12 @@ export default function DevProjects() {
                                     fontFamily: 'monospace',
                                     backgroundColor:
                                         activeFilter === f.id
-                                            ? isDark
-                                                ? 'primary.main'
-                                                : 'primary.light'
-                                            : isDark
-                                                ? 'grey.900'
-                                                : 'grey.200',
+                                            ? theme.palette.primary.main
+                                            : theme.palette.background.paper,
                                     color:
                                         activeFilter === f.id
-                                            ? isDark
-                                                ? '#000'
-                                                : '#fff'
-                                            : 'text.secondary',
+                                            ? theme.palette.background.paper
+                                            : theme.palette.text.secondary,
                                 }}
                             >
                                 {f.label}
@@ -133,42 +113,24 @@ export default function DevProjects() {
                                         <Box
                                             borderRadius={2}
                                             border="2px solid"
-                                            borderColor={
-                                                hovered === p.id ? 'primary.main' : 'divider'
-                                            }
-                                            bgcolor={isDark ? 'grey.900' : '#fff'}
+                                            borderColor={hovered === p.id ? theme.palette.primary.main : theme.palette.divider}
+                                            bgcolor={theme.palette.background.paper}
                                             sx={{ cursor: 'pointer', overflow: 'hidden' }}
                                         >
                                             {/* Header */}
-                                            <Stack
-                                                direction="row"
-                                                justifyContent="space-between"
-                                                p={2}
-                                                borderBottom="1px solid"
-                                                borderColor="divider"
-                                            >
+                                            <Stack direction="row" justifyContent="space-between" p={2} borderBottom="1px solid" borderColor={theme.palette.divider}>
                                                 <Stack direction="row" spacing={1} alignItems="center">
                                                     <FolderIcon fontSize="small" />
-                                                    <Typography fontFamily="monospace" fontSize={12}>
-                                                        {p.language}
-                                                    </Typography>
+                                                    <Typography fontFamily="monospace" fontSize={12}>{p.language}</Typography>
                                                 </Stack>
 
                                                 <Stack direction="row" spacing={1}>
                                                     {p.demo && (
-                                                        <IconButton
-                                                            size="small"
-                                                            href={p.demo}
-                                                            onClick={(e) => e.stopPropagation()}
-                                                        >
+                                                        <IconButton size="small" href={p.demo} onClick={(e) => e.stopPropagation()}>
                                                             <OpenInNewIcon fontSize="small" />
                                                         </IconButton>
                                                     )}
-                                                    <IconButton
-                                                        size="small"
-                                                        href={p.github}
-                                                        onClick={(e) => e.stopPropagation()}
-                                                    >
+                                                    <IconButton size="small" href={p.github} onClick={(e) => e.stopPropagation()}>
                                                         <GitHubIcon fontSize="small" />
                                                     </IconButton>
                                                 </Stack>
@@ -178,47 +140,23 @@ export default function DevProjects() {
                                             <Box p={3}>
                                                 <Stack direction="row" spacing={1} mb={1}>
                                                     <DescriptionIcon fontSize="small" />
-                                                    <Typography fontWeight="600" noWrap>
-                                                        {p.title}
-                                                    </Typography>
+                                                    <Typography fontWeight="600" noWrap>{p.title}</Typography>
                                                 </Stack>
 
-                                                <Typography
-                                                    fontSize={13}
-                                                    color="text.secondary"
-                                                    mb={2}
-                                                    noWrap
-                                                >
+                                                <Typography fontSize={13} color="text.secondary" mb={2} noWrap>
                                                     {p.description}
                                                 </Typography>
 
                                                 <Stack direction="row" flexWrap="wrap" gap={1} mb={2}>
                                                     {p.tech.slice(0, 3).map((t) => (
-                                                        <Chip
-                                                            key={t}
-                                                            label={t}
-                                                            size="small"
-                                                            sx={{ fontFamily: 'monospace' }}
-                                                        />
+                                                        <Chip key={t} label={t} size="small" sx={{ fontFamily: 'monospace' }} />
                                                     ))}
-                                                    {p.tech.length > 3 && (
-                                                        <Chip
-                                                            size="small"
-                                                            label={`+${p.tech.length - 3}`}
-                                                        />
-                                                    )}
+                                                    {p.tech.length > 3 && <Chip size="small" label={`+${p.tech.length - 3}`} />}
                                                 </Stack>
 
                                                 <Divider />
 
-                                                <Stack
-                                                    direction="row"
-                                                    spacing={2}
-                                                    mt={2}
-                                                    fontFamily="monospace"
-                                                    fontSize={18}
-                                                    color="text.secondary"
-                                                >
+                                                <Stack direction="row" spacing={2} mt={2} fontFamily="monospace" fontSize={18} color="text.secondary">
                                                     <Stack direction="row" spacing={0.5}>
                                                         <StarIcon fontSize="inherit" />
                                                         <Typography component={"span"} fontSize={12}>{p.stars}</Typography>
@@ -231,17 +169,7 @@ export default function DevProjects() {
                                             </Box>
 
                                             {/* Footer */}
-                                            <Stack
-                                                direction="row"
-                                                alignItems="center"
-                                                px={2}
-                                                py={1}
-                                                borderTop="1px solid"
-                                                borderColor="divider"
-                                                fontFamily="monospace"
-                                                fontSize={11}
-                                                color="text.secondary"
-                                            >
+                                            <Stack direction="row" alignItems="center" px={2} py={1} borderTop="1px solid" borderColor={theme.palette.divider} fontFamily="monospace" fontSize={11} color="text.secondary">
                                                 Lines: {p.lines}
                                                 <Box flexGrow={1} />
                                                 <TerminalIcon fontSize="inherit" />
@@ -265,29 +193,22 @@ export default function DevProjects() {
                             mx: 'auto',
                             mt: '10%',
                             p: 4,
-                            backgroundColor: isDark ? 'grey.900' : '#fff',
+                            backgroundColor: theme.palette.background.paper,
                             borderRadius: 3,
                             position: 'relative',
                         }}
                     >
-                        <IconButton
-                            onClick={() => setSelected(null)}
-                            sx={{ position: 'absolute', top: 12, right: 12 }}
-                        >
+                        <IconButton onClick={() => setSelected(null)} sx={{ position: 'absolute', top: 12, right: 12 }}>
                             <CloseIcon />
                         </IconButton>
 
-                        <Typography variant="h6" mb={1}>
-                            {project?.title}
-                        </Typography>
+                        <Typography variant="h6" mb={1}>{project?.title}</Typography>
 
-                        <Typography fontSize={14} mb={3}>
-                            {project?.description}
-                        </Typography>
+                        <Typography fontSize={14} mb={3}>{project?.description}</Typography>
 
                         <Stack direction="row" flexWrap="wrap" gap={1} mb={3}>
                             {project?.tech.map((t) => (
-                                <Chip key={t} label={t} size="small" />
+                                <Chip key={t} label={t} size="small" sx={{ fontFamily: 'monospace' }} />
                             ))}
                         </Stack>
 
@@ -300,23 +221,12 @@ export default function DevProjects() {
 
                         <Stack direction="row" spacing={2} mt={3}>
                             {project?.demo && (
-                                <Button
-                                    variant="contained"
-                                    href={project.demo}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                >
+                                <Button variant="contained" href={project.demo} target="_blank" rel="noopener noreferrer">
                                     Demo
                                 </Button>
                             )}
-
                             {project?.github && (
-                                <Button
-                                    variant="outlined"
-                                    href={project.github}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                >
+                                <Button variant="outlined" href={project.github} target="_blank" rel="noopener noreferrer">
                                     GitHub
                                 </Button>
                             )}

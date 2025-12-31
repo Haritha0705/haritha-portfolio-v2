@@ -3,14 +3,18 @@
 import React, { useState, useEffect } from 'react';
 import { Box, Typography, Button, useTheme } from '@mui/material';
 import { motion } from 'framer-motion';
-import {terminalLines, socialLinks, SocialLink} from '@/data/content';
 import DownloadIcon from '@mui/icons-material/Download';
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
+
+import { terminalLines, socialLinks, SocialLink } from '@/data/content';
 import StatusBadge from '@/components/ui/BadgeN';
 import Terminal from '@/components/ui/Terminal';
 
 const TITLES = ['Full Stack Developer', 'Student', 'Tech Enthusiast'];
 
+const MotionBox = motion(Box);
+
+/* ---------------- Matrix data ---------------- */
 const generateBinaryStrings = () =>
     Array.from({ length: 15 }, (_, i) => {
         let seed = i * 12345;
@@ -21,25 +25,23 @@ const generateBinaryStrings = () =>
     });
 
 const BINARY_STRINGS = generateBinaryStrings();
+
 const ANIMATION_CONFIG = Array.from({ length: 15 }, (_, i) => ({
     duration: 5 + (i % 5),
     delay: (i * 0.5) % 5,
 }));
-const MotionBox = motion(Box);
 
-export function Hero() {
+export default function Hero() {
     const theme = useTheme();
-    const isDark = theme.palette.mode === 'dark';
+
     const [displayedText, setDisplayedText] = useState('');
     const [titleIndex, setTitleIndex] = useState(0);
     const [isDeleting, setIsDeleting] = useState(false);
     const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
-        const mount = () => {
-            setMounted(true);
-        };
-        mount();
+        const id = window.setTimeout(() => setMounted(true), 0);
+        return () => window.clearTimeout(id);
     }, []);
 
     useEffect(() => {
@@ -50,13 +52,13 @@ export function Hero() {
         const timeout = setTimeout(() => {
             if (!isDeleting) {
                 if (displayedText.length < currentTitle.length) {
-                    setDisplayedText(currentTitle.substring(0, displayedText.length + 1));
+                    setDisplayedText(currentTitle.slice(0, displayedText.length + 1));
                 } else {
                     setTimeout(() => setIsDeleting(true), pauseTime);
                 }
             } else {
                 if (displayedText.length > 0) {
-                    setDisplayedText(displayedText.substring(0, displayedText.length - 1));
+                    setDisplayedText(displayedText.slice(0, -1));
                 } else {
                     setIsDeleting(false);
                     setTitleIndex((prev) => (prev + 1) % TITLES.length);
@@ -78,34 +80,29 @@ export function Hero() {
                 justifyContent: 'center',
                 position: 'relative',
                 overflow: 'hidden',
-                pt: { xs: 16 * 0.25, sm: 20 * 0.25},
-                backgroundColor: isDark ? 'background.default' : 'grey.100',
+                backgroundColor: theme.palette.background.default,
             }}
         >
-            {/* Matrix Background */}
+            {/* ---------------- Matrix Background ---------------- */}
             {mounted && (
                 <Box
                     sx={{
                         position: 'absolute',
-                        top: 0,
-                        left: 0,
-                        right: 0,
-                        bottom: 0,
-                        overflow: 'hidden',
+                        inset: 0,
                         pointerEvents: 'none',
-                        opacity: isDark ? 0.3 : 0.2,
+                        opacity: theme.matrixOpacity,
                         fontFamily: 'monospace',
                         fontSize: '0.75rem',
                         '@media (min-width:600px)': { fontSize: '0.875rem' },
                     }}
                 >
-                    {BINARY_STRINGS.map((binaryString, i) => (
+                    {BINARY_STRINGS.map((binary, i) => (
                         <MotionBox
                             key={i}
-                            style={{
+                            sx={{
                                 position: 'absolute',
                                 left: i * 80,
-                                color: isDark ? theme.palette.primary.main : theme.palette.primary.light,
+                                color: theme.palette.primary.main,
                             }}
                             initial={{ y: -100 }}
                             animate={{ y: '100vh' }}
@@ -116,31 +113,25 @@ export function Hero() {
                                 delay: ANIMATION_CONFIG[i].delay,
                             }}
                         >
-                            {binaryString}
+                            {binary}
                         </MotionBox>
                     ))}
                 </Box>
             )}
 
-            {/* Particle Grid */}
+            {/* ---------------- Particle Grid ---------------- */}
             <Box
                 sx={{
                     position: 'absolute',
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    bottom: 0,
+                    inset: 0,
                     pointerEvents: 'none',
-                    opacity: 0.2,
-                    backgroundImage: (theme) =>
-                        `radial-gradient(circle, ${
-                            isDark ? theme.palette.primary.main : theme.palette.primary.light
-                        } 1px, transparent 1px)`,
-                    backgroundSize: '20px 20px',
+                    opacity: 0.1,
+                    backgroundImage: `radial-gradient(circle, ${theme.palette.primary.main} 1px, transparent 1px)`,
+                    backgroundSize: '30px 30px',
                 }}
             />
 
-            {/* Content */}
+            {/* ---------------- Content ---------------- */}
             <Box
                 sx={{
                     maxWidth: '1280px',
@@ -156,100 +147,105 @@ export function Hero() {
                     sx={{
                         display: 'grid',
                         gridTemplateColumns: { xs: '1fr', lg: '1fr 1fr' },
-                        gap: { xs: 8, lg: 12 },
+                        gap: { xs: 6, lg: 8 },
                         alignItems: 'center',
                     }}
                 >
-                    {/* Left Content */}
+                    {/* ---------------- Left Content ---------------- */}
                     <MotionBox
                         initial={{ opacity: 0, x: -50 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.8 }}
                     >
                         <StatusBadge status="available" />
+
                         <Typography
                             variant="h2"
                             sx={{
-                                fontWeight: 'bold',
-                                fontSize: { xs: '3rem', sm: '5rem' },
+                                mt: 2,
+                                fontWeight: 800,
+                                fontSize: { xs: '3rem', sm: '4rem' },
                                 background: theme.custom.gradients.text,
                                 WebkitBackgroundClip: 'text',
                                 WebkitTextFillColor: 'transparent',
-                                mt: 2,
                             }}
                         >
                             Haritha Wickremesinghe
                         </Typography>
 
-                        <Box sx={{ mt: 2, maxWidth: 'xl' }}>
-                            {/* Typing line */}
-                            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                                <Typography
-                                    sx={{
-                                        fontFamily: 'Monospace',
-                                        fontSize: { xs: '1.25rem', sm: '1.5rem', lg: '1.75rem' },
-                                        color: 'secondary.main',
-                                    }}
-                                >
-                                    {'>'} {displayedText}
-                                </Typography>
-                                <Box
-                                    component={motion.span}
-                                    animate={{ opacity: [1, 0] }}
-                                    transition={{ duration: 0.5, repeat: Infinity }}
-                                    sx={{
-                                        width: 2,
-                                        height: 28,
-                                        display: 'inline-block',
-                                        backgroundColor: isDark ? theme.palette.primary.main : theme.palette.primary.light,
-                                    }}
-                                />
-                            </Box>
-
-                            {/* Description paragraph */}
+                        {/* Typing line */}
+                        <Box sx={{ mt: 2, display: 'flex', alignItems: 'center', gap: 1 }}>
                             <Typography
                                 sx={{
-                                    mt: 2,
-                                    fontSize: { xs: '0.875rem', sm: '1rem', lg: '1.125rem' },
-                                    maxWidth: 'xl',
-                                    lineHeight: 1.6,
-                                    color: isDark ? 'text.secondary' : 'text.secondary',
+                                    fontFamily: 'monospace',
+                                    fontSize: { xs: '1.25rem', sm: '1.5rem' },
+                                    color: theme.palette.secondary.main,
                                 }}
                             >
-                                Crafting immersive digital experiences at the intersection of
-                                design and code. Specializing in React, TypeScript, and building
-                                systems that scale.
+                                {'>'} {displayedText}
                             </Typography>
+
+                            <MotionBox
+                                animate={{ opacity: [1, 0] }}
+                                transition={{ duration: 0.6, repeat: Infinity }}
+                                sx={{
+                                    width: 2,
+                                    height: 28,
+                                    backgroundColor: theme.palette.primary.main,
+                                }}
+                            />
                         </Box>
 
-                        {/* CTA Buttons */}
-                        <Box sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, gap: 2, mt: 4 }}>
-                            <MotionBox whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                        <Typography
+                            sx={{
+                                mt: 2,
+                                maxWidth: 520,
+                                lineHeight: 1.7,
+                                color: theme.palette.text.secondary,
+                            }}
+                        >
+                            Crafting immersive digital experiences at the intersection of
+                            design and code. Specializing in React, TypeScript, and scalable
+                            systems.
+                        </Typography>
+
+                        {/* ---------------- CTA Buttons ---------------- */}
+                        <Box
+                            sx={{
+                                display: 'flex',
+                                flexDirection: { xs: 'column', sm: 'row' },
+                                gap: 2,
+                                mt: 4,
+                            }}
+                        >
+                            <MotionBox whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }}>
                                 <Button
                                     variant="contained"
                                     endIcon={<ArrowRightAltIcon />}
                                     sx={{
-                                        backgroundColor: isDark ? 'primary.main' : 'primary.light',
-                                        color: isDark ? 'background.default' : 'white',
                                         px: 4,
                                         py: 1.5,
                                         borderRadius: 2,
+                                        backgroundColor: theme.palette.primary.main,
+                                        color: theme.palette.background.default,
+                                        '&:hover': { backgroundColor: theme.palette.primary.dark },
                                     }}
                                 >
                                     View Projects
                                 </Button>
                             </MotionBox>
 
-                            <MotionBox whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                            <MotionBox whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }}>
                                 <Button
                                     variant="outlined"
                                     startIcon={<DownloadIcon />}
                                     sx={{
-                                        borderColor: isDark ? 'secondary.main' : 'primary.light',
-                                        color: isDark ? 'secondary.main' : 'primary.light',
                                         px: 4,
                                         py: 1.5,
                                         borderRadius: 2,
+                                        borderColor: theme.palette.secondary.main,
+                                        color: theme.palette.secondary.main,
+                                        '&:hover': { backgroundColor: theme.palette.action.hover },
                                     }}
                                 >
                                     Download CV
@@ -257,38 +253,38 @@ export function Hero() {
                             </MotionBox>
                         </Box>
 
-                        {/* Social Links */}
-                        <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 2, mt: 3 }}>
-                            {socialLinks.map((link:SocialLink) => (
-                                <Box
-                                    component={motion.a}
+                        {/* ---------------- Social Links ---------------- */}
+                        <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 2, mt: 4 }}>
+                            {socialLinks.map((link: SocialLink) => (
+                                <MotionBox
                                     key={link.label}
                                     href={link.href}
                                     target={link.href.startsWith('http') ? '_blank' : undefined}
-                                    rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                                    whileHover={{ scale: 1.05, y: -2 }}
+                                    rel="noopener noreferrer"
+                                    whileHover={{ y: -3, scale: 1.05 }}
                                     whileTap={{ scale: 0.95 }}
-                                    style={{
+                                    sx={{
                                         display: 'flex',
                                         alignItems: 'center',
-                                        gap: 8,
-                                        padding: '8px 12px',
-                                        borderRadius: 12,
-                                        border: `1px solid ${isDark ? theme.palette.divider : '#ccc'}`,
-                                        backgroundColor: isDark ? 'rgba(255,255,255,0.05)' : '#f9f9f9',
+                                        gap: 1,
+                                        px: 2,
+                                        py: 1,
+                                        borderRadius: 2,
+                                        border: `1px solid ${theme.palette.divider}`,
+                                        backgroundColor: theme.palette.background.paper,
                                         textDecoration: 'none',
                                     }}
                                 >
-                                    <link.icon sx={{ fontSize: 20, color: isDark ? theme.palette.primary.main : theme.palette.primary.light }} />
-                                    <Typography sx={{ fontSize: 14, color: isDark ? 'text.primary' : 'text.primary' }}>
+                                    <link.icon sx={{ fontSize: 20, color: theme.palette.primary.main }} />
+                                    <Typography sx={{ fontSize: 14, color: theme.palette.text.primary }}>
                                         {link.label}
                                     </Typography>
-                                </Box>
+                                </MotionBox>
                             ))}
                         </Box>
                     </MotionBox>
 
-                    {/* Right - Terminal */}
+                    {/* ---------------- Right Terminal ---------------- */}
                     <MotionBox
                         initial={{ opacity: 0, x: 50 }}
                         animate={{ opacity: 1, x: 0 }}
@@ -301,5 +297,3 @@ export function Hero() {
         </Box>
     );
 }
-
-export default Hero;

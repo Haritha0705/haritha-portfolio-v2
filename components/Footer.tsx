@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { motion } from 'framer-motion';
 import {
@@ -8,18 +8,17 @@ import {
     Stack,
     IconButton,
     Divider,
-    Button, useTheme,
+    Button,
+    useTheme,
 } from '@mui/material';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
-import { footerLinks,socialLinksFooter } from '@/data/content';
+import { footerLinks, socialLinksFooter } from '@/data/content';
 
 const MotionBox = motion.create(Box);
 
 export default function Footer() {
     const theme = useTheme();
-    const isDark = theme.palette.mode === 'dark';
-
     const currentYear = new Date().getFullYear();
 
     const scrollToTop = () => {
@@ -39,9 +38,9 @@ export default function Footer() {
     return (
         <Box
             component="footer"
-            bgcolor={isDark ? 'rgba(255,255,255,0.02)' : 'rgba(0,0,0,0.02)'}
+            bgcolor={theme.palette.background.default}
             borderTop={1}
-            borderColor={isDark ? 'divider' : 'grey.300'}
+            borderColor={theme.palette.divider}
             position="relative"
             pt={8}
             pb={6}
@@ -93,9 +92,9 @@ export default function Footer() {
                                             target="_blank"
                                             sx={{
                                                 border: '1px solid',
-                                                borderColor: 'divider',
-                                                backgroundColor: isDark ? 'background.paper' : 'grey.100',
-                                                '&:hover': { backgroundColor: 'primary.main', color: '#fff' },
+                                                borderColor: theme.palette.divider,
+                                                backgroundColor: theme.palette.background.paper,
+                                                '&:hover': { backgroundColor: theme.palette.primary.main, color: '#fff' },
                                             }}
                                         >
                                             <Icon fontSize="small" />
@@ -129,9 +128,9 @@ export default function Footer() {
                                         onClick={() => scrollToSection(link.href)}
                                         sx={{
                                             textTransform: 'none',
-                                            color: isDark ? 'text.secondary' : 'text.secondary',
+                                            color: theme.palette.text.secondary,
                                             '&:hover': {
-                                                color: 'primary.main',
+                                                color: theme.palette.primary.main,
                                                 backgroundColor: 'transparent',
                                             },
                                             p: 0,
@@ -158,20 +157,12 @@ export default function Footer() {
                         <Stack
                             spacing={0.5}
                             color="text.secondary"
-                            sx={{
-                                alignItems: 'flex-start',
-                            }}
+                            sx={{ alignItems: 'flex-start' }}
                         >
                             <Button
                                 component="a"
                                 href="mailto:haritha@example.com"
-                                sx={{
-                                    textTransform: 'none',
-                                    p: 0,
-                                    minWidth: 0,
-                                    color: 'inherit',
-                                    justifyContent: 'flex-start',
-                                }}
+                                sx={{ textTransform: 'none', p: 0, minWidth: 0, color: 'inherit', justifyContent: 'flex-start' }}
                             >
                                 haritha@example.com
                             </Button>
@@ -179,13 +170,7 @@ export default function Footer() {
                             <Button
                                 component="a"
                                 href="tel:+94771234567"
-                                sx={{
-                                    textTransform: 'none',
-                                    p: 0,
-                                    minWidth: 0,
-                                    color: 'inherit',
-                                    justifyContent: 'flex-start',
-                                }}
+                                sx={{ textTransform: 'none', p: 0, minWidth: 0, color: 'inherit', justifyContent: 'flex-start' }}
                             >
                                 +94 77 123 4567
                             </Button>
@@ -206,11 +191,7 @@ export default function Footer() {
                     alignItems="center"
                     spacing={1}
                 >
-                    <MotionBox
-                        initial={{ opacity: 0 }}
-                        whileInView={{ opacity: 1 }}
-                        viewport={{ once: true }}
-                    >
+                    <MotionBox initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>
                         <Typography fontSize={12}>
                             © {currentYear} Haritha Wickremesinghe. All rights reserved.
                         </Typography>
@@ -220,11 +201,9 @@ export default function Footer() {
                         initial={{ opacity: 0 }}
                         whileInView={{ opacity: 1 }}
                         viewport={{ once: true }}
-                        style={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: '0.5em',
-                        }}
+                        display="flex"
+                        alignItems="center"
+                        gap={0.5}
                     >
                         <Typography fontSize={12}>Built with</Typography>
                         <FavoriteIcon fontSize="small" color="primary" sx={{ animation: 'pulse 1.5s infinite' }} />
@@ -250,9 +229,9 @@ export default function Footer() {
                         position: 'fixed',
                         bottom: 16,
                         right: 16,
-                        backgroundColor: 'primary.main',
+                        backgroundColor: theme.palette.primary.main,
                         color: '#fff',
-                        '&:hover': { backgroundColor: 'primary.dark' },
+                        '&:hover': { backgroundColor: theme.palette.primary.dark },
                     }}
                 >
                     <ArrowUpwardIcon />

@@ -16,6 +16,7 @@ declare module '@mui/material/styles' {
                 border: string;
             };
         };
+        matrixOpacity: number;
     }
 
     interface ThemeOptions {
@@ -31,6 +32,7 @@ declare module '@mui/material/styles' {
                 border?: string;
             };
         };
+        matrixOpacity: number;
     }
 }
 
@@ -65,6 +67,7 @@ export const darkTheme = createTheme({
     },
 
     spacing: 8,
+    matrixOpacity: 0.3,
 
     typography: {
         fontFamily: monoFont,
@@ -177,6 +180,8 @@ export const lightTheme = createTheme({
         },
         divider: '#E2E8F0',
     },
+
+    matrixOpacity: 0.2,
 
     typography: {
         fontFamily: monoFont,

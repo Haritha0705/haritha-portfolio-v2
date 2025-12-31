@@ -1,23 +1,20 @@
-'use client';
+"use client";
 
 import { motion } from 'framer-motion';
 import { timeline } from '@/data/content';
-import {Box, Container, Typography, Paper, Chip, useTheme} from '@mui/material';
+import { Box, Container, Typography, Paper, Chip, useTheme } from '@mui/material';
 
 const MotionBox = motion.create(Box);
 
 export default function Experience() {
     const theme = useTheme();
-    const isDark = theme.palette.mode === 'dark';
 
     return (
         <Box
             component="section"
             id="experience"
-            sx={{
-                py: { xs: 6, md: 12 },
-                backgroundColor: isDark ? 'rgba(255,255,255,0.03)' : 'rgba(0,0,0,0.03)',
-            }}
+            py={{ xs: 6, md: 12 }}
+            sx={{ backgroundColor: theme.palette.background.default }}
         >
             <Container maxWidth="lg">
                 {/* Section Header */}
@@ -26,7 +23,8 @@ export default function Experience() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6 }}
-                    style={{ textAlign: 'center', marginBottom: 48 }}
+                    textAlign="center"
+                    mb={6}
                 >
                     <Typography
                         variant="h4"
@@ -47,7 +45,7 @@ export default function Experience() {
                 </MotionBox>
 
                 {/* Timeline */}
-                <Box sx={{ position: 'relative' }}>
+                <Box position="relative">
                     {/* Center Line Desktop */}
                     <Box
                         sx={{
@@ -57,7 +55,7 @@ export default function Experience() {
                             top: 0,
                             bottom: 0,
                             width: 2,
-                            backgroundColor: isDark ? 'grey.700' : 'grey.300',
+                            backgroundColor: theme.palette.divider,
                             transform: 'translateX(-50%)',
                         }}
                     />
@@ -70,11 +68,11 @@ export default function Experience() {
                             top: 0,
                             bottom: 0,
                             width: 2,
-                            backgroundColor: isDark ? 'grey.700' : 'grey.300',
+                            backgroundColor: theme.palette.divider,
                         }}
                     />
 
-                    <Box sx={{ display: 'flex', flexDirection: 'column', gap: { xs: 6, lg: 12 } }}>
+                    <Box display="flex" flexDirection="column" gap={{ xs: 6, lg: 12 }}>
                         {timeline.map((item, index) => {
                             const Icon = item.icon;
                             const isLeft = index % 2 === 0;
@@ -86,9 +84,10 @@ export default function Experience() {
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
                                     transition={{ delay: index * 0.1 }}
-                                    className={`flex items-start gap-4 sm:gap-6 lg:gap-8 ${
-                                        index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'
-                                    }`}
+                                    display="flex"
+                                    gap={{ xs: 4, sm: 6, lg: 8 }}
+                                    flexDirection={{ xs: 'column', lg: isLeft ? 'row' : 'row-reverse' }}
+                                    alignItems="flex-start"
                                 >
                                     {/* Mobile Icon */}
                                     <Box
@@ -97,10 +96,10 @@ export default function Experience() {
                                             width: 40,
                                             height: 40,
                                             borderRadius: '50%',
-                                            background: 'linear-gradient(135deg,#6366f1,#22d3ee)',
+                                            background: theme.custom.gradients.text,
                                             alignItems: 'center',
                                             justifyContent: 'center',
-                                            border: `4px solid ${isDark ? '#0f172a' : '#fff'}`,
+                                            border: `4px solid ${theme.palette.background.paper}`,
                                             zIndex: 10,
                                         }}
                                     >
@@ -108,7 +107,7 @@ export default function Experience() {
                                     </Box>
 
                                     {/* Content */}
-                                    <Box flex={1} sx={{ textAlign: { lg: isLeft ? 'right' : 'left' } }}>
+                                    <Box flex={1} textAlign={{ lg: isLeft ? 'right' : 'left' }}>
                                         <MotionBox whileHover={{ scale: 1.02 }}>
                                             <Paper
                                                 elevation={3}
@@ -116,12 +115,18 @@ export default function Experience() {
                                                     p: { xs: 3, lg: 4 },
                                                     borderRadius: 3,
                                                     border: '1px solid',
-                                                    borderColor: isDark ? 'grey.700' : 'grey.300',
-                                                    backgroundColor: isDark ? 'grey.900' : '#fff',
+                                                    borderColor: theme.palette.divider,
+                                                    backgroundColor: theme.palette.background.paper,
                                                 }}
                                             >
-                                                <Box sx={{ mb: 2 }}>
-                                                    <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap', mb: 1, justifyContent: { lg: isLeft ? 'flex-end' : 'flex-start' } }}>
+                                                <Box mb={2}>
+                                                    <Box
+                                                        display="flex"
+                                                        gap={1}
+                                                        flexWrap="wrap"
+                                                        mb={1}
+                                                        justifyContent={{ lg: isLeft ? 'flex-end' : 'flex-start' }}
+                                                    >
                                                         <Typography fontWeight="bold">{item.title}</Typography>
                                                         {item.current && (
                                                             <Chip
@@ -144,9 +149,27 @@ export default function Experience() {
                                                     {item.description}
                                                 </Typography>
 
-                                                <Box component="ul" sx={{ pl: 2, mt: 1, listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 0.5 }}>
+                                                <Box
+                                                    component="ul"
+                                                    sx={{
+                                                        pl: 2,
+                                                        mt: 1,
+                                                        listStyle: 'none',
+                                                        display: 'flex',
+                                                        flexDirection: 'column',
+                                                        gap: 0.5,
+                                                    }}
+                                                >
                                                     {item.achievements.map((a, i) => (
-                                                        <Typography component="li" key={i} fontSize={13} color="text.secondary" sx={{ display: 'flex', alignItems: 'flex-start', gap: 0.5 }}>
+                                                        <Typography
+                                                            component="li"
+                                                            key={i}
+                                                            fontSize={13}
+                                                            color="text.secondary"
+                                                            display="flex"
+                                                            alignItems="flex-start"
+                                                            gap={0.5}
+                                                        >
                                                             <Box sx={{ color: 'primary.main', mt: '2px' }}>▸</Box> {a}
                                                         </Typography>
                                                     ))}
@@ -165,7 +188,7 @@ export default function Experience() {
                                             alignItems: 'center',
                                             justifyContent: 'center',
                                             zIndex: 10,
-                                            border: `4px solid ${isDark ? '#0f172a' : '#fff'}`,
+                                            border: `4px solid ${theme.palette.background.paper}`,
                                             background: theme.custom.gradients.text,
                                         }}
                                     >
@@ -173,7 +196,7 @@ export default function Experience() {
                                     </Box>
 
                                     {/* Spacer for Desktop */}
-                                    <Box flex={1} sx={{ display: { xs: 'none', lg: 'block' } }} />
+                                    <Box flex={1} display={{ xs: 'none', lg: 'block' }} />
                                 </MotionBox>
                             );
                         })}

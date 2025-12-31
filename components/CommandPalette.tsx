@@ -11,14 +11,10 @@ import {
     IconButton,
     useTheme,
 } from '@mui/material';
-import {
-    Search,
-    Terminal,
-    Close,
-} from '@mui/icons-material';
+import { Search, Terminal, Close } from '@mui/icons-material';
 import { commands } from '@/data/content';
 
-const MotionBox = motion.create(Box);
+const MotionBox = motion(Box);
 
 export default function CommandPalette() {
     const theme = useTheme();
@@ -39,7 +35,7 @@ export default function CommandPalette() {
         setSearch('');
     };
 
-    // Keyboard shortcuts
+    /* ---------------- Keyboard shortcuts ---------------- */
     useEffect(() => {
         const handler = (e: KeyboardEvent) => {
             if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
@@ -63,9 +59,7 @@ export default function CommandPalette() {
 
             if (e.key === 'Enter') {
                 e.preventDefault();
-                if (filtered[selected]) {
-                    scrollTo(filtered[selected].action);
-                }
+                filtered[selected] && scrollTo(filtered[selected].action);
             }
         };
 
@@ -85,7 +79,7 @@ export default function CommandPalette() {
             <AnimatePresence>
                 {open && (
                     <>
-                        {/* Backdrop */}
+                        {/* ---------------- Backdrop ---------------- */}
                         <MotionBox
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
@@ -93,17 +87,14 @@ export default function CommandPalette() {
                             onClick={() => setOpen(false)}
                             sx={{
                                 position: 'fixed',
-                                top: 0,
-                                left: 0,
-                                right: 0,
-                                bottom: 0,
+                                inset: 0,
                                 zIndex: 1200,
-                                backdropFilter: 'blur(6px)',
-                                backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                                backdropFilter: theme.custom.glass.blur,
+                                backgroundColor: 'rgba(0,0,0,0.45)',
                             }}
                         />
 
-                        {/* Palette */}
+                        {/* ---------------- Palette ---------------- */}
                         <MotionBox
                             initial={{ opacity: 0, scale: 0.95, y: -20 }}
                             animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -119,15 +110,16 @@ export default function CommandPalette() {
                             }}
                         >
                             <Paper
+                                elevation={0}
                                 sx={{
                                     borderRadius: 3,
-                                    border: `1px solid ${theme.palette.divider}`,
                                     overflow: 'hidden',
-                                    backdropFilter: 'blur(12px)',
                                     background: theme.custom.glass.background,
+                                    backdropFilter: theme.custom.glass.blur,
+                                    border: `1px solid ${theme.palette.divider}`,
                                 }}
                             >
-                                {/* Search */}
+                                {/* -------- Search -------- */}
                                 <Box
                                     sx={{
                                         display: 'flex',
@@ -138,6 +130,7 @@ export default function CommandPalette() {
                                     }}
                                 >
                                     <Search fontSize="small" />
+
                                     <TextField
                                         variant="standard"
                                         placeholder="Type a command or search…"
@@ -147,17 +140,28 @@ export default function CommandPalette() {
                                         slotProps={{
                                             input: { disableUnderline: true },
                                         }}
-                                        sx={{ ml: 2, flex: 1 }}
+                                        sx={{
+                                            ml: 2,
+                                            flex: 1,
+                                            fontFamily: 'monospace',
+                                        }}
                                     />
+
                                     <IconButton size="small" onClick={() => setOpen(false)}>
                                         <Close fontSize="small" />
                                     </IconButton>
                                 </Box>
 
-                                {/* Commands */}
+                                {/* -------- Commands -------- */}
                                 <Box sx={{ maxHeight: 360, overflowY: 'auto' }}>
                                     {filtered.length === 0 ? (
-                                        <Typography sx={{ textAlign: 'center', py: 4, color: 'text.secondary' }}>
+                                        <Typography
+                                            sx={{
+                                                textAlign: 'center',
+                                                py: 4,
+                                                color: 'text.secondary',
+                                            }}
+                                        >
                                             No commands found
                                         </Typography>
                                     ) : (
@@ -169,23 +173,31 @@ export default function CommandPalette() {
                                                     width: '100%',
                                                     display: 'flex',
                                                     alignItems: 'center',
+                                                    gap: 2,
                                                     px: 2,
                                                     py: 1.5,
-                                                    backgroundColor: i === selected ? 'primary.main' : 'transparent',
+                                                    textAlign: 'left',
+                                                    backgroundColor:
+                                                        i === selected
+                                                            ? 'action.selected'
+                                                            : 'transparent',
                                                     color:
                                                         i === selected
-                                                            ? theme.palette.primary.contrastText
+                                                            ? 'primary.main'
                                                             : 'text.primary',
+                                                    '&:hover': {
+                                                        backgroundColor: 'action.hover',
+                                                    },
                                                 }}
                                             >
                                                 <cmd.icon fontSize="small" />
-                                                <Typography sx={{ ml: 2 }}>{cmd.label}</Typography>
+                                                <Typography fontSize={14}>{cmd.label}</Typography>
                                             </ButtonBase>
                                         ))
                                     )}
                                 </Box>
 
-                                {/* Footer */}
+                                {/* -------- Footer -------- */}
                                 <Box
                                     sx={{
                                         px: 2,
@@ -195,6 +207,7 @@ export default function CommandPalette() {
                                         justifyContent: 'space-between',
                                         fontSize: 12,
                                         color: 'text.secondary',
+                                        fontFamily: 'monospace',
                                     }}
                                 >
                                     <Typography fontSize={12}>↑↓ navigate</Typography>
@@ -207,7 +220,7 @@ export default function CommandPalette() {
                 )}
             </AnimatePresence>
 
-            {/* Hint Button */}
+            {/* ---------------- Hint Button ---------------- */}
             <ButtonBase
                 onClick={() => setOpen(true)}
                 sx={{
@@ -222,6 +235,10 @@ export default function CommandPalette() {
                     display: { xs: 'none', md: 'flex' },
                     alignItems: 'center',
                     gap: 1,
+                    fontFamily: 'monospace',
+                    '&:hover': {
+                        backgroundColor: 'action.hover',
+                    },
                 }}
             >
                 <Terminal fontSize="small" />
