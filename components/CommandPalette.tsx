@@ -9,7 +9,7 @@ import {
     Typography,
     ButtonBase,
     IconButton,
-    useTheme,
+    useTheme, Icon,
 } from '@mui/material';
 import { Search, Terminal, Close } from '@mui/icons-material';
 import { commands } from '@/data/content';
@@ -190,7 +190,7 @@ export default function CommandPalette() {
                                                     },
                                                 }}
                                             >
-                                                <cmd.icon fontSize="small" />
+                                                <Icon fontSize="small" />
                                                 <Typography fontSize={14}>{cmd.label}</Typography>
                                             </ButtonBase>
                                         ))
