@@ -94,11 +94,12 @@ import React from 'react';
 import NextJS from 'next';
 import TypeScript from 'typescript';
 import TailwindCSS from 'tailwindcss';
+import Material UI from 'mui';
 
 const skills = {
-  frameworks: ['React', 'Next.js', 'Vue.js'],
-  languages: ['TypeScript', 'JavaScript', 'HTML5', 'CSS3'],
-  styling: ['Tailwind CSS', 'Sass', 'Styled Components'],
+  frameworks: ['React', 'Next.js'],
+  languages: ['TypeScript', 'JavaScript', 'HTML', 'CSS'],
+  styling: ['Tailwind CSS' , 'MUI', 'Sass'],
   tools: ['Vite', 'Webpack', 'Redux', 'React Query'],
   proficiency: '90%'
 };
@@ -112,7 +113,7 @@ const mongoose = require('mongoose');
 class BackendDeveloper {
   constructor() {
     this.languages = ['Node.js', 'Python', 'Java'];
-    this.frameworks = ['Express', 'FastAPI', 'Spring Boot'];
+    this.frameworks = ['Express', 'FastAPI', 'Spring Boot', 'Flask', 'NestJS', 'Ballerina'];
     this.apis = ['REST', 'GraphQL', 'WebSocket'];
     this.auth = ['JWT', 'OAuth', 'Passport'];
   }
@@ -141,14 +142,18 @@ CREATE TABLE expertise (
 docker build -t app .
 docker-compose up -d
 
-AWS • Vercel • CI/CD
-GitHub Actions`,
+• AWS • Vercel 
+• Render • CI/CD 
+• GitHub Actions
+`,
 
     tools: `{
   "editor": "VS Code",
   "design": ["Figma", "Adobe XD"],
-  "testing": ["Postman", "Insomnia"],
-  "versionControl": "Git & GitHub"
+  "testing": ["Postman", "Jest", "JUnit"],
+  "containerization": "Docker",
+  "orchestration": "Kubernetes",
+  "versionControl": "Git & GitHub" , "Bitbucket",
 }`,
 };
 

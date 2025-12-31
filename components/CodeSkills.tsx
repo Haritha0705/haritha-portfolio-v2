@@ -124,7 +124,9 @@ export default function CodeSkills() {
                                 sx={{
                                     fontFamily: 'monospace',
                                     borderRadius: 0,
-                                    px: 2,
+                                    px: { xs: 1, sm: 2 },
+                                    py: { xs: 0.5, sm: 1 },
+                                    fontSize: { xs: 11, sm: 13 },
                                     color:
                                         activeTab === tab.id
                                             ? theme.custom.gradients.text
@@ -157,7 +159,7 @@ export default function CodeSkills() {
                                 py: 2,
                                 textAlign: 'right',
                                 fontFamily: 'monospace',
-                                fontSize: 12,
+                                fontSize: { xs: 10, sm: 12 },
                                 color: theme.custom.gradients.text,
                                 backgroundColor: theme.palette.background.paper,
                                 borderRight: `1px solid ${theme.palette.divider}`,
@@ -181,7 +183,7 @@ export default function CodeSkills() {
                                     p: '16px 16px 16px 64px',
                                     overflowX: 'auto',
                                     fontFamily: 'monospace',
-                                    fontSize: 13,
+                                    fontSize: { xs: 10, sm: 12 },
                                     lineHeight: 1.6,
                                     color: theme.palette.text.primary,
                                 }}
@@ -201,15 +203,14 @@ export default function CodeSkills() {
                             backgroundColor: theme.palette.primary.main,
                             color: theme.palette.background.default,
                             fontFamily: 'monospace',
-                            fontSize: 12,
                         }}
                     >
-                        <Stack direction="row" spacing={2}>
-                            <Typography component="span">✓ Ready</Typography>
-                            <Typography component="span">UTF-8</Typography>
-                            <Typography component="span">JavaScript</Typography>
+                        <Stack direction="row" spacing={{ xs: 1, sm: 2 }}>
+                            <Typography component="span" sx={{ fontSize: { xs: 9, sm: 15 } }}>✓ Ready</Typography>
+                            <Typography component="span" sx={{ fontSize: { xs: 9, sm: 15 } }}>UTF-8</Typography>
+                            <Typography component="span" sx={{ fontSize: { xs: 9, sm: 15 } }}>JavaScript</Typography>
                         </Stack>
-                        <Typography component="span">Spaces: 2</Typography>
+                        <Typography component="span" sx={{ fontSize: { xs: 9, sm: 15 } }}>Spaces: 2</Typography>
                     </Stack>
                 </Box>
             </Container>

@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { motion } from 'framer-motion';
 import { timeline } from '@/data/content';
@@ -64,7 +64,7 @@ export default function Experience() {
                         sx={{
                             display: { xs: 'block', lg: 'none' },
                             position: 'absolute',
-                            left: 16,
+                            left: 20,
                             top: 0,
                             bottom: 0,
                             width: 2,
@@ -85,8 +85,8 @@ export default function Experience() {
                                     viewport={{ once: true }}
                                     transition={{ delay: index * 0.1 }}
                                     display="flex"
-                                    gap={{ xs: 4, sm: 6, lg: 8 }}
-                                    flexDirection={{ xs: 'column', lg: isLeft ? 'row' : 'row-reverse' }}
+                                    gap={{ xs: 1, sm: 6, lg: 8 }}
+                                    flexDirection={{ xs: 'row', lg: isLeft ? 'row' : 'row-reverse' }}
                                     alignItems="flex-start"
                                 >
                                     {/* Mobile Icon */}
@@ -101,18 +101,23 @@ export default function Experience() {
                                             justifyContent: 'center',
                                             border: `4px solid ${theme.palette.background.paper}`,
                                             zIndex: 10,
+                                            flexShrink: 0,
                                         }}
                                     >
                                         <Icon sx={{ color: '#fff', fontSize: 20 }} />
                                     </Box>
 
                                     {/* Content */}
-                                    <Box flex={1} textAlign={{ lg: isLeft ? 'right' : 'left' }}>
+                                    <Box
+                                        flex={1}
+                                        ml={{ xs: 2, lg: 0 }}
+                                        textAlign={{ lg: isLeft ? 'right' : 'left' }}
+                                    >
                                         <MotionBox whileHover={{ scale: 1.02 }}>
                                             <Paper
                                                 elevation={3}
                                                 sx={{
-                                                    p: { xs: 3, lg: 4 },
+                                                    p: { xs: 2, sm: 3, lg: 4 },
                                                     borderRadius: 3,
                                                     border: '1px solid',
                                                     borderColor: theme.palette.divider,

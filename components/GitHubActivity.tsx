@@ -12,7 +12,6 @@ import {
     Stack,
     useTheme,
 } from "@mui/material";
-
 import BarChartIcon from "@mui/icons-material/BarChart";
 import WhatshotIcon from "@mui/icons-material/Whatshot";
 import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
@@ -114,8 +113,7 @@ export default function GitHubActivity() {
     }, [contributions]);
 
     const getColor = (count: number) => {
-        // Use theme palette colors instead of hard-coded dark/light
-        if (count === 0) return theme.palette.grey[100];
+        if (count === 0) return theme.palette.background.paper;
         if (count <= 3) return theme.palette.success.light;
         if (count <= 6) return theme.palette.success.main;
         if (count <= 12) return theme.palette.success.dark;
@@ -134,6 +132,7 @@ export default function GitHubActivity() {
     return (
         <Box
             component="section"
+            px={{ xs: 2, md: 32 }}
             py={{ xs: 6, md: 8 }}
             bgcolor={theme.palette.background.default}
         >
