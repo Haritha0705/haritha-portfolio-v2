@@ -43,7 +43,13 @@ export default function DevProjects() {
     const project = projects.find((p) => p.id === selected);
 
     return (
-        <Box component="section" id="projects" py={theme.custom.sectionPadding} bgcolor={theme.palette.background.default}>
+        <Box
+            component="section"
+            id="projects"
+            py={{ xs: 4, sm: 6, md: 8 }}
+            px={{ xs: 1.5, sm: 2 }}
+            bgcolor={theme.palette.background.default}
+        >
             <Container maxWidth="lg">
                 {/* Header */}
                 <MotionBox initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
@@ -53,6 +59,7 @@ export default function DevProjects() {
                         fontWeight="bold"
                         mb={1}
                         sx={{
+                            fontSize: { xs: '1.25rem', sm: '1.5rem', md: '2rem' },
                             background: theme.custom.gradients.text,
                             WebkitBackgroundClip: 'text',
                             WebkitTextFillColor: 'transparent',
@@ -62,19 +69,23 @@ export default function DevProjects() {
                         {'<'}Featured Projects{' />'}
                     </Typography>
 
-                    <Typography align="center" fontFamily="monospace" color="text.secondary" mb={4}>
+                    <Typography align="center" fontFamily="monospace" color="text.secondary" mb={{ xs: 3, sm: 4 }} fontSize={{ xs: 12, sm: 14 }}>
                         {"// Building cool stuff, one commit at a time"}
                     </Typography>
                 </MotionBox>
 
                 {/* Filters */}
-                <Stack direction="row" flexWrap="wrap" justifyContent="center" gap={1.5} mb={5}>
+                <Stack direction="row" flexWrap="wrap" justifyContent="center" gap={{ xs: 1, sm: 1.5 }} mb={{ xs: 3, sm: 5 }}>
                     {filters.map((f) => (
                         <MotionBox key={f.id} whileHover={{ scale: 1.05 }}>
                             <Button
                                 onClick={() => setActiveFilter(f.id)}
+                                size="small"
                                 sx={{
                                     fontFamily: 'monospace',
+                                    fontSize: { xs: 11, sm: 13 },
+                                    px: { xs: 1.5, sm: 2 },
+                                    py: { xs: 0.5, sm: 0.75 },
                                     backgroundColor:
                                         activeFilter === f.id
                                             ? theme.palette.primary.main
@@ -147,29 +158,29 @@ export default function DevProjects() {
                                                     {p.description}
                                                 </Typography>
 
-                                                <Stack direction="row" flexWrap="wrap" gap={1} mb={2}>
+                                                <Stack direction="row" flexWrap="wrap" gap={0.5} mb={2}>
                                                     {p.tech.slice(0, 3).map((t) => (
-                                                        <Chip key={t} label={t} size="small" sx={{ fontFamily: 'monospace' }} />
+                                                        <Chip key={t} label={t} size="small" sx={{ fontFamily: 'monospace', fontSize: { xs: 10, sm: 12 } }} />
                                                     ))}
-                                                    {p.tech.length > 3 && <Chip size="small" label={`+${p.tech.length - 3}`} />}
+                                                    {p.tech.length > 3 && <Chip size="small" label={`+${p.tech.length - 3}`} sx={{ fontSize: { xs: 10, sm: 12 } }} />}
                                                 </Stack>
 
                                                 <Divider />
 
-                                                <Stack direction="row" spacing={2} mt={2} fontFamily="monospace" fontSize={18} color="text.secondary">
+                                                <Stack direction="row" spacing={2} mt={2} fontFamily="monospace" fontSize={{ xs: 14, sm: 18 }} color="text.secondary">
                                                     <Stack direction="row" spacing={0.5}>
                                                         <StarIcon fontSize="inherit" />
-                                                        <Typography component={"span"} fontSize={12}>{p.stars}</Typography>
+                                                        <Typography component={"span"} fontSize={{ xs: 10, sm: 12 }}>{p.stars}</Typography>
                                                     </Stack>
                                                     <Stack direction="row" spacing={0.5}>
                                                         <CallSplitIcon fontSize="inherit" />
-                                                        <Typography component={"span"} fontSize={12}>{p.forks}</Typography>
+                                                        <Typography component={"span"} fontSize={{ xs: 10, sm: 12 }}>{p.forks}</Typography>
                                                     </Stack>
                                                 </Stack>
                                             </Box>
 
                                             {/* Footer */}
-                                            <Stack direction="row" alignItems="center" px={2} py={1} borderTop="1px solid" borderColor={theme.palette.divider} fontFamily="monospace" fontSize={11} color="text.secondary">
+                                            <Stack direction="row" alignItems="center" px={{ xs: 1.5, sm: 2 }} py={1} borderTop="1px solid" borderColor={theme.palette.divider} fontFamily="monospace" fontSize={{ xs: 9, sm: 11 }} color="text.secondary">
                                                 Lines: {p.lines}
                                                 <Box flexGrow={1} />
                                                 <TerminalIcon fontSize="inherit" />
@@ -189,44 +200,47 @@ export default function DevProjects() {
                         initial={{ scale: 0.85 }}
                         animate={{ scale: 1 }}
                         sx={{
+                            width: { xs: '90%', sm: '80%', md: 520 },
                             maxWidth: 520,
+                            maxHeight: '80vh',
+                            overflowY: 'auto',
                             mx: 'auto',
-                            mt: '10%',
-                            p: 4,
+                            mt: { xs: '15%', sm: '10%' },
+                            p: { xs: 2.5, sm: 3, md: 4 },
                             backgroundColor: theme.palette.background.paper,
-                            borderRadius: 3,
+                            borderRadius: { xs: 2, sm: 3 },
                             position: 'relative',
                         }}
                     >
-                        <IconButton onClick={() => setSelected(null)} sx={{ position: 'absolute', top: 12, right: 12 }}>
+                        <IconButton onClick={() => setSelected(null)} sx={{ position: 'absolute', top: 8, right: 8 }}>
                             <CloseIcon />
                         </IconButton>
 
-                        <Typography variant="h6" mb={1}>{project?.title}</Typography>
+                        <Typography variant="h6" mb={1} fontSize={{ xs: 16, sm: 18, md: 20 }}>{project?.title}</Typography>
 
-                        <Typography fontSize={14} mb={3}>{project?.description}</Typography>
+                        <Typography fontSize={{ xs: 12, sm: 14 }} mb={3}>{project?.description}</Typography>
 
-                        <Stack direction="row" flexWrap="wrap" gap={1} mb={3}>
+                        <Stack direction="row" flexWrap="wrap" gap={0.5} mb={3}>
                             {project?.tech.map((t) => (
-                                <Chip key={t} label={t} size="small" sx={{ fontFamily: 'monospace' }} />
+                                <Chip key={t} label={t} size="small" sx={{ fontFamily: 'monospace', fontSize: { xs: 10, sm: 12 } }} />
                             ))}
                         </Stack>
 
-                        <Stack spacing={1}>
-                            <Typography component={"span"} fontSize={12}>Repo: {project?.githubRepo}</Typography>
-                            <Typography component={"span"} fontSize={12}>⭐ {project?.stars}</Typography>
-                            <Typography component={"span"} fontSize={12}>🍴 {project?.forks}</Typography>
-                            <Typography component={"span"} fontSize={12}>📦 Lines: {project?.lines}</Typography>
+                        <Stack spacing={0.5}>
+                            <Typography component={"span"} fontSize={{ xs: 10, sm: 12 }}>Repo: {project?.githubRepo}</Typography>
+                            <Typography component={"span"} fontSize={{ xs: 10, sm: 12 }}>⭐ {project?.stars}</Typography>
+                            <Typography component={"span"} fontSize={{ xs: 10, sm: 12 }}>🍴 {project?.forks}</Typography>
+                            <Typography component={"span"} fontSize={{ xs: 10, sm: 12 }}>📦 Lines: {project?.lines}</Typography>
                         </Stack>
 
-                        <Stack direction="row" spacing={2} mt={3}>
+                        <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} mt={3}>
                             {project?.demo && (
-                                <Button variant="contained" href={project.demo} target="_blank" rel="noopener noreferrer">
+                                <Button variant="contained" href={project.demo} target="_blank" rel="noopener noreferrer" fullWidth sx={{ fontSize: { xs: 12, sm: 14 } }}>
                                     Demo
                                 </Button>
                             )}
                             {project?.github && (
-                                <Button variant="outlined" href={project.github} target="_blank" rel="noopener noreferrer">
+                                <Button variant="outlined" href={project.github} target="_blank" rel="noopener noreferrer" fullWidth sx={{ fontSize: { xs: 12, sm: 14 } }}>
                                     GitHub
                                 </Button>
                             )}

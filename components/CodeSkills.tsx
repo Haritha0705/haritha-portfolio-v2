@@ -114,6 +114,9 @@ export default function CodeSkills() {
                         divider={<Divider orientation="vertical" flexItem />}
                         sx={{
                             borderBottom: `1px solid ${theme.palette.divider}`,
+                            overflowX: 'auto',
+                            '&::-webkit-scrollbar': { display: 'none' },
+                            scrollbarWidth: 'none',
                         }}
                     >
                         {tabs.map((tab) => (
@@ -125,8 +128,10 @@ export default function CodeSkills() {
                                     fontFamily: 'monospace',
                                     borderRadius: 0,
                                     px: { xs: 1, sm: 2 },
-                                    py: { xs: 0.5, sm: 1 },
-                                    fontSize: { xs: 11, sm: 13 },
+                                    py: { xs: 0.75, sm: 1 },
+                                    fontSize: { xs: 10, sm: 12, md: 13 },
+                                    minWidth: { xs: 'auto', sm: 'auto' },
+                                    whiteSpace: 'nowrap',
                                     color:
                                         activeTab === tab.id
                                             ? theme.custom.gradients.text
@@ -138,6 +143,9 @@ export default function CodeSkills() {
                                     '&:hover': {
                                         backgroundColor: theme.palette.action.hover,
                                     },
+                                    '& .MuiButton-startIcon': {
+                                        marginRight: { xs: 0.5, sm: 1 },
+                                    },
                                 }}
                             >
                                 {tab.label}
@@ -146,7 +154,7 @@ export default function CodeSkills() {
                     </Stack>
 
                     {/* -------- Code Area -------- */}
-                    <Box position="relative">
+                    <Box position="relative" sx={{ overflowX: 'auto' }}>
                         {/* Line Numbers */}
                         <Box
                             sx={{
@@ -154,12 +162,12 @@ export default function CodeSkills() {
                                 left: 0,
                                 top: 0,
                                 bottom: 0,
-                                width: 48,
-                                px: 1,
-                                py: 2,
+                                width: { xs: 36, sm: 48 },
+                                px: { xs: 0.5, sm: 1 },
+                                py: { xs: 1.5, sm: 2 },
                                 textAlign: 'right',
                                 fontFamily: 'monospace',
-                                fontSize: { xs: 10, sm: 12 },
+                                fontSize: { xs: 9, sm: 11, md: 12 },
                                 color: theme.custom.gradients.text,
                                 backgroundColor: theme.palette.background.paper,
                                 borderRight: `1px solid ${theme.palette.divider}`,
@@ -180,12 +188,13 @@ export default function CodeSkills() {
                                 transition={{ duration: 0.25 }}
                                 sx={{
                                     m: 0,
-                                    p: '16px 16px 16px 64px',
+                                    p: { xs: '12px 12px 12px 48px', sm: '16px 16px 16px 64px' },
                                     overflowX: 'auto',
                                     fontFamily: 'monospace',
-                                    fontSize: { xs: 10, sm: 12 },
+                                    fontSize: { xs: 9, sm: 11, md: 12 },
                                     lineHeight: 1.6,
                                     color: theme.palette.text.primary,
+                                    minWidth: 'fit-content',
                                 }}
                             >
                                 {skillsCode[activeTab as keyof typeof skillsCode]}

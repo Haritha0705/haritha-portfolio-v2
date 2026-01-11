@@ -165,11 +165,12 @@ export default function Hero() {
                             sx={{
                                 mt: 2,
                                 fontWeight: 800,
-                                fontSize: { xs: '2rem', sm: '3rem', md: '4rem' },
+                                fontSize: { xs: '1.5rem', sm: '2.25rem', md: '3rem', lg: '4rem' },
                                 lineHeight: { xs: 1.2, sm: 1.3 },
                                 background: theme.custom.gradients.text,
                                 WebkitBackgroundClip: 'text',
                                 WebkitTextFillColor: 'transparent',
+                                wordBreak: 'break-word',
                             }}
                         >
                             Haritha Wickremesinghe
@@ -221,7 +222,7 @@ export default function Hero() {
                                 display: 'flex',
                                 flexDirection: { xs: 'column', sm: 'row' },
                                 gap: { xs: 1.5, sm: 2 },
-                                mt: 4,
+                                mt: { xs: 3, sm: 4 },
                             }}
                         >
                             <MotionBox whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }} sx={{ width: { xs: '100%', sm: 'auto' } }}>
@@ -230,12 +231,12 @@ export default function Hero() {
                                     endIcon={<ArrowRightAltIcon />}
                                     fullWidth
                                     sx={{
-                                        px: { xs: 3, sm: 4 },
-                                        py: { xs: 1.5, sm: 1.5 },
+                                        px: { xs: 2.5, sm: 4 },
+                                        py: { xs: 1.25, sm: 1.5 },
                                         borderRadius: 2,
                                         backgroundColor: theme.palette.primary.main,
                                         color: theme.palette.background.default,
-                                        fontSize: { xs: 14, sm: 14 },
+                                        fontSize: { xs: 13, sm: 14 },
                                         '&:hover': { backgroundColor: theme.palette.primary.dark },
                                     }}
                                 >
@@ -249,12 +250,12 @@ export default function Hero() {
                                     startIcon={<DownloadIcon />}
                                     fullWidth
                                     sx={{
-                                        px: { xs: 3, sm: 4 },
-                                        py: { xs: 1.5, sm: 1.5 },
+                                        px: { xs: 2.5, sm: 4 },
+                                        py: { xs: 1.25, sm: 1.5 },
                                         borderRadius: 2,
                                         borderColor: theme.palette.secondary.main,
                                         color: theme.palette.secondary.main,
-                                        fontSize: { xs: 14, sm: 14 },
+                                        fontSize: { xs: 13, sm: 14 },
                                         '&:hover': { backgroundColor: theme.palette.action.hover },
                                     }}
                                 >
@@ -264,7 +265,7 @@ export default function Hero() {
                         </Box>
 
                         {/* ---------------- Social Links ---------------- */}
-                        <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: { xs: 1, sm: 2 }, mt: { xs: 2, sm: 4 } }}>
+                        <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: { xs: 0.75, sm: 1.5 }, mt: { xs: 2, sm: 4 } }}>
                             {socialLinks.map((link: SocialLink) => (
                                 <motion.a
                                     key={link.label}
@@ -277,15 +278,15 @@ export default function Hero() {
                                         display: 'flex',
                                         alignItems: 'center',
                                         gap: 4,
-                                        padding: '6px 12px',
+                                        padding: '6px 10px',
                                         borderRadius: 8,
                                         border: `1px solid ${theme.palette.divider}`,
                                         backgroundColor: theme.palette.background.paper,
                                         textDecoration: 'none',
                                     }}
                                 >
-                                    <link.icon style={{ fontSize: 18, color: theme.palette.primary.main }} />
-                                    <Typography sx={{ fontSize: { xs: 10, sm: 14 } }}>{link.label}</Typography>
+                                    <link.icon style={{ fontSize: 16, color: theme.palette.primary.main }} />
+                                    <Typography sx={{ fontSize: { xs: 9, sm: 13 } }}>{link.label}</Typography>
                                 </motion.a>
                             ))}
                         </Box>
@@ -299,7 +300,8 @@ export default function Hero() {
                         sx={{
                             // order: { xs: 1, lg: 2 },
                             maxWidth: { xs: '100%', lg: '100%' },
-                            overflowX: { xs: 'auto', lg: 'visible' },
+                            overflowX: 'hidden',
+                            display: { xs: 'none', sm: 'block' },
                         }}
                     >
                         <Terminal lines={terminalLines} />

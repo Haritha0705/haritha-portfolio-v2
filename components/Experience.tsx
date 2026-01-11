@@ -110,21 +110,21 @@ export default function Experience() {
                                     {/* Content */}
                                     <Box
                                         flex={1}
-                                        ml={{ xs: 2, lg: 0 }}
+                                        ml={{ xs: 1, sm: 2, lg: 0 }}
                                         textAlign={{ lg: isLeft ? 'right' : 'left' }}
                                     >
                                         <MotionBox whileHover={{ scale: 1.02 }}>
                                             <Paper
                                                 elevation={3}
                                                 sx={{
-                                                    p: { xs: 2, sm: 3, lg: 4 },
-                                                    borderRadius: 3,
+                                                    p: { xs: 2, sm: 2.5, md: 3, lg: 4 },
+                                                    borderRadius: { xs: 2, sm: 3 },
                                                     border: '1px solid',
                                                     borderColor: theme.palette.divider,
                                                     backgroundColor: theme.palette.background.paper,
                                                 }}
                                             >
-                                                <Box mb={2}>
+                                                <Box mb={{ xs: 1.5, sm: 2 }}>
                                                     <Box
                                                         display="flex"
                                                         gap={1}
@@ -132,32 +132,33 @@ export default function Experience() {
                                                         mb={1}
                                                         justifyContent={{ lg: isLeft ? 'flex-end' : 'flex-start' }}
                                                     >
-                                                        <Typography fontWeight="bold">{item.title}</Typography>
+                                                        <Typography fontWeight="bold" fontSize={{ xs: 14, sm: 16 }}>{item.title}</Typography>
                                                         {item.current && (
                                                             <Chip
                                                                 label="Current"
                                                                 size="small"
                                                                 color="success"
                                                                 variant="outlined"
+                                                                sx={{ fontSize: { xs: 10, sm: 12 } }}
                                                             />
                                                         )}
                                                     </Box>
-                                                    <Typography fontWeight={500} color="primary" fontSize={14}>
+                                                    <Typography fontWeight={500} color="primary" fontSize={{ xs: 12, sm: 14 }}>
                                                         {item.company}
                                                     </Typography>
-                                                    <Typography fontSize={12} color="text.secondary">
+                                                    <Typography fontSize={{ xs: 10, sm: 12 }} color="text.secondary">
                                                         {item.period}
                                                     </Typography>
                                                 </Box>
 
-                                                <Typography fontSize={14} color="text.secondary" mb={1}>
+                                                <Typography fontSize={{ xs: 12, sm: 14 }} color="text.secondary" mb={1}>
                                                     {item.description}
                                                 </Typography>
 
                                                 <Box
                                                     component="ul"
                                                     sx={{
-                                                        pl: 2,
+                                                        pl: { xs: 1.5, sm: 2 },
                                                         mt: 1,
                                                         listStyle: 'none',
                                                         display: 'flex',
@@ -169,7 +170,7 @@ export default function Experience() {
                                                         <Typography
                                                             component="li"
                                                             key={i}
-                                                            fontSize={13}
+                                                            fontSize={{ xs: 11, sm: 13 }}
                                                             color="text.secondary"
                                                             display="flex"
                                                             alignItems="flex-start"

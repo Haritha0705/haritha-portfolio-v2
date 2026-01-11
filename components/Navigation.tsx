@@ -80,7 +80,7 @@ export default function Navigation({ toggleTheme }: { toggleTheme: () => void })
                     backgroundColor: theme.palette.background.default,
                 }}
             >
-                <Toolbar sx={{ justifyContent: 'space-between' }}>
+                <Toolbar sx={{ justifyContent: 'space-between', minHeight: { xs: 56, sm: 64 }, px: { xs: 0, sm: 1 } }}>
                     {/* Logo */}
                     <Typography
                         component={motion.button}
@@ -88,7 +88,7 @@ export default function Navigation({ toggleTheme }: { toggleTheme: () => void })
                         onClick={() => scrollTo('home')}
                         sx={{
                             fontWeight: 700,
-                            fontSize: { xs: 16, sm: 18 },
+                            fontSize: { xs: 14, sm: 16, md: 18 },
                             cursor: 'pointer',
                             background: 'none',
                             border: 'none',
@@ -154,14 +154,24 @@ export default function Navigation({ toggleTheme }: { toggleTheme: () => void })
                 anchor="right"
                 open={mobileOpen}
                 onClose={() => setMobileOpen(false)}
-                PaperProps={{ sx: { backgroundColor: theme.palette.background.paper } }}
+                slotProps={{
+                    paper: {
+                        sx: {
+                            backgroundColor: theme.palette.background.paper,
+                            width: { xs: '100%', sm: 300 },
+                            maxWidth: '100vw',
+                        }
+                    }
+                }}
             >
-                <Box sx={{ width: 280, p: 3 }}>
-                    <IconButton onClick={() => setMobileOpen(false)}>
-                        <CloseIcon />
-                    </IconButton>
+                <Box sx={{ width: '100%', p: { xs: 2, sm: 3 } }}>
+                    <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+                        <IconButton onClick={() => setMobileOpen(false)}>
+                            <CloseIcon />
+                        </IconButton>
+                    </Box>
 
-                    <Box sx={{ mt: 4, display: 'flex', flexDirection: 'column', gap: 2 }}>
+                    <Box sx={{ mt: 2, display: 'flex', flexDirection: 'column', gap: 1 }}>
                         {navItems.map((item, i) => (
                             <Button
                                 key={item.id}
@@ -170,9 +180,11 @@ export default function Navigation({ toggleTheme }: { toggleTheme: () => void })
                                 animate={{ x: 0, opacity: 1 }}
                                 transition={{ delay: i * 0.1 }}
                                 onClick={() => scrollTo(item.id)}
+                                fullWidth
                                 sx={{
                                     justifyContent: 'flex-start',
-                                    fontSize: 18,
+                                    fontSize: { xs: 16, sm: 18 },
+                                    py: 1.5,
                                     color:
                                         active === item.id
                                             ? theme.palette.primary.main

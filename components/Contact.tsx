@@ -196,7 +196,7 @@ export default function Contact() {
                         viewport={{ once: true }}
                     >
                         <Box component="form" onSubmit={handleSubmit}>
-                            <Stack spacing={3}>
+                            <Stack spacing={{ xs: 2, sm: 3 }}>
                                 <TextField
                                     label="Your Name"
                                     name="name"
@@ -204,6 +204,8 @@ export default function Contact() {
                                     value={formData.name}
                                     onChange={handleChange}
                                     required
+                                    size="small"
+                                    sx={{ '& .MuiInputBase-root': { fontSize: { xs: 14, sm: 16 } } }}
                                 />
                                 <TextField
                                     label="Your Email"
@@ -212,6 +214,8 @@ export default function Contact() {
                                     value={formData.email}
                                     onChange={handleChange}
                                     required
+                                    size="small"
+                                    sx={{ '& .MuiInputBase-root': { fontSize: { xs: 14, sm: 16 } } }}
                                 />
                                 <TextField
                                     label="Message"
@@ -221,7 +225,8 @@ export default function Contact() {
                                     onChange={handleChange}
                                     required
                                     multiline
-                                    rows={5}
+                                    rows={4}
+                                    sx={{ '& .MuiInputBase-root': { fontSize: { xs: 14, sm: 16 } } }}
                                 />
 
                                 <Button
@@ -230,6 +235,7 @@ export default function Contact() {
                                     variant="contained"
                                     startIcon={<SendIcon />}
                                     disabled={isSubmitting}
+                                    sx={{ fontSize: { xs: 13, sm: 15 }, py: { xs: 1.25, sm: 1.5 } }}
                                 >
                                     {isSubmitting ? 'Sending...' : 'Send Message'}
                                 </Button>

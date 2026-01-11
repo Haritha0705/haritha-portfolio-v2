@@ -101,18 +101,18 @@ export default function CommandPalette() {
                             exit={{ opacity: 0, scale: 0.95, y: -20 }}
                             sx={{
                                 position: 'fixed',
-                                top: '20%',
+                                top: { xs: '10%', sm: '20%' },
                                 left: '50%',
                                 transform: 'translateX(-50%)',
                                 zIndex: 1300,
-                                width: '90%',
+                                width: { xs: '95%', sm: '90%' },
                                 maxWidth: 640,
                             }}
                         >
                             <Paper
                                 elevation={0}
                                 sx={{
-                                    borderRadius: 3,
+                                    borderRadius: { xs: 2, sm: 3 },
                                     overflow: 'hidden',
                                     background: theme.custom.glass.background,
                                     backdropFilter: theme.custom.glass.blur,
@@ -124,12 +124,12 @@ export default function CommandPalette() {
                                     sx={{
                                         display: 'flex',
                                         alignItems: 'center',
-                                        px: 2,
-                                        py: 1.5,
+                                        px: { xs: 1.5, sm: 2 },
+                                        py: { xs: 1, sm: 1.5 },
                                         borderBottom: `1px solid ${theme.palette.divider}`,
                                     }}
                                 >
-                                    <Search fontSize="small" />
+                                    <Search sx={{ fontSize: { xs: 18, sm: 20 } }} />
 
                                     <TextField
                                         variant="standard"
@@ -141,25 +141,29 @@ export default function CommandPalette() {
                                             input: { disableUnderline: true },
                                         }}
                                         sx={{
-                                            ml: 2,
+                                            ml: { xs: 1.5, sm: 2 },
                                             flex: 1,
                                             fontFamily: 'monospace',
+                                            '& .MuiInputBase-input': {
+                                                fontSize: { xs: 13, sm: 14 },
+                                            },
                                         }}
                                     />
 
                                     <IconButton size="small" onClick={() => setOpen(false)}>
-                                        <Close fontSize="small" />
+                                        <Close sx={{ fontSize: { xs: 18, sm: 20 } }} />
                                     </IconButton>
                                 </Box>
 
                                 {/* -------- Commands -------- */}
-                                <Box sx={{ maxHeight: 360, overflowY: 'auto' }}>
+                                <Box sx={{ maxHeight: { xs: 280, sm: 360 }, overflowY: 'auto' }}>
                                     {filtered.length === 0 ? (
                                         <Typography
                                             sx={{
                                                 textAlign: 'center',
-                                                py: 4,
+                                                py: { xs: 3, sm: 4 },
                                                 color: 'text.secondary',
+                                                fontSize: { xs: 12, sm: 14 },
                                             }}
                                         >
                                             No commands found
@@ -173,9 +177,9 @@ export default function CommandPalette() {
                                                     width: '100%',
                                                     display: 'flex',
                                                     alignItems: 'center',
-                                                    gap: 2,
-                                                    px: 2,
-                                                    py: 1.5,
+                                                    gap: { xs: 1.5, sm: 2 },
+                                                    px: { xs: 1.5, sm: 2 },
+                                                    py: { xs: 1, sm: 1.5 },
                                                     textAlign: 'left',
                                                     backgroundColor:
                                                         i === selected
@@ -190,8 +194,8 @@ export default function CommandPalette() {
                                                     },
                                                 }}
                                             >
-                                                <Icon fontSize="small" />
-                                                <Typography fontSize={14}>{cmd.label}</Typography>
+                                                <Icon sx={{ fontSize: { xs: 18, sm: 20 } }} />
+                                                <Typography fontSize={{ xs: 12, sm: 14 }}>{cmd.label}</Typography>
                                             </ButtonBase>
                                         ))
                                     )}
@@ -200,19 +204,19 @@ export default function CommandPalette() {
                                 {/* -------- Footer -------- */}
                                 <Box
                                     sx={{
-                                        px: 2,
-                                        py: 1,
+                                        px: { xs: 1.5, sm: 2 },
+                                        py: { xs: 0.75, sm: 1 },
                                         borderTop: `1px solid ${theme.palette.divider}`,
-                                        display: 'flex',
+                                        display: { xs: 'none', sm: 'flex' },
                                         justifyContent: 'space-between',
-                                        fontSize: 12,
+                                        fontSize: { xs: 10, sm: 12 },
                                         color: 'text.secondary',
                                         fontFamily: 'monospace',
                                     }}
                                 >
-                                    <Typography fontSize={12}>↑↓ navigate</Typography>
-                                    <Typography fontSize={12}>↵ select</Typography>
-                                    <Typography fontSize={12}>ESC close</Typography>
+                                    <Typography fontSize={{ xs: 10, sm: 12 }}>↑↓ navigate</Typography>
+                                    <Typography fontSize={{ xs: 10, sm: 12 }}>↵ select</Typography>
+                                    <Typography fontSize={{ xs: 10, sm: 12 }}>ESC close</Typography>
                                 </Box>
                             </Paper>
                         </MotionBox>

@@ -57,7 +57,7 @@ export function Terminal({
     return (
         <Box
             sx={{
-                borderRadius: 4,
+                borderRadius: { xs: 2, sm: 4 },
                 overflow: 'hidden',
                 border: 1,
                 borderColor: 'divider',
@@ -71,30 +71,30 @@ export function Terminal({
                     display: 'flex',
                     justifyContent: 'space-between',
                     alignItems: 'center',
-                    px: 2,
-                    py: 1,
+                    px: { xs: 1.5, sm: 2 },
+                    py: { xs: 0.75, sm: 1 },
                     borderBottom: 1,
                     borderColor: 'divider',
                     bgcolor: 'background.paper',
                 }}
             >
-                <Box sx={{ display: 'flex', gap: 1 }}>
+                <Box sx={{ display: 'flex', gap: { xs: 0.75, sm: 1 } }}>
                     <Box
                         onClick={resetTerminal}
                         sx={{
-                            width: 12,
-                            height: 12,
+                            width: { xs: 10, sm: 12 },
+                            height: { xs: 10, sm: 12 },
                             borderRadius: '50%',
                             bgcolor: '#ff5f56',
                             cursor: 'pointer',
                             '&:hover': { filter: 'brightness(1.2)' },
                         }}
                     />
-                    <Box sx={{ width: 12, height: 12, borderRadius: '50%', bgcolor: '#ffbd2e' }} />
+                    <Box sx={{ width: { xs: 10, sm: 12 }, height: { xs: 10, sm: 12 }, borderRadius: '50%', bgcolor: '#ffbd2e' }} />
                     <Box
                         sx={{
-                            width: 12,
-                            height: 12,
+                            width: { xs: 10, sm: 12 },
+                            height: { xs: 10, sm: 12 },
                             borderRadius: '50%',
                             bgcolor: theme.palette.primary.main,
                         }}
@@ -105,23 +105,24 @@ export function Terminal({
                     variant="caption"
                     sx={{
                         fontFamily: 'Monospace',
+                        fontSize: { xs: 10, sm: 12 },
                         color: theme.custom.gradients.text,
                     }}
                 >
                     haritha@dev:~
                 </Typography>
 
-                <Box sx={{ width: 52 }} />
+                <Box sx={{ width: { xs: 40, sm: 52 } }} />
             </Box>
 
             {/* Terminal Content */}
             <Box
                 sx={{
-                    p: 2,
-                    minHeight: 240,
+                    p: { xs: 1.5, sm: 2 },
+                    minHeight: { xs: 180, sm: 240 },
                     overflowY: 'auto',
                     fontFamily: 'Monospace',
-                    fontSize: 13,
+                    fontSize: { xs: 11, sm: 13 },
                 }}
             >
                 <AnimatePresence>
@@ -132,17 +133,17 @@ export function Terminal({
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0 }}
                             transition={{ duration: 0.3 }}
-                            style={{ marginBottom: 8 }}
+                            style={{ marginBottom: 6 }}
                         >
                             {line.type === 'command' ? (
-                                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                                    <Typography sx={{ color: theme.palette.primary.main }}>❯</Typography>
-                                    <Typography sx={{ color: theme.custom.gradients.text }}>
+                                <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.75 }}>
+                                    <Typography sx={{ color: theme.palette.primary.main, fontSize: { xs: 11, sm: 13 } }}>❯</Typography>
+                                    <Typography sx={{ color: theme.custom.gradients.text, fontSize: { xs: 11, sm: 13 } }}>
                                         {line.text}
                                     </Typography>
                                 </Box>
                             ) : (
-                                <Typography sx={{ pl: 3, color: theme.custom.gradients.text }}>
+                                <Typography sx={{ pl: { xs: 2, sm: 3 }, color: theme.custom.gradients.text, fontSize: { xs: 11, sm: 13 } }}>
                                     {line.text}
                                 </Typography>
                             )}
@@ -152,12 +153,12 @@ export function Terminal({
 
                 {/* Typing indicator */}
                 {isTyping && currentIndex < lines.length && (
-                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mt: 0.5 }}>
-                        <Typography sx={{ color: theme.palette.primary.main }}>❯</Typography>
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.75, mt: 0.5 }}>
+                        <Typography sx={{ color: theme.palette.primary.main, fontSize: { xs: 11, sm: 13 } }}>❯</Typography>
                         <motion.div
                             animate={{ opacity: [1, 0.5, 1] }}
                             transition={{ duration: 0.8, repeat: Infinity }}
-                            style={{ width: 8, height: 16, backgroundColor: theme.palette.success.main }}
+                            style={{ width: 8, height: 14, backgroundColor: theme.palette.success.main }}
                         />
                     </Box>
                 )}

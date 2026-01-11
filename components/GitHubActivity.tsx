@@ -170,11 +170,11 @@ export default function GitHubActivity() {
                 </MotionBox>
 
                 {/* Stats */}
-                <Grid container spacing={2} mb={6}>
+                <Grid container spacing={{ xs: 1.5, sm: 2 }} mb={{ xs: 4, sm: 6 }}>
                     {stats.map((s, i) => {
                         const Icon = s.icon;
                         return (
-                            <Grid size={{ xs: 6, md: 4, lg: 2 }} key={s.label}>
+                            <Grid size={{ xs: 4, sm: 4, md: 4, lg: 2 }} key={s.label}>
                                 <MotionBox
                                     initial={{ opacity: 0, scale: 0.9 }}
                                     whileInView={{ opacity: 1, scale: 1 }}
@@ -184,7 +184,7 @@ export default function GitHubActivity() {
                                     <Paper
                                         elevation={3}
                                         sx={{
-                                            p: 2,
+                                            p: { xs: 1.5, sm: 2 },
                                             textAlign: "center",
                                             borderRadius: 2,
                                             backgroundColor: theme.palette.background.paper,
@@ -195,16 +195,16 @@ export default function GitHubActivity() {
                                             },
                                         }}
                                     >
-                                        <Icon sx={{ fontSize: 20, opacity: 0.8, mb: 0.5 }} />
+                                        <Icon sx={{ fontSize: { xs: 16, sm: 20 }, opacity: 0.8, mb: 0.5 }} />
                                         <Typography
                                             fontFamily="monospace"
                                             fontWeight="bold"
-                                            fontSize={18}
+                                            fontSize={{ xs: 14, sm: 18 }}
                                             color="primary"
                                         >
                                             {s.value}
                                         </Typography>
-                                        <Typography fontSize={11} color="text.secondary">
+                                        <Typography fontSize={{ xs: 8, sm: 11 }} color="text.secondary" sx={{ lineHeight: 1.2 }}>
                                             {s.label}
                                         </Typography>
                                     </Paper>
@@ -251,20 +251,22 @@ export default function GitHubActivity() {
                     </Box>
 
                     {/* Legend */}
-                    <Stack direction="row" spacing={1} mt={3} fontSize={10}>
-                        <Typography component="span" sx={{ fontSize: 10 }}>
+                    <Stack direction="row" spacing={{ xs: 0.5, sm: 1 }} mt={{ xs: 2, sm: 3 }} fontSize={{ xs: 8, sm: 10 }}>
+                        <Typography component="span" sx={{ fontSize: { xs: 8, sm: 10 } }}>
                             Less
                         </Typography>
                         {[0, 2, 4, 8, 12].map((v, i) => (
                             <Box
                                 key={i}
-                                width={11}
-                                height={11}
-                                borderRadius={1}
-                                bgcolor={getColor(v)}
+                                sx={{
+                                    width: { xs: 8, sm: 11 },
+                                    height: { xs: 8, sm: 11 },
+                                    borderRadius: 1,
+                                    bgcolor: getColor(v),
+                                }}
                             />
                         ))}
-                        <Typography component="span" sx={{ fontSize: 10 }}>
+                        <Typography component="span" sx={{ fontSize: { xs: 8, sm: 10 } }}>
                             More
                         </Typography>
                     </Stack>

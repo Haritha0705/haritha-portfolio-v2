@@ -42,16 +42,17 @@ export default function Footer() {
             borderTop={1}
             borderColor={theme.palette.divider}
             position="relative"
-            pt={8}
-            pb={6}
+            pt={{ xs: 4, sm: 6, md: 8 }}
+            pb={{ xs: 4, sm: 5, md: 6 }}
+            px={{ xs: 1.5, sm: 2 }}
         >
             <Container maxWidth="lg">
                 {/* Main Content */}
                 <Box
                     display="grid"
                     gridTemplateColumns={{ xs: '1fr', sm: '1fr 1fr', lg: 'repeat(3, 1fr)' }}
-                    gap={6}
-                    mb={6}
+                    gap={{ xs: 3, sm: 4, md: 6 }}
+                    mb={{ xs: 3, sm: 4, md: 6 }}
                 >
                     {/* Brand & Social */}
                     <MotionBox
@@ -62,8 +63,9 @@ export default function Footer() {
                         <Typography
                             variant="h6"
                             fontWeight="bold"
-                            mb={2}
+                            mb={{ xs: 1.5, sm: 2 }}
                             sx={{
+                                fontSize: { xs: '1rem', sm: '1.15rem', md: '1.25rem' },
                                 background: theme.custom.gradients.text,
                                 WebkitBackgroundClip: 'text',
                                 WebkitTextFillColor: 'transparent',
@@ -72,10 +74,10 @@ export default function Footer() {
                         >
                             Haritha Wickremesinghe
                         </Typography>
-                        <Typography fontSize={14} mb={2} color="text.secondary">
+                        <Typography fontSize={{ xs: 12, sm: 14 }} mb={{ xs: 1.5, sm: 2 }} color="text.secondary">
                             Full Stack Developer passionate about creating elegant solutions to complex problems.
                         </Typography>
-                        <Stack direction="row" spacing={1.5}>
+                        <Stack direction="row" spacing={{ xs: 1, sm: 1.5 }} flexWrap="wrap">
                             {socialLinksFooter.map((s, i) => {
                                 const Icon = s.icon;
                                 return (
@@ -94,10 +96,12 @@ export default function Footer() {
                                                 border: '1px solid',
                                                 borderColor: theme.palette.divider,
                                                 backgroundColor: theme.palette.background.paper,
+                                                width: { xs: 36, sm: 40 },
+                                                height: { xs: 36, sm: 40 },
                                                 '&:hover': { backgroundColor: theme.palette.primary.main, color: '#fff' },
                                             }}
                                         >
-                                            <Icon fontSize="small" />
+                                            <Icon sx={{ fontSize: { xs: 18, sm: 20 } }} />
                                         </IconButton>
                                     </MotionBox>
                                 );
@@ -112,10 +116,10 @@ export default function Footer() {
                         viewport={{ once: true }}
                         transition={{ delay: 0.1 }}
                     >
-                        <Typography fontWeight="bold" mb={1.5}>
+                        <Typography fontWeight="bold" mb={{ xs: 1, sm: 1.5 }} fontSize={{ xs: 14, sm: 16 }}>
                             Quick Links
                         </Typography>
-                        <Stack spacing={1}>
+                        <Stack spacing={{ xs: 0.5, sm: 1 }}>
                             {footerLinks.map((link, i) => (
                                 <MotionBox
                                     key={link.label}
@@ -129,6 +133,7 @@ export default function Footer() {
                                         sx={{
                                             textTransform: 'none',
                                             color: theme.palette.text.secondary,
+                                            fontSize: { xs: 12, sm: 14 },
                                             '&:hover': {
                                                 color: theme.palette.primary.main,
                                                 backgroundColor: 'transparent',
@@ -151,7 +156,7 @@ export default function Footer() {
                         viewport={{ once: true }}
                         transition={{ delay: 0.2 }}
                     >
-                        <Typography fontWeight="bold" mb={1.5}>
+                        <Typography fontWeight="bold" mb={{ xs: 1, sm: 1.5 }} fontSize={{ xs: 14, sm: 16 }}>
                             Get in Touch
                         </Typography>
                         <Stack
@@ -162,7 +167,7 @@ export default function Footer() {
                             <Button
                                 component="a"
                                 href="mailto:haritha@example.com"
-                                sx={{ textTransform: 'none', p: 0, minWidth: 0, color: 'inherit', justifyContent: 'flex-start' }}
+                                sx={{ textTransform: 'none', p: 0, minWidth: 0, color: 'inherit', justifyContent: 'flex-start', fontSize: { xs: 12, sm: 14 } }}
                             >
                                 haritha@example.com
                             </Button>
@@ -170,29 +175,29 @@ export default function Footer() {
                             <Button
                                 component="a"
                                 href="tel:+94771234567"
-                                sx={{ textTransform: 'none', p: 0, minWidth: 0, color: 'inherit', justifyContent: 'flex-start' }}
+                                sx={{ textTransform: 'none', p: 0, minWidth: 0, color: 'inherit', justifyContent: 'flex-start', fontSize: { xs: 12, sm: 14 } }}
                             >
                                 +94 77 123 4567
                             </Button>
 
-                            <Typography fontSize={14}>
+                            <Typography fontSize={{ xs: 12, sm: 14 }}>
                                 Colombo, Sri Lanka
                             </Typography>
                         </Stack>
                     </MotionBox>
                 </Box>
 
-                <Divider sx={{ my: 3 }} />
+                <Divider sx={{ my: { xs: 2, sm: 3 } }} />
 
                 {/* Bottom */}
                 <Stack
                     direction={{ xs: 'column', sm: 'row' }}
                     justifyContent="space-between"
                     alignItems="center"
-                    spacing={1}
+                    spacing={{ xs: 0.5, sm: 1 }}
                 >
                     <MotionBox initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>
-                        <Typography fontSize={12}>
+                        <Typography fontSize={{ xs: 10, sm: 12 }} textAlign={{ xs: 'center', sm: 'left' }}>
                             © {currentYear} Haritha Wickremesinghe. All rights reserved.
                         </Typography>
                     </MotionBox>
@@ -205,10 +210,10 @@ export default function Footer() {
                         alignItems="center"
                         gap={0.5}
                     >
-                        <Typography fontSize={12}>Built with</Typography>
-                        <FavoriteIcon fontSize="small" color="primary" sx={{ animation: 'pulse 1.5s infinite' }} />
-                        <Typography fontSize={12}>and</Typography>
-                        <Typography fontSize={12} fontWeight="medium" color="primary">
+                        <Typography fontSize={{ xs: 10, sm: 12 }}>Built with</Typography>
+                        <FavoriteIcon sx={{ fontSize: { xs: 14, sm: 18 }, animation: 'pulse 1.5s infinite' }} color="primary" />
+                        <Typography fontSize={{ xs: 10, sm: 12 }}>and</Typography>
+                        <Typography fontSize={{ xs: 10, sm: 12 }} fontWeight="medium" color="primary">
                             Next JS
                         </Typography>
                     </MotionBox>
@@ -227,14 +232,16 @@ export default function Footer() {
                     onClick={scrollToTop}
                     sx={{
                         position: 'fixed',
-                        bottom: 16,
-                        right: 16,
+                        bottom: { xs: 12, sm: 16 },
+                        right: { xs: 12, sm: 16 },
                         backgroundColor: theme.palette.primary.main,
                         color: '#fff',
+                        width: { xs: 40, sm: 48 },
+                        height: { xs: 40, sm: 48 },
                         '&:hover': { backgroundColor: theme.palette.primary.dark },
                     }}
                 >
-                    <ArrowUpwardIcon />
+                    <ArrowUpwardIcon sx={{ fontSize: { xs: 20, sm: 24 } }} />
                 </IconButton>
             </MotionBox>
         </Box>

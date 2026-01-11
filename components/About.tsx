@@ -36,13 +36,14 @@ export default function About() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6 }}
-                    sx={{ textAlign: 'center', mb: { xs: 5, sm: 6, lg: 8 } }}
+                    sx={{ textAlign: 'center', mb: { xs: 3, sm: 5, lg: 8 } }}
                 >
                     <Typography
                         variant="h4"
                         fontWeight={800}
                         mb={1}
                         sx={{
+                            fontSize: { xs: '1.25rem', sm: '1.5rem', md: '2rem' },
                             background: theme.custom.gradients.text,
                             WebkitBackgroundClip: 'text',
                             WebkitTextFillColor: 'transparent',
@@ -107,7 +108,7 @@ export default function About() {
                                             elevation={0}
                                             sx={{
                                                 textAlign: 'center',
-                                                p: 2,
+                                                p: { xs: 1.5, sm: 2 },
                                                 borderRadius: 2,
                                                 backgroundColor: theme.palette.background.paper,
                                                 border: `1px solid ${theme.palette.divider}`,
@@ -115,7 +116,7 @@ export default function About() {
                                         >
                                             <Typography
                                                 fontWeight={700}
-                                                fontSize={{ xs: 18, sm: 22 }}
+                                                fontSize={{ xs: 16, sm: 20, md: 22 }}
                                                 sx={{ background: theme.custom.gradients.text,
                                                     WebkitBackgroundClip: 'text',
                                                     WebkitTextFillColor: 'transparent',
@@ -124,7 +125,7 @@ export default function About() {
                                                 {stat.value}
                                             </Typography>
                                             <Typography
-                                                fontSize={12}
+                                                fontSize={{ xs: 10, sm: 12 }}
                                                 sx={{ color: theme.custom.gradients.text }}
                                             >
                                                 {stat.label}
@@ -147,19 +148,22 @@ export default function About() {
                             <Typography
                                 variant="h5"
                                 fontWeight={700}
-                                mb={3}
-                                sx={{ color: theme.custom.gradients.text }}
+                                mb={{ xs: 2, sm: 3 }}
+                                sx={{
+                                    color: theme.custom.gradients.text,
+                                    fontSize: { xs: '1rem', sm: '1.25rem', md: '1.5rem' },
+                                }}
                             >
                                 Passionate Developer & Problem Solver
                             </Typography>
 
-                            <Stack spacing={2} mb={4}>
+                            <Stack spacing={{ xs: 1.5, sm: 2 }} mb={{ xs: 3, sm: 4 }}>
                                 {[
                                     'I am a 2nd-year Software Engineering student passionate about building impactful digital experiences.',
                                     'I specialize in full-stack development with React, Node.js, and TypeScript.',
                                     'I believe in continuous learning and staying ahead of technology trends.',
                                 ].map((text, i) => (
-                                    <Typography key={i} sx={{ color: theme.custom.gradients.text }}>
+                                    <Typography key={i} sx={{ color: theme.custom.gradients.text, fontSize: { xs: 13, sm: 14, md: 16 } }}>
                                         {text}
                                     </Typography>
                                 ))}
